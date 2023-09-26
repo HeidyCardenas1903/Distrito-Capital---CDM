@@ -1,29 +1,84 @@
 /* Fuentes */
-
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
 
 /* Variables */
+:root{
+    --primary-color: #DD2C2C;
+    --secondary-color: #000;
+    --tertiary-color: #fff;
+    --fontS-titulo: 30px;
+    --fontS-subtitulos: 22px;
+    --fontS-parra: 16px; 
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Crimson Text', serif;
+    font-weight: 700;
+}
+
+p,a,button,label,input{
+    font-family: 'Crimson Text', serif;
+}
 
 /* Estilos Index | Inicio */
 
     /* Barra superior */
-    header .barra-superior{
-        display: block;
-        background: #ccc;
+    .barra-superior{
+        display: flex;
+        background: transparent;
+        height: 60px;
+        justify-content: space-around;
         width: 100%;
-        height: 100px;
+        padding: 10px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     }
 
+    .barra-superior #menu {
+        background: transparent;
+        font-size: 30px;
+        border:none;
+        padding: 3px;
+        color: var(--primary-color);
+    }
+
+    .barra-superior img {
+        transition: .5s;
+    }
+    
+    .barra-superior img:hover{
+        transform: scale(1.2);
+    }
+
+    .barra-superior a {
+        font-size: 18px;
+        font-weight: 600;
+        border: 3px solid var(--primary-color);
+        padding: 5px 10px; 
+        text-decoration: none; 
+        color: var(--primary-color); 
+        border-radius: 5px;
+        transition: .1s linear;
+    }
+
+    .barra-superior a:hover {
+        background-color: var(--primary-color);
+        color: #fff; 
+      }
+
     /* Fin estilos barra superior */
+
+    /* Barra lateral (menú) */
     .panel-lateral{
         position: absolute;
-        width: 400px;
+        width: 350px;
         height: 100%;
-        background: #dbd6d6;
+        background: #fff;
+        box-shadow: -2px 0 20px rgba(0, 0, 0, 0.4);
         top: 0;
-        left: -500px;
+        left: -400px;
         z-index: 9;
         text-align: center;
-        padding-top: 120px;
+        padding-top: 100px;
         transition: .6s;
     }
     
@@ -32,7 +87,7 @@
     }
     
     .panel-lateral h3{
-        color:#000;
+        color: var(--primary-color);
     }
     
     .panel-lateral a{
@@ -42,4 +97,12 @@
         width: 80%;
         text-decoration: none;
     }
+
+    button.close{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+    /* Fin estilos barra lateral (menú) */
+
 /* Estilos Index | Fin */
