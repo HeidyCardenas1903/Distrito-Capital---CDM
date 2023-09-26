@@ -26,10 +26,15 @@ body {
     color: var(--secondary-color);
 }
 
+h2{
+    font-size: var(--fontS-titulo);
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
 .container {
     display: flex;
     width: 500px;
-    margin: 200px auto;
+    margin: 120px auto;
     background: #fff;
     justify-content: center;
     padding: 5px;
@@ -60,11 +65,20 @@ body {
     color: var(--secondary-color);
 }
 
+button{
+    background: transparent;
+    border: 2px solid #000;
+    border-radius: 5px;
+    color: var(--secondary-color);
+    font-weight: 700;
+    margin: 20px auto;
+    padding: 10px 20px;
+    margin-left: 100px;
+}
 
-
-.btn-primary:hover {
-    background-color: #fff;
-    color: #000;
+button:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .forgot-password {
