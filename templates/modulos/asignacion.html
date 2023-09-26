@@ -1,4 +1,70 @@
 {%extends 'base.html'%}
+{%block title%}Asignaciones{%endblock%}
 {%block content%}
-<h2>Asignacion</h2>
+<h2>Asignaciones a Cuidadoras</h2>
+<br>
+<form action="" method="post">
+
+    <label for="documento">Número Documento de la Cuidadora</label>
+    <input type="text" name="documento" placeholder="Númer de Documento" maxlength="10" required>
+    <br>
+    <label for="codmanzana">Código de Manzana propuesta</label>
+    <input type="text" name="codmanzana" placeholder="10256" maxlength="5" minlength="5" required>
+    <br>
+    
+    <label for="service">Servicio A Aplicar</label>
+    <select name="service" id="service" required>
+        <option value="">-------</option>
+        <option value="1">Estudiar</option>
+        <option value="2">Emprender</option>
+        <option value="3">Emplearse</option>
+        <option value="4">Descansar</option>
+        <option value="5">Ejercitarse</option>
+        <option value="6">Recibir Orientación</option>
+        <option value="7">Asesoría Jurídica</option>
+        <option value="8">Asesoría Psicológica</option>
+        <option value="9">Lavanderías Comunitarias</option>
+    </select>
+    <br>
+    <label for="dia">Día</label>
+    <input type="date" name="dia" required>
+    <br>
+    <label for="hora">Hora</label>
+    <input type="time" name="hora" required>
+
+    <br>
+
+    <button type="submit">Registrar</button>
+
+</form>
+<br><br>
+<table>
+    <thead>
+        <tr>
+            <th>Documento</th>
+            <th>Codigo Manzana</th>
+            <th>Servicio Deseado</th>
+            <th>Día</th>
+            <th>Hora</th>
+            <th>            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>102076823</td>
+        <td>44353</td>
+        <td>Ejercitarse</td>
+        <td>2023-10-12</td>
+        <td>12:20</td>
+
+        <td>
+            <button><span class="fa-solid fa-pencil"></span></button>
+            <button><span class="fa-solid fa-trash"></span></button>
+        </td>
+        </tr>
+
+
+    </tbody>
+</table>
+
 {%endblock%}

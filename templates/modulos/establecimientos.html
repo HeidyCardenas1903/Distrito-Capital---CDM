@@ -1,4 +1,71 @@
 {%extends 'base.html'%}
+{%block title%}Establecimientos{%endblock%}
 {%block content%}
-<h2>Establecimientos</h2>
+<h2>Registro de Establecimientos</h2>
+<br>
+<form action="" method="post">
+
+    <label for="codmunicipio">Código Establecimiento</label>
+    <input type="text" name="" placeholder="32" maxlength="2" minlength="2"  required>
+    <br>
+    <label for="nombres">Nombre del Establecimiento</label>
+    <input type="text" name="nombres" placeholder="Ejemplo: Librería Pedro" maxlength="20" required>
+    <br>
+    <label for="responsable">Responsable</label>
+    <input type="textbox" name="responsable" placeholder="Ejemplo: Julian Romero" maxlength="40" required>
+    <br>
+    <label for="responsable">Responsable</label>
+    <input type="textbox" name="responsable" placeholder="Ejemplo: Julian Romero" maxlength="40" required>
+    <br>
+    <label for="direccion">Dirección del Establecimiento</label>
+    <input type="textbox" name="direccion" placeholder="Ejemplo: calle 23a#56-87" maxlength="40" required>
+    <br>
+    <label for="service">Servicio Prestado</label>
+    <select name="service" id="service" required>
+        <option value="">-------</option>
+        <option value="1">Estudiar</option>
+        <option value="2">Emprender</option>
+        <option value="3">Emplearse</option>
+        <option value="4">Descansar</option>
+        <option value="5">Ejercitarse</option>
+        <option value="6">Recibir Orientación</option>
+        <option value="7">Asesoría Jurídica</option>
+        <option value="8">Asesoría Psicológica</option>
+        <option value="9">Lavanderías Comunitarias</option>
+    </select>
+    <br>
+
+    <button type="submit">Registrar</button>
+
+</form>
+<br><br>
+<table>
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Responsable</th>
+            <th>Dirección</th>
+            <th>Servicio Prestado</th>
+            <th>            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>32</td>
+        <td>Librería Otoño</td>
+        <td>Juan Manaos</td>
+        <td>cll 134#12a-76</td>
+        <td>Estudiar</td>
+
+        <td>
+            <button><span class="fa-solid fa-pencil"></span></button>
+            <button><span class="fa-solid fa-trash"></span></button>
+        </td>
+        </tr>
+
+
+    </tbody>
+</table>
+
 {%endblock%}
