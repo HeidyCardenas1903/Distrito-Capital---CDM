@@ -1,4 +1,61 @@
 {%extends 'base.html'%}
 {%block content%}
-<h2>Mujeres</h2>
+<form action="" method="post">
+    <label for="tipodoc">Tipo Documento:</label>
+    <select name="tipodoc" id="tipodoc" required>
+        <option value="">-------</option>
+        <option value="CC">Cédula Ciudadanía</option>
+        <option value="TI">Tarjeta de Identidad</option>
+        <option value="Pasaporte">Pasporte</option>
+        <option value="CE">Cédula Extranjería</option>
+    </select>
+    <br>
+
+    <label for="documento">Número Documento</label>
+    <input type="text" name="documento" placeholder="Númer de Documento" maxlength="10" required>
+    <br>
+    <label for="nombres">Nombres</label>
+    <input type="text" name="nombres" placeholder="Ejemplo: Maria" maxlength="40" required>
+    <br>
+    <label for="apellidos">Apellidos</label>
+    <input type="text" name="Apellidos" placeholder="Ejemplo: Cardenas" maxlength="40" required>
+    <br>
+    <label for="telefono">Teléfono</label>
+    <input type="tel" name="telefono" placeholder="Ejemplo: 6011234567" minlength="7" maxlength="10" required>
+    <br>
+    <label for="correo">Correo</label>
+    <input type="email" name="correo" placeholder="ejemplo@gmail.com" maxlength="40" required>
+    <br>
+    <label for="ciudad">Ciudad</label>
+    <input type="text" name="ciudad" placeholder="Ejemplo: Medellin" maxlength="20" required>
+    <br>
+    <label for="direccion">Dirección</label>
+    <input type="text" name="direccion" placeholder="Ejemplo: Cr 75 # 23a-92" maxlength="40" required>
+    <br>
+    <label for="ocupacion">Ocupación</label>
+    <input type="text" name="ocupacion" placeholder="Ejemplo: Médico" maxlength="20" required>
+    <br>
+    <label for="direccion">Direcciòn</label>
+    <input type="text" name="direccion" placeholder="Ejemplo: Cr 75 # 23a-92" maxlength="40" required>
+    <br>
+
+    <label for="servicioint">¿Qué servicio le interesa?:</label>
+    <select name="servicioint" id="servicioint" required>
+        <option value="">-------</option>
+        <option value="1">Estudiar</option>
+        <option value="2">Emprender</option>
+        <option value="3">Emplearse</option>
+        <option value="4">Descansar</option>
+        <option value="5">Ejercitarse</option>
+        <option value="6">Recibir Orientación</option>
+        <option value="7">Asesoría Jurídica</option>
+        <option value="8">Asesoría Psicológica</option>
+        <option value="9">Lavanderías Comunitarias</option>
+    </select>
+    <br>
+
+    <button type="submit">Registrar</button>
+
+</form>
+
 {%endblock%}
