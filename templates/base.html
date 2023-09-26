@@ -16,8 +16,6 @@
 </head>
 <body>
 
-
-
     <header>
 
         <!-- Barra de navegación -->
@@ -25,7 +23,7 @@
             <div class="barra-superior">
                 <button id="menu" onclick="panelLateral()"><span><i class="fa-solid fa-list"></i></span></button> <!--Boton de menú-->
                 <img src="{{url_for('static', filename='img/logo.png')}}" alt="logo"> <!--Logo-->
-                <a class="nav-link" href="#">Cerrar Sesión</a> <!-- Boton cerrar sesión -->
+                <a id="cerrar sesion" href="#">Cerrar sesión</a> <!-- Boton cerrar sesión -->
             </div>
         </nav>
 
@@ -34,33 +32,26 @@
             <button class="close" onclick="panelLateral()">X</button>
             <h3>Menú principal</h3>
             <ul>
-                <a href="#">Inicio</a>
-                <a href="#">Municipios</a>
-                <a href="#">Manzanas</a>
-                <a href="#">Servicios</a>
-                <a href="#">Establecimientos</a>
-                <a href="#">Cuidadoras</a>
-                <a href="#">Asignación</a>
-                <a href="#">Reportes</a>
+                <a class="item"href="#">Inicio</a>
+                <a class="item"href="#">Municipios</a>
+                <a class="item"href="#">Manzanas</a>
+                <a class="item"href="#">Servicios</a>
+                <a class="item"href="#">Establecimientos</a>
+                <a class="item"href="#">Cuidadoras</a>
+                <a class="item"href="#">Asignación</a>
+                <a class="item"href="#">Reportes</a>
             </ul>
         </div>
         
     </header>
-
     <main>
         {%block content%}
-        {%endblock%}
+        {% endblock%}
     </main>
-
-    <footer>
-    </footer>
-
-    
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> <!-- Link de js bootstrap-->
     
     <script src="https://kit.fontawesome.com/909a90592e.js" crossorigin="anonymous"></script> <!-- Links iconos-->
 
-    <script src="js/main.js"></script> <!-- Script de js propio -->
+    <script src="{{url_for('static', filename='js/main.js')}}"></script> <!-- Script de js propio -->
 </body>
 </html>
