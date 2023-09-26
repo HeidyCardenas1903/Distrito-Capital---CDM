@@ -5,7 +5,7 @@
 :root{
     --primary-color: #fff;
     --secondary-color: #000;
-    --tertiary-color: #DD2C2C;
+    --tertiary-color: #438dee;
     --fontS-titulo: 30px;
     --fontS-subtitulos: 22px;
     --fontS-parra: 16px; 
@@ -18,10 +18,12 @@ body {
 h1,h2,h3,h4,h5,h6{
     font-family: 'Crimson Text', serif;
     font-weight: 700;
+    color: var(--primary-color);
 }
 
 p,a,button,label,input{
     font-family: 'Crimson Text', serif;
+    color: var(--primary-color);
 }
 
 /* Estilos Index | Inicio */
@@ -114,6 +116,7 @@ p,a,button,label,input{
     }
 
     button.close{
+        color: #000;
         position: absolute;
         top: 10px;
         right: 10px;
@@ -123,4 +126,52 @@ p,a,button,label,input{
     }
     /* Fin estilos barra lateral (menú) */
 
+
+    /* Estilos para las tablas */
+    table {
+        width: 80%;
+        background: var(--primary-color);
+        color: var(--primary-color);
+        margin-left: 120px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        border-radius: 10px; 
+        overflow: hidden; 
+    }
+
+    table, th, td {
+        border: None;
+        color: #000;
+    }
+
+    table td button{
+        background: transparent;
+        border: none;
+        color: #000;
+        font-size: 20px;
+    }
+
+    /* Encabezado de la tabla */
+    th {
+        background-color: var(--tertiary-color);
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    /* Celdas de datos */
+    td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    /* Estilos para filas alternas (para facilitar la lectura) */
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Estilos para resaltar filas al pasar el mouse sobre ellas */
+    tr:hover {
+        background-color: #cfcfcf;
+    }
 
