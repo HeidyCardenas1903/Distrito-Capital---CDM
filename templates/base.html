@@ -21,7 +21,7 @@
         <!-- Barra de navegación -->
         <nav>
             <div class="barra-superior">
-                <button id="menu" onclick="panelLateral()"><span><i class="fa-solid fa-list"></i></span></button> <!--Boton de menú-->
+                <button id="menu" onclick="panelLateral()"><span><i class="fa-solid fa-bars"></i></span></button> <!--Boton de menú-->
                 <img src="{{url_for('static', filename='img/logo.png')}}" alt="logo"> <!--Logo-->
                 <a id="cerrar sesion" href="#">Cerrar sesión</a> <!-- Boton cerrar sesión -->
             </div>
@@ -29,17 +29,17 @@
 
         <div class="panel-lateral">
 
-            <button class="close" onclick="panelLateral()">X</button>
+            <button class="close" onclick="panelLateral()"><span><i class="fa-solid fa-xmark"></i></span></button>
             <h3>Menú principal</h3>
             <ul>
-                <a class="item"href="#">Inicio</a>
-                <a class="item"href="#">Municipios</a>
-                <a class="item"href="#">Manzanas</a>
-                <a class="item"href="#">Servicios</a>
-                <a class="item"href="#">Establecimientos</a>
-                <a class="item"href="#">Cuidadoras</a>
-                <a class="item"href="#">Asignación</a>
-                <a class="item"href="#">Reportes</a>
+                <a class="item"href="#"><span><i class="fa-solid fa-house"></i></span> Inicio</a>
+                <a class="item"href="#"><span><i class="fa-solid fa-gear"></i></span> Municipios</a>
+                <a class="item"href="#"><span><i class="fa-solid fa-map"></i></span> Manzanas</a>
+                <a class="item"href="#"><span><i class="fa-solid fa-star"></i></span> Servicios</a>
+                <a class="item"href="#"><span><i class="fa-solid fa-building"></i></span> Establecimientos</a>
+                <a class="item"href="#"><span><i class="fa-solid fa-person-dress"></i></span> Cuidadoras</a>
+                <a class="item"href="#"><span><i class="fa-solid fa-check"></i></span> Asignación</a>
+                <a class="item"href="#"><span><i class="fa-solid fa-newspaper"></i></span> Reportes</a>
             </ul>
         </div>
         

@@ -3,12 +3,16 @@
 
 /* Variables */
 :root{
-    --primary-color: #DD2C2C;
+    --primary-color: #fff;
     --secondary-color: #000;
-    --tertiary-color: #fff;
+    --tertiary-color: #DD2C2C;
     --fontS-titulo: 30px;
     --fontS-subtitulos: 22px;
     --fontS-parra: 16px; 
+}
+
+body {
+    background: var(--secondary-color);
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -62,7 +66,7 @@ p,a,button,label,input{
 
     .barra-superior a:hover {
         background-color: var(--primary-color);
-        color: #fff; 
+        color: var(--secondary-color); 
       }
 
     /* Fin estilos barra superior */
@@ -78,7 +82,7 @@ p,a,button,label,input{
         left: -400px;
         z-index: 9;
         text-align: center;
-        padding-top: 100px;
+        padding-top: 80px;
         transition: .6s;
     }
     
@@ -87,21 +91,35 @@ p,a,button,label,input{
     }
     
     .panel-lateral h3{
-        color: var(--primary-color);
+        color: var(--secondary-color);
+        font-size: 35px;
+        font-weight: 700;
+        margin-bottom: 30px;
     }
     
     .panel-lateral a{
         display: block;
-        font-size: 20px;
-        margin: 10px auto;
         width: 80%;
+        color: var(--secondary-color);
+        text-align: left;
+        letter-spacing: 1px;
+        font-size: 20px;
+        margin: 10px 10px 10px 0;
         text-decoration: none;
+        font-weight: 600;
+    }
+
+    span{
+        margin-right: 8px;
     }
 
     button.close{
         position: absolute;
         top: 10px;
         right: 10px;
+        background: transparent;
+        border: none;
+        font-size: 30px;
     }
     /* Fin estilos barra lateral (menú) */
 
