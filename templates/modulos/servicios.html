@@ -1,4 +1,45 @@
 {%extends 'base.html'%}
 {%block content%}
-<h2>Servicios</h2>
+<h2>Registro de Servicios</h2>
+<br>
+<form action="" method="post">
+
+    <label for="codservicio">Código Servicio</label>
+    <input type="text" name="codservicio" placeholder="1132" maxlength="4" minlength="4"  required>
+
+    <label for="nombres">Nombre del Servicio</label>
+    <input type="text" name="nombres" placeholder="Ejemplo: Lavanderia Comunitaria" maxlength="20" required>
+
+    <label for="nombres">Descripción</label>
+    <input type="textbox" name="nombres" placeholder="Ejemplo: Permite lavar en comunidad" maxlength="100" required>
+
+    <button type="submit">Registrar</button>
+
+</form>
+<br><br>
+<table>
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>1</td>
+        <td>Estudiar</td>
+        <td>Para Interesados en aprender</td>
+
+        <td>
+            <button><span class="fa-solid fa-pencil"></span></button>
+            <button><span class="fa-solid fa-trash"></span></button>
+        </td>
+        </tr>
+
+
+    </tbody>
+</table>
+
 {%endblock%}

@@ -1,4 +1,70 @@
 {%extends 'base.html'%}
 {%block content%}
-<h2>Manzanas</h2>
+<h2>Registro de Manzanas</h2>
+<br>
+<form action="" method="post">
+
+    <label for="codmanzana">Código de Manzana</label>
+    <input type="text" name="codmanzana" placeholder="10256" maxlength="5" minlength="5" required>
+    <br>
+    <label for="nombres">Nombre de la Manzana</label>
+    <input type="text" name="nombres" placeholder="Ejemplo: Industrial" maxlength="20" required>
+    <br>
+    <label for="codmunicipio">Código Municipio al que pertenece</label>
+    <input type="text" name="documento" placeholder="1132" maxlength="4" minlength="4"  required>
+    <br>
+    <label for="localidad">Localidad:</label>
+    <input type="text" name="localidad" placeholder="Ejemplo: Suba" maxlength="20" required>
+    <br>
+    <label for="direccion">Dirección:</label>
+    <input type="text" name="direccion" placeholder="Ejemplo: calle 24b#87-26" maxlength="40" required>
+    <br><br>
+    <label for="servicios">Servicios:*</label> 
+    <select name="servicioprest" id="servicioprest" multiple required>
+        <option value="1">Estudiar</option>
+        <option value="2">Emprender</option>
+        <option value="3">Emplear</option>
+        <option value="4">Descansar</option>
+        <option value="5">Ejercitar</option>
+        <option value="6">Recibir Orientación</option>
+        <option value="7">Asesoría Jurídica</option>
+        <option value="8">Asesoría Psicológica</option>
+        <option value="9">Lavanderías Comunitarias</option>
+    </select>
+    <p>*Para escoger varios servicios mantenga presionado ctrl mientras selecciona las opciones</p>
+
+    <button type="submit">Registrar</button>
+
+</form>
+<br><br>
+<table>
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Municipio</th>
+            <th>Localidad</th>
+            <th>Dirección</th>
+            <th>Servicios Prestados</th>
+            <th>            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>10256</td>
+        <td>Industrial</td>
+        <td>Cundinamarca</td>
+        <td>Suba</td>
+        <td>Calle 92#17-35</td>
+        <td>Descansar,Asesoría Jurídica</td>
+
+        <td>
+            <button><span class="fa-solid fa-pencil"></span></button>
+            <button><span class="fa-solid fa-trash"></span></button>
+        </td>
+        </tr>
+
+
+    </tbody>
+</table>
 {%endblock%}
