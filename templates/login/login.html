@@ -6,46 +6,49 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"><!-- Link de bootstrap -->
 
-    <link rel="stylesheet" href="{{url_for ('static', filename='css/style.css')}}"> <!-- Link de hoja de estilos .css -->
+    <link rel="stylesheet" href="{{url_for ('static', filename='css/login.css')}}"> <!-- Link de hoja de estilos .css -->
 
     <link rel="icon" href="{{url_for('static', filename='img/icono.png')}}" sizes="48x48"><!-- Link icono pestaña de navegador -->
 
     <title>LogIn | Inicio de sesión</title> <!-- Titulo pagina -->
 </head>
 <body>
-    <section>
-        <div class="row">
-            <div class="col-lg-5">
-                <h2>¡Bienvenido de nuevo!</h2>
-                {%with messages=get_flashed_messages()%}
-                {%if messages%}
-                {%for message in messages%}   
-                <div class="alert alert-warning d-flex align-items-center" role="alert">
-                    <div class="fa-solid fa-triangle-exclamation">
-                      {{message}}
+    <section class="container">
+        <div>
+            <h2>¡Bienvenido de nuevo!</h2>
+            {% with messages=get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}   
+            <div class="alert alert-warning" role="alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                {{ message }}
+            </div>   
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <form action="login" method="post">        
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Digite su correo electronico" required>
+                </div>
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-key"></i> Contraseña:</label>
+                    <div class="password-input">
+                        <input type="password" id="contraseña" name="contrasenia" class="form-control" placeholder="Digite su contraseña" minlength="6" maxlength="10" required>
+                        <span class="ojo"><i class="fas fa-eye"></i></span>
                     </div>
-                  </div>   
-                {%endfor%}
-                {%endif%}
-                {%endwith%}
-                <form class="form-control" action="login" method="post">        
-                    <label for="email">Email:</label>
-                    <br>
-                    <input type="email" id="email" name="email" placeholder="Digite su correo electronico" required>
-                    <br>
-                    <label for="password">Contraseña:</label>
-                    <br>
-                    <input type="password" id="contraseña" name="contrasenia"placeholder="Digite su contraseña" minlength="6" maxlength="10" required>
-                    <br>
-                    <p class="msj">¿No tienes una cuenta? <a href="registro">Click aquí</a> para registrarte.</p>
-                    <button type="submit">Ingresar</button>
-                </form>
-                <a class="ini" href="/">Volver al Inicio</a>
-            </div>
-            <div class="col-lg-7">
-                <img src="{{url_for('static', filename='img/imglogin.png')}}" alt="ImgBg" id="ImgBg">
-            </div>
+                </div>
+                <a href="#" class="forgot-password">Olvidé mi contraseña</a>
+                <br>
+                <button type="submit" class="Ingresar">Ingresar</button>
+            </form>
         </div> 
     </section>  
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> <!-- Link de js bootstrap-->
+    
+    <script src="https://kit.fontawesome.com/909a90592e.js" crossorigin="anonymous"></script> <!-- Links iconos-->
+
+    <script src="{{url_for('static', filename='js/main.js')}}"></script> <!-- Script de js propio -->
 </body>
 </html>

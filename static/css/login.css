@@ -1,0 +1,77 @@
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
+
+/* Variables */
+:root{
+    --primary-color: #fff;
+    --secondary-color: #000;
+    --tertiary-color: #DD2C2C;
+    --fontS-titulo: 30px;
+    --fontS-subtitulos: 22px;
+    --fontS-parra: 16px; 
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Crimson Text', serif;
+    font-weight: 700;
+}
+
+p,a,button,label,input{
+    font-family: 'Crimson Text', serif;
+}
+
+/* Estilos */
+body {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.container {
+    display: flex;
+    width: 500px;
+    margin: 200px auto;
+    background: #fff;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
+
+.alert {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.password-input {
+    position: relative;
+}
+
+.password-input input[type="password"] {
+    padding-right: 30px;
+}
+
+.password-input .ojo {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.forgot-password {
+    color: #8f8f8f;
+    margin: 10px 0 10px 0;
+}
+
+.forgot-password:hover {
+    color: var(--secondary-color);
+}
