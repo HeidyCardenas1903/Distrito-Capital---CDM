@@ -1,7 +1,19 @@
 {%extends 'base.html'%}
+{%block title%}Municipios{%endblock%}
 {%block content%}
 <h2>Registro de Municipios</h2>
 <br>
+{%with messages=get_flashed_messages()%}
+{%if messages%}
+{%for message in messages%}   
+<div class="alert alert-success d-flex align-items-center" role="alert">
+<div class="fa-solid fa-triangle-exclamation">
+{{message}}
+</div>
+</div>   
+{%endfor%}
+{%endif%}
+{%endwith%}
 <form action="" method="post">
 
     <label for="codmunicipio">Código Municipio</label>

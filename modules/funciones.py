@@ -1,14 +1,14 @@
 '''Modulo dedicado a todas las funciones de los distintos modulos de la app'''
 
 from flask import Flask, render_template, request, redirect,url_for,flash,session
+ 
+
 
 def login():
     '''Se establece la función para la ruta del login'''
     return render_template('login/login.html')#Devolvera el template login.html
 
-def municipios():
-    '''Se establece la función para la ruta para la seccion municipios'''
-    return render_template('modulos/municipios.html')#Devolvera el template municipios.html
+
 
 def manzanas():
     '''Se establece la función para la ruta para la seccion manzanas'''
