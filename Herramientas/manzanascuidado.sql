@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-09-2023 a las 18:08:08
+-- Tiempo de generación: 27-09-2023 a las 00:37:54
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -104,6 +104,14 @@ CREATE TABLE `municipios` (
   `nombre_municipio` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `municipios`
+--
+
+INSERT INTO `municipios` (`cod_municipio`, `nombre_municipio`) VALUES
+(3344, 'Cundiinamarca'),
+(3456, 'Antioquia');
+
 -- --------------------------------------------------------
 
 --
@@ -115,6 +123,26 @@ CREATE TABLE `servicios` (
   `nombre_servicio` varchar(40) NOT NULL,
   `descripcion` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `cod_usuario` int(11) NOT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `contraseña` varchar(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`cod_usuario`, `nombre`, `email`, `contraseña`) VALUES
+(1, 'Juan', 'juan@gmail.com', 'juan123456');
 
 --
 -- Índices para tablas volcadas
@@ -168,6 +196,13 @@ ALTER TABLE `municipios`
 --
 ALTER TABLE `servicios`
   ADD PRIMARY KEY (`cod_servicio`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`cod_usuario`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Restricciones para tablas volcadas
