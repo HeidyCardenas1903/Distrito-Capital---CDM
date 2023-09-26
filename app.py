@@ -17,6 +17,14 @@ def index():
     return render_template('index.html')#Devolvera el template index.html
 
 
+'''Ruta para el login'''
+@app.route('/login')
+
+def login():
+    '''Se establece la función para la ruta del login'''
+    return render_template('login/login.html')#Devolvera el template login.html
+
+
 if __name__=='__main__':
     #Se verifica que se este corriendo la aplicacion.
     app.run(debug=True)
