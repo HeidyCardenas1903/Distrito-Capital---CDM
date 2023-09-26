@@ -29,7 +29,7 @@ def index():
 @app.route('/login', methods=['GET','POST'])
 def login():
     '''Función para el ingreso de usuarios'''
-    if request.method == 'POST' and 'email' in request.form and 'contrasenia':
+    if request.method == 'POST':
         email=request.form['email']
         password=request.form['contrasenia']
 
