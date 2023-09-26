@@ -3,13 +3,6 @@
 from flask import Flask, render_template, request, redirect,url_for,flash,session
  
 
-
-def login():
-    '''Se establece la función para la ruta del login'''
-    return render_template('login/login.html')#Devolvera el template login.html
-
-
-
 def manzanas():
     '''Se establece la función para la ruta para la seccion manzanas'''
     return render_template('modulos/manzanas.html')#Devolvera el template manzana.html

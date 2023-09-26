@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect,url_for,flash,session, make_response
-from flask_login import login_required
+from flask_login import login_required, login_manager
 from flask_mysqldb import MySQL
 from reportlab.pdfgen import canvas
 from modules.funciones import * 
@@ -26,10 +26,36 @@ def index():
 
 
 '''Ruta para el login'''
-@app.route('/login')
-def usuario():
-    usuario = login()
-    return usuario
+@app.route('/login', methods=['GET','POST'])
+def login():
+    '''Función para el ingreso de usuarios'''
+    if request.method == 'POST' and 'email' in request.form and 'contrasenia':
+        email=request.form['email']
+        password=request.form['contrasenia']
+
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM usuarios where usuarios.email=%s AND usuarios.contraseña=%s',(email,password))
+        account = cur.fetchone()
+
+        if account:
+            session['Logueado']=True
+
+
+            flash('Bienvenido')
+            return redirect(url_for('index'))#si el usuario ingresa correctamente lo redireccionara al home
+
+        
+        else:
+            flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
+            return render_template('login/login.html')
+    return render_template('login/login.html')#Devolvera el template login.html
+
+@app.route('/logout')
+def logout():
+    # Elimina la sesión del usuario
+    session.clear()
+    flash('Has cerrado sesion exitosamente', 'success')
+    return redirect(url_for('login'))  # Redirige a la página de inicio de sesión
 
 '''Ruta para los municipios'''
 @app.route ('/municipios', methods=['GET','POST'])
