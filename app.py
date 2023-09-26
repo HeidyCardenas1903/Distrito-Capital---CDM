@@ -22,7 +22,7 @@ app.secret_key='mysecretkey'
 @app.route('/')
 def index():
     '''Se establece la función para la ruta del index'''
-    return render_template('index.html')#Devolvera el template index.html
+    return render_template('login/login.html')#Devolvera el template index.html
 
 
 '''Ruta para el login'''
@@ -71,6 +71,13 @@ def municipios():
         flash('Municipio Agregado')
         return redirect(url_for('municipios'))
     return render_template('modulos/municipios.html')#Devolvera el template municipios.html
+
+'''Ruta de inicio'''
+
+@app.route ('/index')
+def inicio():
+    '''Se establece la función para la ruta de inicio'''
+    return render_template('modulos/index.html')
 
 '''Ruta para los manzanas'''
 @app.route ('/manzanas')
