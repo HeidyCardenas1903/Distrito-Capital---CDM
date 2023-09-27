@@ -47,7 +47,7 @@ def login():
         
         else:
             flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
-            return render_template('lmodulos/login.html')
+            return render_template('modulos/login.html')
     return render_template('login.html')#Devolvera el template login.html
 
 @app.route('/logout')
@@ -61,17 +61,36 @@ def logout():
 @app.route ('/municipios', methods=['GET','POST'])
 def municipios():
     '''Se establece la función para la ruta para la seccion municipios'''
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM municipios')
+    info=cur.fetchall()
+
     if request.method == 'POST':
         cod = request.form['codmunicipio']
         name = request.form['nombres']
 
-        cur=mysql.connection.cursor()
-        cur.execute('INSERT INTO municipios(cod_municipio,nombre_municipio) VALUES(%s,%s)',(cod,name))
-        mysql.connection.commit()
-        flash('Municipio Agregado')
-        return redirect(url_for('municipios'))
-    return render_template('modulos/municipios.html')#Devolvera el template municipios.html
+        cur.execute('SELECT * FROM municipios WHERE cod_municipio=%s',[cod,])#Se verifica que el municipio no haya sido previamente ingresado
+        data=cur.fetchone()
 
+        if data:
+            flash('Municipio ya Registrado')
+            return redirect(url_for('municipios'))#Si el municipio se encuentra ya resgistrao se habilita el mensaje de aviso y se redirije al formulario
+
+        else:
+            cur.execute('INSERT INTO municipios(cod_municipio,nombre_municipio) VALUES(%s,%s)',(cod,name))
+            mysql.connection.commit()
+            flash('Municipio Agregado')
+            return redirect(url_for('municipios'))
+    return render_template('modulos/municipios.html', municipios=info)#Devolvera el template municipios.html
+
+@app.route('/municipio/borrar/<string:cod_municipio>', methods=['GET','POST'])
+def borrarmunicipio(cod_municipio):
+    '''Funcion encargada de borrar registros de la tabla municipios'''
+    cur=mysql.connection.cursor()
+    cur.execute('DELETE FROM municipios WHERE cod_municipio={0}'.format(cod_municipio))
+    mysql.connection.commit()
+    flash('Registro Eliminado')
+    return redirect(url_for('municipios'))
 
 '''Ruta de inicio'''
 @app.route ('/index')

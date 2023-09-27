@@ -37,15 +37,17 @@
         </tr>
     </thead>
     <tbody>
+        {%for municipio in municipios%}
         <tr>
-        <td>1132</td>
-        <td>Cundinamarca</td>
+        <td>{{municipio.0}}</td>
+        <td>{{municipio.1}}</td>
 
         <td>
             <button><span class="fa-solid fa-pencil"></span></button>
-            <button><span class="fa-solid fa-trash"></span></button>
+            <a href="/municipio/borrar/{{municipio.0}}"><span class="fa-solid fa-trash"></span></a>
         </td>
         </tr>
+        {%endfor%}
 
 
     </tbody>
