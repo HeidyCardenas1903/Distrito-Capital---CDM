@@ -98,9 +98,37 @@ def inicio():
     return render_template('modulos/index.html')#despues de que el usuario este ingresado se redirigira al index.html
 
 '''Ruta para los manzanas'''
-@app.route ('/manzanas')
+@app.route ('/manzanas',methods=['GET','POST'])
 def manzana():
-    return render_template('modulos/manzanas.html')#Devolvera el template manzana.html
+    '''Se establece la función para la ruta para la seccion municipios'''
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM manzanas')
+    info=cur.fetchall()
+
+    if request.method == 'POST':
+        cod = request.form['codmanzana']
+        name = request.form['nombres']
+        cod2 = request.form['codmunicipio']
+        localidad = request.form['localidad']
+        direccion = request.form['direccion']
+        codserv=request.form['servicioprest']
+
+        
+        cur.execute('SELECT * FROM manzanas WHERE cod_manzana=%s',[cod,])#Se verifica que el municipio no haya sido previamente ingresado
+        data=cur.fetchone()
+
+        if data:
+            flash('Manzana ya registrada')
+            return redirect(url_for('manzana'))#Si la manzana se encuentra ya resgistrao se habilita el mensaje de aviso y se redirije al formulario
+
+
+        else:
+            cur.execute('INSERT INTO manzanas(cod_manzana,cod_municipio,nombre_manzana,localidad,direccion_manzana) VALUES(%s,%s,%s,%s,%s)',(cod,cod2,name,localidad,direccion))
+            cur.execute('INSERT INTO manzanas_servicios(cod_manzana,cod_servicio) VALUES(%s,%s)',(cod,codserv))
+            mysql.connection.commit()
+            flash('Manzana Agregada')
+            return redirect(url_for('manzana'))
+    return render_template('modulos/manzanas.html', manzanas=info)#Devolvera el template manzana.html
 
 '''Ruta para los servicios'''
 @app.route ('/servicios')
