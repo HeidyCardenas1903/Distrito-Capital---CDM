@@ -2,6 +2,17 @@
 {%block title%}Cuidadoras{%endblock%}
 {%block content%}
 <h2>Formulario de registro</h2>
+{%with messages=get_flashed_messages()%}
+{%if messages%}
+{%for message in messages%}   
+<div class="alert alert-success d-flex align-items-center" role="alert">
+<div class="fa-solid fa-triangle-exclamation">
+{{message}}
+</div>
+</div>   
+{%endfor%}
+{%endif%}
+{%endwith%}
 <div class="container mt-5">
     <form action="" method="post" class="row g-3">
         <div class="col-md-6">
@@ -16,7 +27,7 @@
         </div>
         <div class="col-md-6">
             <label for="documento" class="form-label">Número Documento:</label>
-            <input type="text" class="form-control" name="documento" placeholder="Número de Documento" maxlength="10" required>
+            <input type="number" class="form-control" name="documento" placeholder="Número de Documento" maxlength="10" required>
         </div>
         <div class="col-md-6">
             <label for="nombres" class="form-label">Nombres:</label>
@@ -24,7 +35,7 @@
         </div>
         <div class="col-md-6">
             <label for="apellidos" class="form-label">Apellidos:</label>
-            <input type="text" class="form-control" name="Apellidos" placeholder="Ejemplo: Cardenas" maxlength="40" required>
+            <input type="text" class="form-control" name="apellidos" placeholder="Ejemplo: Cardenas" maxlength="40" required>
         </div>
         <div class="col-md-6">
             <label for="telefono" class="form-label">Teléfono:</label>
@@ -86,22 +97,24 @@
         </tr>
     </thead>
     <tbody>
+        {%for mujer in mujeres%}
         <tr>
-        <td>CC</td>
-        <td>1028919710</td>
-        <td>Maria</td>
-        <td>Castañeda</td>
-        <td>6017975876</td>
-        <td>maria@ejemplo.com</td>
-        <td>Bogotá</td>
-        <td>cra 19a #36b -10</td>
-        <td>Enfermera</td>
-        <td>Ejercitarse</td> 
-        <td>
-            <button><span class="fa-solid fa-pencil"></span></button>
-            <button><span class="fa-solid fa-trash"></span></button>
-        </td>
+            <td>{{mujer.2}}</td>
+            <td>{{mujer.0}}</td>
+            <td>{{mujer.3}}</td>
+            <td>{{mujer.4}}</td>
+            <td>{{mujer.5}}</td>
+            <td>{{mujer.6}}</td>
+            <td>{{mujer.7}}</td>
+            <td>{{mujer.8}}</td>
+            <td>{{mujer.9}}</td>
+            <td>{{mujer.1}}</td> 
+            <td>
+                <button><span class="fa-solid fa-pencil"></span></button>
+                <a href="/mujer/borrar/{{mujer.0}}"><span class="fa-solid fa-trash"></span></a>
+            </td>
         </tr>
+        {%endfor%}
 
 
     </tbody>

@@ -47,8 +47,13 @@ def login():
         
         else:
             flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
+<<<<<<< HEAD
             return render_template('moculos/login.html')
     return render_template('modulos/login.html')#Devolvera el template login.html
+=======
+            return render_template('lmodulos/login.html')
+    return render_template('login.html')#Devolvera el template login.html
+>>>>>>> 52bfb1ffb2aeaefedf2b825b8ac8f7eb3830712c
 
 @app.route('/logout')
 def logout():
@@ -72,8 +77,8 @@ def municipios():
         return redirect(url_for('municipios'))
     return render_template('modulos/municipios.html')#Devolvera el template municipios.html
 
-'''Ruta de inicio'''
 
+'''Ruta de inicio'''
 @app.route ('/index')
 def inicio():
     '''Se establece la función para la ruta de inicio'''
@@ -98,10 +103,57 @@ def establecimiento():
     return est
 
 '''Ruta para las Cuidadoras'''
-@app.route ('/mujeres')
+@app.route ('/mujeres', methods=['GET','POST'])
 def cuidadora():
-    women=mujeres()
-    return women
+    '''Se establece la función para la ruta para la seccion Cuidadoras'''
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT documento,nombre_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,ciudad,direccion_mujer,ocupacion FROM mujeres,servicios WHERE mujeres.cod_servicio=servicios.cod_servicio')
+    info=cur.fetchall()#Esta seleccion va a mostrar los campos que esten existentes en la bd de la tabla
+
+    if request.method == 'POST':
+        tipodoc = request.form['tipodoc']
+        doc = request.form['documento']
+        name = request.form['nombres']
+        lastname = request.form['apellidos']
+        tel = request.form['telefono']
+        email = request.form['correo']
+        city = request.form['ciudad']
+        address = request.form['direccion']
+        ocupacion = request.form['ocupacion']
+        servicioint = request.form['servicioint']
+        
+     
+        cur.execute('SELECT * FROM mujeres WHERE documento=%s',[doc,])#Se verifica que la mujer no haya sido previamente ingresada
+        data=cur.fetchone()
+
+        if data:
+            flash('Cuidadora ya Registrada')
+            return redirect(url_for('cuidadora'))#Si la mujer se encuentra ya resgistrada se habilita el mensaje de aviso y se redirije al formulario
+
+        else:
+            cur.execute('SELECT * FROM mujeres WHERE correo=%s',[email,])#Se verifica que el email no haya sido registrado anteriormente
+            data=cur.fetchone()
+
+            if data:
+                flash('Email ya Registrado')
+                return redirect(url_for('cuidadora'))#Si el email se encuentra ya resgistrado se habilita el mensaje de aviso y se redirije al formulario
+            else:
+                cur.execute('INSERT INTO mujeres(documento,cod_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,ciudad,direccion_mujer,ocupacion) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(doc,servicioint,tipodoc,name,lastname,tel,email,city,address,ocupacion))
+                mysql.connection.commit()
+                flash('Cuidadora Agregada Satisfactoriamente')
+        return redirect(url_for('cuidadora'))#SI el registro se completa satisfactoriamente se habilita el mensaje y se redirige al formulario
+    
+    return render_template('modulos/mujeres.html', mujeres=info)#Devolvera el template mujeres.html
+
+@app.route('/mujer/borrar/<string:documento>', methods=['GET','POST'])
+def borrarmujer(documento):
+    cur=mysql.connection.cursor()
+    cur.execute('DELETE FROM mujeres WHERE documento={0}'.format(documento))
+    mysql.connection.commit()
+    flash('Registro Eliminado')
+    return redirect(url_for('cuidadora'))
+
+
 
 
 '''Ruta para la asignación'''
