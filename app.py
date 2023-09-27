@@ -227,7 +227,6 @@ def establecimientos():
     cur=mysql.connection.cursor()
     cur.execute('SELECT cod_establecimiento,nombre_establecimiento,responsable,direccion_establecimiento,nombre_servicio FROM establecimiento,servicios WHERE establecimiento.cod_servicio=servicios.cod_servicio')
     info=cur.fetchall()
-    print(info)
 
     if request.method == 'POST':
         cod = request.form['codestablecimiento']
@@ -250,6 +249,26 @@ def establecimientos():
             return redirect(url_for('establecimientos'))
 
     return render_template('modulos/establecimientos.html',establecimiento=info)#Devolvera el template establecimientos.html
+
+'''Ruta encargada de editar registros de establecimientos'''
+@app.route('/establecimientos/edit/<cod_establecimiento>',methods=['GET','POST'])
+def update_establecimientos(cod_establecimiento):
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT cod_establecimiento,nombre_establecimiento,responsable,direccion_establecimiento,nombre_servicio FROM establecimiento,servicios WHERE establecimiento.cod_servicio=servicios.cod_servicio')
+    info=cur.fetchall()
+
+    if request.method=='POST':
+        cod = request.form['codestablecimiento']
+        name = request.form['nombres']
+        responsable = request.form['responsable']
+        direccion = request.form['direccion']
+        service= request.form['service']
+
+        cur.execute('UPDATE establecimiento SET cod_servicio=%s,nombre_establecimiento=%s,responsable=%s,direccion_establecimiento=%s WHERE cod_establecimiento=%s',(service,name,responsable,direccion,cod))
+        mysql.connection.commit()
+        flash('Establecimiento Actualizado')
+        return redirect(url_for('establecimientos'))
+    return render_template('edicion/editestablecimientos.html', establecimientos=info)#Devolvera el template asignacion.html
 
 @app.route('/establecimiento/borrar/<string:cod_establecimiento>', methods=['GET','POST'])
 @login_required
@@ -316,21 +335,64 @@ def borrarmujer(documento):
 
 
 '''Ruta para la asignación'''
-@app.route ('/asignacion')
-@login_required
-def asignaciones():
-    choose=asignacion()
-    return choose
+@app.route ('/asignacion', methods=['GET','POST'])
+def asignacion():
+    '''Se establece la función para la ruta para la seccion asignación'''
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT documento_mujer,nombres_mujer,apellidos_mujer,nombre_manzana,nombre_servicio,fecha,hora FROM cuidadoras,mujeres,servicios,manzanas WHERE cuidadoras.documento_mujer=mujeres.documento AND cuidadoras.cod_manzana=manzanas.cod_manzana AND cuidadoras.cod_servicio=servicios.cod_servicio')
+    info=cur.fetchall()
 
-@app.route('/establecimiento/borrar/<string:cod_establecimiento>', methods=['GET','POST'])
-@login_required
-def borrarasignacion(cod_establecimiento):
+    if request.method == 'POST':
+        documento = request.form['documento']
+        cod1 = request.form['codmanzana']
+        cod2 = request.form['service']
+        date = request.form['dia']
+        time = request.form['hora']
+
+        cur.execute('SELECT * FROM cuidadoras WHERE documento_mujer=%s',[documento,])#Se verifica que el establecimiento no haya sido previamente ingresado
+        data=cur.fetchone()
+
+        if data:
+            flash('Ya cuenta con una cita asignada')
+            return redirect(url_for('establecimientos'))#Si el servicio se encuentra ya resgistrao se habilita el mensaje de aviso y se redirije al formulario
+
+        else:
+            cur.execute('INSERT INTO cuidadoras(documento_mujer,cod_manzana,cod_servicio,fecha,hora) VALUES(%s,%s,%s,%s,%s)',(documento,cod1,cod2,date,time))
+            mysql.connection.commit()
+            flash('Cita Asignada')
+            return redirect(url_for('asignacion'))
+    return render_template('modulos/asignacion.html', cuidadoras=info)#Devolvera el template asignacion.html
+
+'''Ruta encargada de editar registros de asignaciones'''
+@app.route('/asignacion/edit/<documento_mujer>',methods=['GET','POST'])
+def update_asignaciones(documento_mujer):
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT documento_mujer,cuidadoras.cod_manzana,nombre_servicio,fecha,hora FROM cuidadoras,mujeres,servicios,manzanas WHERE cuidadoras.documento_mujer=mujeres.documento AND cuidadoras.cod_manzana=manzanas.cod_manzana AND cuidadoras.cod_servicio=servicios.cod_servicio')
+    info=cur.fetchall()
+
+    if request.method=='POST':
+        documento= request.form['documento']
+        cod1 = request.form['codmanzana']
+        cod2 = request.form['service']
+        date = request.form['dia']
+        time = request.form['hora']
+
+        cur.execute('UPDATE cuidadoras SET cod_manzana=%s,cod_servicio=%s,fecha=%s,hora=%s WHERE documento_mujer=%s',(cod1,cod2,date,time,documento))
+        mysql.connection.commit()
+        flash('Cita Re-asignada')
+        return redirect(url_for('asignacion'))
+    return render_template('edicion/editasignaciones.html', cuidadoras=info)#Devolvera el template asignacion.html
+
+
+'''Ruta encargada de elimiar registros de asignaciones'''
+@app.route('/asignacion/borrar/<string:documento_mujer>', methods=['GET','POST'])
+def borrarasignacion(documento_mujer):
     '''Funcion encargada de borrar registros de la tabla municipios'''
     cur=mysql.connection.cursor()
-    cur.execute('DELETE FROM establecimiento WHERE cod_establecimiento={0}'.format(cod_establecimiento))
+    cur.execute('DELETE FROM cuidadoras WHERE documento_mujer={0}'.format(documento_mujer))
     mysql.connection.commit()
     flash('Registro Eliminado')
-    return redirect(url_for('establecimientos'))
+    return redirect(url_for('asignacion'))
 
 '''Ruta para los reportes'''
 @app.route ('/reportes')
