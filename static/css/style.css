@@ -185,6 +185,11 @@ p,a,button,label,input{
         background-color: #cfcfcf;
     }
 
+    a.delete{
+        color: #000;
+        font-size: 20px;
+    }
+
     /* Fin estilos tablas */
 
     /* Estilos de formularios */
@@ -227,9 +232,6 @@ p,a,button,label,input{
 /* Fin de estilos de tablas y formularios */      
         
 /* Estilos inicio | home */
-    #map{
-        height: 500px;
-        width: 800px;
-    }
+
 /* Fin de estilos inicio | home */
 
