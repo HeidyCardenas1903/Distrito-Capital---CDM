@@ -41,8 +41,7 @@ def login():
             session['Logueado']=True
 
 
-            flash('Bienvenido')
-            return redirect(url_for('index'))#si el usuario ingresa correctamente lo redireccionara al home
+            return redirect(url_for('inicio'))#si el usuario ingresa correctamente lo redireccionara al home
 
         
         else:
