@@ -16,6 +16,16 @@
     <div class="tab-pane fade show active" id="registrar" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
         <h2 class="titulos">Formulario de Asignaciones</h2>
         <br>
+        {% with messages=get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}   
+        <div class="alert alert-warning" role="alert">
+            <i class="fas fa-exclamation-triangle"></i>
+            {{ message }}
+        </div>   
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         <form action="" method="post" class="container mt-4">
             <div class="mb-3">
                 <label for="documento" class="form-label subtitulo">Número Documento de la Cuidadora:</label>
@@ -57,7 +67,10 @@
         <table>
             <thead>
                 <tr>
+                    
                     <th>Documento</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
                     <th>Codigo Manzana</th>
                     <th>Servicio Deseado</th>
                     <th>Día</th>
@@ -66,18 +79,22 @@
                 </tr>
             </thead>
             <tbody>
+                {%for asignacion in cuidadoras%}
                 <tr>
-                <td>102076823</td>
-                <td>44353</td>
-                <td>Ejercitarse</td>
-                <td>2023-10-12</td>
-                <td>12:20</td>
+                <td>{{asignacion.0}}</td>
+                <td>{{asignacion.1}}</td>
+                <td>{{asignacion.2}}</td>
+                <td>{{asignacion.3}}</td>
+                <td>{{asignacion.4}}</td>
+                <td>{{asignacion.5}}</td>
+                <td>{{asignacion.6}}</td>
 
                 <td>
                     <button><span class="fa-solid fa-pencil"></span></button>
-                    <button><span class="fa-solid fa-trash"></span></button>
+                    <a href="/asignacion/borrar/{{asignacion.0}}"><span class="fa-solid fa-trash"></span></a>
                 </td>
                 </tr>
+                {%endfor%}
             </tbody>
         </table>
     </div>
