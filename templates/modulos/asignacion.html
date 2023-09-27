@@ -3,40 +3,41 @@
 {%block content%}
 <h2>Formulario de Asignaciones</h2>
 <br>
-<form action="" method="post">
-
-    <label for="documento" class="subtitulo">Número Documento de la Cuidadora</label>
-    <input type="text" name="documento" placeholder="Númer de Documento" maxlength="10" required class="entrada">
-    <br>
-    <label for="codmanzana" class="subtitulo">Código de Manzana propuesta</label>
-    <input type="text" name="codmanzana" placeholder="10256" maxlength="5" minlength="5" required class="entrada">
-    <br>
-    
-    <label for="service" class="subtitulo">Servicio A Aplicar</label>
-    <select name="service" id="service" required class="entrada">
-        <option value="">-------</option>
-        <option value="1">Estudiar</option>
-        <option value="2">Emprender</option>
-        <option value="3">Emplearse</option>
-        <option value="4">Descansar</option>
-        <option value="5">Ejercitarse</option>
-        <option value="6">Recibir Orientación</option>
-        <option value="7">Asesoría Jurídica</option>
-        <option value="8">Asesoría Psicológica</option>
-        <option value="9">Lavanderías Comunitarias</option>
-    </select>
-    <br>
-    <label for="dia" class="subtitulo">Día</label>
-    <input type="date" name="dia" required class="entrada">
-    <br>
-    <label for="hora" class="subtitulo">Hora</label>
-    <input type="time" name="hora" required class="entrada">
-
-    <br>
-
-    <button type="submit">Registrar</button>
-
+<form action="" method="post" class="container mt-4">
+    <div class="mb-3">
+        <label for="documento" class="form-label subtitulo">Número Documento de la Cuidadora</label>
+        <input type="text" name="documento" class="form-control entrada" placeholder="Número de Documento" maxlength="10" required>
+    </div>
+    <div class="mb-3">
+        <label for="codmanzana" class="form-label subtitulo">Código de Manzana propuesta</label>
+        <input type="text" name="codmanzana" class="form-control entrada" placeholder="10256" maxlength="5" minlength="5" required>
+    </div>
+    <div class="mb-3">
+        <label for="service" class="form-label subtitulo">Servicio A Aplicar</label>
+        <select name="service" id="service" class="form-select entrada" required>
+            <option value="">-------</option>
+            <option value="1">Estudiar</option>
+            <option value="2">Emprender</option>
+            <option value="3">Emplearse</option>
+            <option value="4">Descansar</option>
+            <option value="5">Ejercitarse</option>
+            <option value="6">Recibir Orientación</option>
+            <option value="7">Asesoría Jurídica</option>
+            <option value="8">Asesoría Psicológica</option>
+            <option value="9">Lavanderías Comunitarias</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="dia" class="form-label subtitulo">Día</label>
+        <input type="date" name="dia" class="form-control entrada" required>
+    </div>
+    <div class="mb-3">
+        <label for="hora" class="form-label subtitulo">Hora</label>
+        <input type="time" name="hora" class="form-control entrada" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar</button>
 </form>
+
 <br><br>
 
 <h2>Asignaciones Registradas</h2>

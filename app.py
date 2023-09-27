@@ -47,15 +47,15 @@ def login():
         
         else:
             flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
-            return render_template('login/login.html')
-    return render_template('login.html')#Devolvera el template login.html
+            return render_template('moculos/login.html')
+    return render_template('modulos/login.html')#Devolvera el template login.html
 
 @app.route('/logout')
 def logout():
     # Elimina la sesión del usuario
     session.clear()
     flash('Has cerrado sesion exitosamente', 'success')
-    return redirect(url_for('/'))  # Redirige a la página de inicio de sesión
+    return redirect(url_for('login'))  # Redirige a la página de inicio de sesión
 
 '''Ruta para los municipios'''
 @app.route ('/municipios', methods=['GET','POST'])

@@ -1,5 +1,5 @@
 /* Fuentes */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 /* Variables */
 :root{
@@ -16,13 +16,13 @@ body {
 }
 
 h1,h2,h3,h4,h5,h6{
-    font-family: 'Crimson Text', serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     color: var(--primary-color);
 }
 
 p,a,button,label,input{
-    font-family: 'Crimson Text', serif;
+    font-family: 'Montserrat', sans-serif;
     color: var(--primary-color);
 }
 
@@ -132,8 +132,11 @@ p,a,button,label,input{
     }
     /* Fin estilos barra lateral (menú) */
 
+/* Fin de estilos Index | Inicio */
 
-/* Estilos para las tablas */
+/* Estilos de tablas y formularios */
+
+    /* Estilos para las tablas */
     table {
         width: 80%;
         background: var(--primary-color);
@@ -169,7 +172,7 @@ p,a,button,label,input{
     td {
         padding: 10px;
         text-align: center;
-    }
+        }
 
     /* Estilos para filas alternas (para facilitar la lectura) */
     tr:nth-child(even) {
@@ -183,55 +186,9 @@ p,a,button,label,input{
 
     /* Fin estilos tablas */
 
-/* Estilos fomularios */
-    /* Estilos generales para el formulario */
-    form {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f0f0f0;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    }
+    /* Estilos de formulario asignacion */
 
-    /* Estilo para el botón de envío */
-    button[type="submit"] {
-        background-color: var(--tertiary-color);
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-size: 18px;
-        cursor: pointer;
-    }
 
-    /* Estilo para el botón de envío al pasar el ratón sobre él */
-    button[type="submit"]:hover {
-        background-color: #0056b3;
-    }
 
-    /* Estilo para los campos "subtitulo" */
-    .subtitulo {
-        display: block;
-        font-weight: bold;
-        margin-top: 10px;
-        font-weight: bold;
-        color: #000;
-    }
-
-    /* Estilo para la clase "entrada" */
-    .entrada {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-
-    /* Estilo para la clase "entrada 1" */
-
-    .entrada1{
-        color:#000;
-    }
+/* Fin de estilos de tablas y formularios */      
+        
