@@ -35,6 +35,7 @@ p,a,button,label,input{
         height: 60px;
         justify-content: space-around;
         width: 100%;
+        margin-top: 20px;
         padding: 10px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     }
@@ -56,9 +57,8 @@ p,a,button,label,input{
     }
 
     .barra-superior a {
-        font-size: 18px;
-        font-weight: 600;
-        border: 3px solid var(--primary-color);
+        font-size: 15px;
+        border: 2px solid var(--primary-color);
         padding: 5px 10px; 
         text-decoration: none; 
         color: var(--primary-color); 
@@ -138,10 +138,10 @@ p,a,button,label,input{
 
     /* Estilos para las tablas */
     table {
-        width: 80%;
+        width: 90%;
         background: var(--primary-color);
         color: var(--primary-color);
-        margin-left: 120px;
+        margin-left: 80px;
         margin-bottom: 20px;
         font-size: 16px;
         border-radius: 10px; 
@@ -187,6 +187,39 @@ p,a,button,label,input{
     /* Fin estilos tablas */
 
     /* Estilos de formulario asignacion */
+    #Asignacion{
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        color:var(--tertiary-color);
+    }
+    #Asignadas{
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        color:var(--tertiary-color)
+    }
+
+    .btn{
+        display:block;
+        background: var(--tertiary-color);
+        color: var(--primary-color);
+        font-weight: 600;
+        margin: auto;
+        margin-top: 30px;
+        margin-bottom: 100px;
+        padding: 10px 20px;
+    }
+
+    .btn:hover{
+        background: #003274;
+        color: var(--primary-color);
+    }
+
+
+    /* Fin de estilos de formulario asignacion */
 
 
 

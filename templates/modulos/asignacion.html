@@ -1,73 +1,86 @@
 {%extends 'base.html'%}
 {%block title%}Asignaciones{%endblock%}
 {%block content%}
-<h2>Formulario de Asignaciones</h2>
-<br>
-<form action="" method="post" class="container mt-4">
-    <div class="mb-3">
-        <label for="documento" class="form-label subtitulo">Número Documento de la Cuidadora</label>
-        <input type="text" name="documento" class="form-control entrada" placeholder="Número de Documento" maxlength="10" required>
-    </div>
-    <div class="mb-3">
-        <label for="codmanzana" class="form-label subtitulo">Código de Manzana propuesta</label>
-        <input type="text" name="codmanzana" class="form-control entrada" placeholder="10256" maxlength="5" minlength="5" required>
-    </div>
-    <div class="mb-3">
-        <label for="service" class="form-label subtitulo">Servicio A Aplicar</label>
-        <select name="service" id="service" class="form-select entrada" required>
-            <option value="">-------</option>
-            <option value="1">Estudiar</option>
-            <option value="2">Emprender</option>
-            <option value="3">Emplearse</option>
-            <option value="4">Descansar</option>
-            <option value="5">Ejercitarse</option>
-            <option value="6">Recibir Orientación</option>
-            <option value="7">Asesoría Jurídica</option>
-            <option value="8">Asesoría Psicológica</option>
-            <option value="9">Lavanderías Comunitarias</option>
-        </select>
-    </div>
-    <div class="mb-3">
-        <label for="dia" class="form-label subtitulo">Día</label>
-        <input type="date" name="dia" class="form-control entrada" required>
-    </div>
-    <div class="mb-3">
-        <label for="hora" class="form-label subtitulo">Hora</label>
-        <input type="time" name="hora" class="form-control entrada" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Registrar</button>
-</form>
 
-<br><br>
+<ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 30px;display: flex;justify-content: center;">
+    <!-- Titulos de pestañas de navegación -->
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#registrar" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><span><i class="fa-solid fa-user-plus"></i></span>Registrar asignación</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#asignados" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><span><i class="fa-solid fa-list"></i></span>Asignadas</button>
+    </li>
+</ul>
+    <!-- Cuerpo de pestañas de navegación -->
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="registrar" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <h2 id="Asignacion">Formulario de Asignaciones</h2>
+        <br>
+        <form action="" method="post" class="container mt-4">
+            <div class="mb-3">
+                <label for="documento" class="form-label subtitulo">Número Documento de la Cuidadora:</label>
+                <input type="text" name="documento" class="form-control entrada" placeholder="Número de Documento" maxlength="10" required>
+            </div>
+            <div class="mb-3">
+                <label for="codmanzana" class="form-label subtitulo">Código de Manzana propuesta:</label>
+                <input type="text" name="codmanzana" class="form-control entrada" placeholder="10256" maxlength="5" minlength="5" required>
+            </div>
+            <div class="mb-3">
+                <label for="service" class="form-label subtitulo">Servicio por aplicar:</label>
+                <select name="service" id="service" class="form-select entrada" required>
+                    <option value="">-------</option>
+                    <option value="1">Estudiar</option>
+                    <option value="2">Emprender</option>
+                    <option value="3">Emplearse</option>
+                    <option value="4">Descansar</option>
+                    <option value="5">Ejercitarse</option>
+                    <option value="6">Recibir Orientación</option>
+                    <option value="7">Asesoría Jurídica</option>
+                    <option value="8">Asesoría Psicológica</option>
+                    <option value="9">Lavanderías Comunitarias</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="dia" class="form-label subtitulo">Día:</label>
+                <input type="date" name="dia" class="form-control entrada" required>
+            </div>
+            <div class="mb-3">
+                <label for="hora" class="form-label subtitulo">Hora:</label>
+                <input type="time" name="hora" class="form-control entrada" required>
+            </div>
+            <button type="submit" class="btn">Registrar</button>
+        </form>
+    </div>
 
-<h2>Asignaciones Registradas</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Documento</th>
-            <th>Codigo Manzana</th>
-            <th>Servicio Deseado</th>
-            <th>Día</th>
-            <th>Hora</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        <td>102076823</td>
-        <td>44353</td>
-        <td>Ejercitarse</td>
-        <td>2023-10-12</td>
-        <td>12:20</td>
+    <div class="tab-pane fade" id="asignados" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <h2 id="Asignadas">Asignaciones registradas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Documento</th>
+                    <th>Codigo Manzana</th>
+                    <th>Servicio Deseado</th>
+                    <th>Día</th>
+                    <th>Hora</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>102076823</td>
+                <td>44353</td>
+                <td>Ejercitarse</td>
+                <td>2023-10-12</td>
+                <td>12:20</td>
 
-        <td>
-            <button><span class="fa-solid fa-pencil"></span></button>
-            <button><span class="fa-solid fa-trash"></span></button>
-        </td>
-        </tr>
-
-
-    </tbody>
-</table>
+                <td>
+                    <button><span class="fa-solid fa-pencil"></span></button>
+                    <button><span class="fa-solid fa-trash"></span></button>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
 
 {%endblock%}
