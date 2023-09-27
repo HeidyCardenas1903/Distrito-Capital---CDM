@@ -5,7 +5,7 @@
 :root{
     --primary-color: #fff;
     --secondary-color: #000;
-    --tertiary-color: #438dee;
+    --tertiary-color: #004caf;
     --fontS-titulo: 30px;
     --fontS-subtitulos: 22px;
     --fontS-parra: 16px; 
@@ -106,9 +106,15 @@ p,a,button,label,input{
         text-align: left;
         letter-spacing: 1px;
         font-size: 20px;
-        margin: 10px 10px 10px 0;
+        margin: 10px 10px 10px 40px;
         text-decoration: none;
         font-weight: 600;
+        transition: .2s;
+    }
+
+    .panel-lateral a:hover{
+        transform: scale(1.2);
+        color: var(--tertiary-color);
     }
 
     span{

@@ -55,7 +55,7 @@ def logout():
     # Elimina la sesión del usuario
     session.clear()
     flash('Has cerrado sesion exitosamente', 'success')
-    return redirect(url_for('login'))  # Redirige a la página de inicio de sesión
+    return redirect(url_for('/'))  # Redirige a la página de inicio de sesión
 
 '''Ruta para los municipios'''
 @app.route ('/municipios', methods=['GET','POST'])
