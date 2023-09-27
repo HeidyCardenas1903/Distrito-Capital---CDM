@@ -3,3 +3,4 @@ para correr a app:
 Una vez se encuentre en la carpeta que contiene la app, en la terminal correr el codigo python app.py
 
 AIzaSyC-lmH6uemg3kFPtnjIO_l1YlKKDo5VYtY
+https://www.youtube.com/watch?v=FX0lMm_Qj10
