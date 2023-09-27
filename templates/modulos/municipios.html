@@ -13,7 +13,7 @@
 
 <!-- Cuerpo de pestañas de navegación -->
 <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="municipioR" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+    <div class="tab-pane fade show active" id="municipiosR" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
         <h2 class="titulos">Formulario de Registro</h2>
         <br>
         {%with messages=get_flashed_messages()%}
@@ -39,8 +39,10 @@
             <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
     </div>
+
     <div class="tab-pane fade" id="municipiosT" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
         <h2 class="titulos">Municipios Registrados</h2>
+        <a class="PDF" href="/generar_pdf">Descargar PDF</a>
         <table>
             <thead>
                 <tr>
@@ -58,12 +60,16 @@
 
                 <td>
                     <button><span class="fa-solid fa-pencil"></span></button>
-                    <a href="/municipio/borrar/{{municipio.0}}"><span class="fa-solid fa-trash"></span></a>
+                    <a class="delete" href="/municipio/borrar/{{municipio.0}}"><span class="fa-solid fa-trash"></span></a>
                 </td>
                 </tr>
                 {%endfor%}
             </tbody>
         </table>
+    </div>
+
+    <div class="tab-pane fade" id="municipiosT" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <h2 class="titulos">Municipios Registrados</h2>
     </div>
 </div>
 {%endblock%}

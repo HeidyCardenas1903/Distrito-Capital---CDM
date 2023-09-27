@@ -71,6 +71,7 @@
     </div>
     <div class="tab-pane fade" id="establecimientos" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
         <h2 class="titulos">Manzanas registradas</h2>
+        <a class="PDF" href="/generar_pdfM">Descargar PDF</a>
         <table>
             <thead>
                 <tr>
@@ -95,7 +96,7 @@
 
                 <td>
                     <button><span class="fa-solid fa-pencil"></span></button>
-                    <a href="/manzana/borrar/{{manzana.0}}"><span class="fa-solid fa-trash"></span></a>
+                    <a class="delete" href="/manzana/borrar/{{manzana.0}}"><span class="fa-solid fa-trash"></span></a>
                 </td>
                 </tr>
                 {%endfor%}

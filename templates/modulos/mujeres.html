@@ -93,6 +93,7 @@
     </div>
     <div class="tab-pane fade" id="cuidadorasM" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
         <h2 class="titulos">Mujeres cuidadoras registradas</h2>
+        <a class="PDF" href="/generar_pdfW">Descargar PDF</a>
         <table>
             <thead>
                 <tr>
@@ -124,7 +125,7 @@
                     <td>{{mujer.1}}</td> 
                     <td>
                         <button><span class="fa-solid fa-pencil"></span></button>
-                        <a href="/mujer/borrar/{{mujer.0}}"><span class="fa-solid fa-trash"></span></a>
+                        <a class="delete" href="/mujer/borrar/{{mujer.0}}"><span class="fa-solid fa-trash"></span></a>
                     </td>
                 </tr>
                 {%endfor%}

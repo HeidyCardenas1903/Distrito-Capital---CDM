@@ -378,7 +378,7 @@ def pdf_report(data):
     # Agregar contenido al PDF
     y = 700  # Posición inicial en y para el primer dato
     for row in data:
-        x = 100  # Posición en x para el primer dato
+        x = 80  # Posición en x para el primer dato
         for value in row:
             p.drawString(x, y, str(value))
             x += 100  # Espaciado entre datos
@@ -393,8 +393,9 @@ def pdf_report(data):
     buffer.close()
     return pdf
 
+'''Rutas de PDF'''
 
-@app.route('/generar_pdf', methods=['POST'])
+@app.route('/generar_pdf', methods=['GET','POST']) #Genera el pdf de municipios
 def generarpdf():
     cur=mysql.connection.cursor()
     cur.execute('SELECT * FROM municipios')
@@ -403,18 +404,75 @@ def generarpdf():
     pdf = pdf_report(data)
 
     response = make_response(pdf)
-    response.headers['Content-Disposition'] = 'attachment; filename=reporte.pdf'
+    response.headers['Content-Disposition'] = 'attachment; filename=Reporte Municipios.pdf'
     response.mimetype = 'application/pdf'
     return response
 
-@app.route('/generar_xlx')
-def generar_xlx():
-    conn = mysql.connect()
-    cursor= conn.cursor(pymysql.cursors.DictCursor)
+@app.route('/generar_pdfC', methods=['GET','POST']) #Genera el PDF de las Asignaciones
+def generarpdfC():
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM cuidadoras')
+    data=cur.fetchall()
 
-    cursor.execute('SELECT * FROM municipios')
-    result = cursor.fetchall()
+    pdf = pdf_report(data)
 
+    response = make_response(pdf)
+    response.headers['Content-Disposition'] = 'attachment; filename=Reporte Asignaciones.pdf'
+    response.mimetype = 'application/pdf'
+    return response
+
+@app.route('/generar_pdfM', methods=['GET','POST']) #Genera el PDF de las Manzanas
+def generarpdfM():
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM manzanas')
+    data=cur.fetchall()
+
+    pdf = pdf_report(data)
+
+    response = make_response(pdf)
+    response.headers['Content-Disposition'] = 'attachment; filename=Reporte Manzanas.pdf'
+    response.mimetype = 'application/pdf'
+    return response
+
+
+@app.route('/generar_pdfS', methods=['GET','POST']) #Genera el PDF de las servicios
+def generarpdfS():
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM servicios')
+    data=cur.fetchall()
+
+    pdf = pdf_report(data)
+
+    response = make_response(pdf)
+    response.headers['Content-Disposition'] = 'attachment; filename=Reporte Servicios.pdf'
+    response.mimetype = 'application/pdf'
+    return response
+
+@app.route('/generar_pdfW', methods=['GET','POST']) #Genera el PDF de las Mujeres
+def generarpdfW():
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM mujeres')
+    data=cur.fetchall()
+
+    pdf = pdf_report(data)
+
+    response = make_response(pdf)
+    response.headers['Content-Disposition'] = 'attachment; filename=Reporte Mujeres.pdf'
+    response.mimetype = 'application/pdf'
+    return response
+
+@app.route('/generar_pdfE', methods=['GET','POST']) #Genera el PDF de las Establecimientos
+def generarpdfE():
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM establecimiento')
+    data=cur.fetchall()
+
+    pdf = pdf_report(data)
+
+    response = make_response(pdf)
+    response.headers['Content-Disposition'] = 'attachment; filename=Establecimientos.pdf'
+    response.mimetype = 'application/pdf'
+    return response
 
 
 if __name__=='__main__':
