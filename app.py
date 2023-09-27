@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect,url_for,flash,session, make_response
-from flask_login import login_required, login_manager
+from flask_login import login_required, LoginManager, UserMixin
 from flask_mysqldb import MySQL
 from reportlab.pdfgen import canvas
 from modules.funciones import * 
@@ -12,6 +12,7 @@ from flask_googlemaps import Map
 
 
 app = Flask(__name__)#Se especifica que este archivo es el que va a iniciar la webapp
+login_manager = LoginManager(app)
 
 '''Google Maps API'''
 app.config['GOOGLEMAPS_KEY'] = "AIzaSyC-lmH6uemg3kFPtnjIO_l1YlKKDo5VYtY"
@@ -26,7 +27,7 @@ app.config['MYSQL_DB']='manzanascuidado'
 mysql=MySQL(app)
 
 '''Settings'''
-app.secret_key='mysecretkey'
+app.secret_key='manzanita'
 
 
 '''Ruta para el index'''
@@ -69,6 +70,7 @@ def logout():
 
 '''Ruta para los municipios'''
 @app.route ('/municipios', methods=['GET','POST'])
+@login_required
 def municipios():
     '''Se establece la función para la ruta para la seccion municipios'''
     cur=mysql.connection.cursor()
@@ -104,6 +106,7 @@ def borrarmunicipio(cod_municipio):
 
 '''Ruta de inicio'''
 @app.route ('/index')
+@login_required
 def inicio():
     mymap = Map(
         identifier="view-side",
@@ -134,6 +137,7 @@ def inicio():
 
 '''Ruta para los manzanas'''
 @app.route ('/manzanas',methods=['GET','POST'])
+@login_required
 def manzana():
     '''Se establece la función para la ruta para la seccion municipios'''
     cur=mysql.connection.cursor()
@@ -167,6 +171,7 @@ def manzana():
     return render_template('modulos/manzanas.html', manzanas=info)#Devolvera el template manzana.html
 
 @app.route('/manzana/borrar/<string:cod_manzana>', methods=['GET','POST'])
+@login_required
 def borrarmanzana(cod_manzana):
     cur=mysql.connection.cursor()
     cur.execute('DELETE FROM appleservice WHERE copy_codmanzana={0}'.format(cod_manzana))
@@ -205,6 +210,7 @@ def servicios():
     return render_template('modulos/servicios.html', servicios=info)#Devolvera el template servicios.html ubicado en la carpeta templates/modulos
 
 @app.route('/servicio/borrar/<string:cod_servicio>', methods=['GET','POST'])
+@login_required
 def borrarservicio(cod_servicio):
     '''Funcion encargada de borrar registros de la tabla municipios'''
     cur=mysql.connection.cursor()
@@ -215,6 +221,7 @@ def borrarservicio(cod_servicio):
 
 '''Ruta para los establecimientos'''
 @app.route ('/establecimientos', methods=['GET','POST'])
+@login_required
 def establecimientos():
     '''Se establece la función para la ruta para la seccion establecimientos'''
     cur=mysql.connection.cursor()
@@ -245,6 +252,7 @@ def establecimientos():
     return render_template('modulos/establecimientos.html',establecimiento=info)#Devolvera el template establecimientos.html
 
 @app.route('/establecimiento/borrar/<string:cod_establecimiento>', methods=['GET','POST'])
+@login_required
 def borrarestablecimiento(cod_establecimiento):
     '''Funcion encargada de borrar registros de la tabla establecimientos'''
     cur=mysql.connection.cursor()
@@ -255,6 +263,7 @@ def borrarestablecimiento(cod_establecimiento):
 
 '''Ruta para las Cuidadoras'''
 @app.route ('/mujeres', methods=['GET','POST'])
+@login_required
 def cuidadora():
     '''Se establece la función para la ruta para la seccion Cuidadoras'''
     cur=mysql.connection.cursor()
@@ -297,6 +306,7 @@ def cuidadora():
     return render_template('modulos/mujeres.html', mujeres=info)#Devolvera el template mujeres.html
 
 @app.route('/mujer/borrar/<string:documento>', methods=['GET','POST'])
+@login_required
 def borrarmujer(documento):
     cur=mysql.connection.cursor()
     cur.execute('DELETE FROM mujeres WHERE documento={0}'.format(documento))
@@ -307,11 +317,13 @@ def borrarmujer(documento):
 
 '''Ruta para la asignación'''
 @app.route ('/asignacion')
+@login_required
 def asignaciones():
     choose=asignacion()
     return choose
 
 @app.route('/establecimiento/borrar/<string:cod_establecimiento>', methods=['GET','POST'])
+@login_required
 def borrarasignacion(cod_establecimiento):
     '''Funcion encargada de borrar registros de la tabla municipios'''
     cur=mysql.connection.cursor()
@@ -429,6 +441,11 @@ def generarpdfE():
     response.headers['Content-Disposition'] = 'attachment; filename=Establecimientos.pdf'
     response.mimetype = 'application/pdf'
     return response
+
+def status_401(error):
+    return render_template('errores/401.html'),401
+def status_404(error):
+    return render_template('errores/404.html'),404
 
 
 if __name__=='__main__':

@@ -190,6 +190,14 @@ p,a,button,label,input{
         font-size: 20px;
     }
 
+    a.PDF{
+        display: flex;
+        font-weight: 700;
+        text-decoration: revert;
+        justify-content: flex-end;
+        margin-right: 3cm;
+    }
+
     /* Fin estilos tablas */
 
     /* Estilos de formularios */
