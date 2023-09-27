@@ -329,6 +329,10 @@ def generarpdf():
     return response
 
 
+# RUTA DE MAPA
+
+
+
 if __name__=='__main__':
     #Se verifica que se este corriendo la aplicacion.
     app.run(debug=True)
