@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-09-2023 a las 00:37:54
+-- Tiempo de generación: 27-09-2023 a las 21:12:46
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -20,6 +20,24 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `manzanascuidado`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `appleservice`
+--
+
+CREATE TABLE `appleservice` (
+  `copy_codmanzana` int(11) NOT NULL,
+  `copy_codservice` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `appleservice`
+--
+
+INSERT INTO `appleservice` (`copy_codmanzana`, `copy_codservice`) VALUES
+(10789, 6);
 
 -- --------------------------------------------------------
 
@@ -63,16 +81,12 @@ CREATE TABLE `manzanas` (
   `direccion_manzana` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `manzanas_servicios`
+-- Volcado de datos para la tabla `manzanas`
 --
 
-CREATE TABLE `manzanas_servicios` (
-  `cod_manzana` int(11) NOT NULL,
-  `cod_servicio` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `manzanas` (`cod_manzana`, `cod_municipio`, `nombre_manzana`, `localidad`, `direccion_manzana`) VALUES
+(10789, 5476, 'Morada', 'modelia', 'car 65#12-67');
 
 -- --------------------------------------------------------
 
@@ -93,6 +107,13 @@ CREATE TABLE `mujeres` (
   `ocupacion` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `mujeres`
+--
+
+INSERT INTO `mujeres` (`documento`, `cod_servicio`, `tipoDocumento`, `nombres_mujer`, `apellidos_mujer`, `telefono`, `correo`, `ciudad`, `direccion_mujer`, `ocupacion`) VALUES
+(1019132790, 5, 'TI', 'Vivian', 'hincapie', '3194091311', 'carohinca1997@gmail.com', 'Bogotá', 'calle 168a # 73 a-96', 'Desarrolladora');
+
 -- --------------------------------------------------------
 
 --
@@ -110,7 +131,7 @@ CREATE TABLE `municipios` (
 
 INSERT INTO `municipios` (`cod_municipio`, `nombre_municipio`) VALUES
 (3344, 'Cundiinamarca'),
-(3456, 'Antioquia');
+(5476, 'Nariño');
 
 -- --------------------------------------------------------
 
@@ -123,6 +144,21 @@ CREATE TABLE `servicios` (
   `nombre_servicio` varchar(40) NOT NULL,
   `descripcion` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `servicios`
+--
+
+INSERT INTO `servicios` (`cod_servicio`, `nombre_servicio`, `descripcion`) VALUES
+(1, 'Estudiar', 'Servicio que presta ayuda para la educación'),
+(2, 'Emprender', 'Servicio que presta ayuda a las mujeres que quieren ser sus propias jefas'),
+(3, 'Emplearse', 'Servicio que busca ayudar a las mujeres que buscan emplearse'),
+(4, 'Descansar', 'Buscando la comodidad y descanso apropiado de todas las mujeres trabajadoras o d'),
+(5, 'Ejercitarse', 'Con el fin de buscar una salud física idónea para todas las mujeres'),
+(6, 'Recibir Orientación', 'Servicio dedicado a a la ayuda de mujeres que deben tomar decisiones importantes'),
+(7, 'Asesoria Juridica', 'Con el fin de que todas las mujeres tengas una representacion legal'),
+(8, 'Asesoria Psicologica', 'La salud mental es lo primordial, acceso a todas las mujeres'),
+(9, 'Lavanderias Comunitarias', 'Con el fin de ayudar a las mujeres que no puedan completar esta labor de casa en');
 
 -- --------------------------------------------------------
 
@@ -149,6 +185,13 @@ INSERT INTO `usuarios` (`cod_usuario`, `nombre`, `email`, `contraseña`) VALUES
 --
 
 --
+-- Indices de la tabla `appleservice`
+--
+ALTER TABLE `appleservice`
+  ADD PRIMARY KEY (`copy_codmanzana`,`copy_codservice`),
+  ADD KEY `copy_codservice` (`copy_codservice`);
+
+--
 -- Indices de la tabla `cuidadoras`
 --
 ALTER TABLE `cuidadoras`
@@ -169,13 +212,6 @@ ALTER TABLE `establecimiento`
 ALTER TABLE `manzanas`
   ADD PRIMARY KEY (`cod_manzana`),
   ADD KEY `cod_municipio` (`cod_municipio`);
-
---
--- Indices de la tabla `manzanas_servicios`
---
-ALTER TABLE `manzanas_servicios`
-  ADD PRIMARY KEY (`cod_manzana`,`cod_servicio`),
-  ADD KEY `cod_servicio` (`cod_servicio`);
 
 --
 -- Indices de la tabla `mujeres`
@@ -209,6 +245,13 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- Filtros para la tabla `appleservice`
+--
+ALTER TABLE `appleservice`
+  ADD CONSTRAINT `appleservice_ibfk_1` FOREIGN KEY (`copy_codmanzana`) REFERENCES `manzanas` (`cod_manzana`),
+  ADD CONSTRAINT `appleservice_ibfk_2` FOREIGN KEY (`copy_codservice`) REFERENCES `servicios` (`cod_servicio`);
+
+--
 -- Filtros para la tabla `cuidadoras`
 --
 ALTER TABLE `cuidadoras`
@@ -227,13 +270,6 @@ ALTER TABLE `establecimiento`
 --
 ALTER TABLE `manzanas`
   ADD CONSTRAINT `manzanas_ibfk_1` FOREIGN KEY (`cod_municipio`) REFERENCES `municipios` (`cod_municipio`);
-
---
--- Filtros para la tabla `manzanas_servicios`
---
-ALTER TABLE `manzanas_servicios`
-  ADD CONSTRAINT `manzanas_servicios_ibfk_1` FOREIGN KEY (`cod_manzana`) REFERENCES `manzanas` (`cod_manzana`),
-  ADD CONSTRAINT `manzanas_servicios_ibfk_2` FOREIGN KEY (`cod_servicio`) REFERENCES `servicios` (`cod_servicio`);
 
 --
 -- Filtros para la tabla `mujeres`

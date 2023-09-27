@@ -179,11 +179,44 @@ def borrarservicio(cod_servicio):
     return redirect(url_for('servicios'))
 
 '''Ruta para los establecimientos'''
-@app.route ('/establecimientos')
+@app.route ('/establecimientos', methods=['GET','POST'])
 def establecimientos():
     '''Se establece la función para la ruta para la seccion establecimientos'''
-    return render_template('modulos/establecimientos.html')#Devolvera el template establecimientos.html
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT cod_establecimiento,nombre_establecimiento,responsable,direccion_establecimiento,nombre_servicio FROM establecimiento,servicios WHERE establecimiento.cod_servicio=servicios.cod_servicio')
+    info=cur.fetchall()
+    print(info)
 
+    if request.method == 'POST':
+        cod = request.form['codestablecimiento']
+        name = request.form['nombres']
+        responsable = request.form['responsable']
+        direccion = request.form['direccion']
+        service= request.form['service']
+
+        cur.execute('SELECT * FROM establecimiento WHERE cod_establecimiento=%s',[cod,])#Se verifica que el establecimiento no haya sido previamente ingresado
+        data=cur.fetchone()
+
+        if data:
+            flash('Establecimiento ya registrado')
+            return redirect(url_for('establecimientos'))#Si el servicio se encuentra ya resgistrao se habilita el mensaje de aviso y se redirije al formulario
+
+        else:
+            cur.execute('INSERT INTO establecimiento(cod_establecimiento,cod_servicio,nombre_establecimiento,responsable,direccion_establecimiento) VALUES(%s,%s,%s,%s,%s)',(cod,service,name,responsable,direccion))
+            mysql.connection.commit()
+            flash('Establecimiento Agregado')
+            return redirect(url_for('establecimientos'))
+
+    return render_template('modulos/establecimientos.html',establecimiento=info)#Devolvera el template establecimientos.html
+
+@app.route('/establecimiento/borrar/<string:cod_establecimiento>', methods=['GET','POST'])
+def borrarestablecimiento(cod_establecimiento):
+    '''Funcion encargada de borrar registros de la tabla establecimientos'''
+    cur=mysql.connection.cursor()
+    cur.execute('DELETE FROM establecimiento WHERE cod_establecimiento={0}'.format(cod_establecimiento))
+    mysql.connection.commit()
+    flash('Registro Eliminado')
+    return redirect(url_for('establecimientos'))
 
 '''Ruta para las Cuidadoras'''
 @app.route ('/mujeres', methods=['GET','POST'])
@@ -242,6 +275,15 @@ def borrarmujer(documento):
 def asignaciones():
     choose=asignacion()
     return choose
+
+@app.route('/establecimiento/borrar/<string:cod_establecimiento>', methods=['GET','POST'])
+def borrarasignacion(cod_establecimiento):
+    '''Funcion encargada de borrar registros de la tabla municipios'''
+    cur=mysql.connection.cursor()
+    cur.execute('DELETE FROM establecimiento WHERE cod_establecimiento={0}'.format(cod_establecimiento))
+    mysql.connection.commit()
+    flash('Registro Eliminado')
+    return redirect(url_for('establecimientos'))
 
 '''Ruta para los reportes'''
 @app.route ('/reportes')

@@ -16,10 +16,20 @@
     <div class="tab-pane fade show active" id="registrar" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
         <h2 class="titulos">Formulario de establecimientos</h2>
         <br>
+        {% with messages=get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}   
+        <div class="alert alert-warning" role="alert">
+            <i class="fas fa-exclamation-triangle"></i>
+            {{ message }}
+        </div>   
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         <form action="" method="post" class="container mt-4">
             <div class="mb-3">
-                <label for="codmunicipio" class="form-label subtitulo">Código establecimiento:</label>
-                <input type="text" name="codmunicipio" class="form-control entrada" placeholder="32" maxlength="2" minlength="2" required>
+                <label for="codestablecimiento" class="form-label subtitulo">Código establecimiento:</label>
+                <input type="text" name="codestablecimiento" class="form-control entrada" placeholder="32" maxlength="2" minlength="2" required>
             </div>
             <div class="mb-3">
                 <label for="nombres" class="form-label subtitulo">Nombre del establecimiento:</label>
@@ -65,18 +75,20 @@
                 </tr>
             </thead>
             <tbody>
+                {%for est in establecimiento%}
                 <tr>
-                <td>32</td>
-                <td>Librería Otoño</td>
-                <td>Juan Manaos</td>
-                <td>cll 134#12a-76</td>
-                <td>Estudiar</td>
+                <td>{{est.0}}</td>
+                <td>{{est.1}}</td>
+                <td>{{est.2}}</td>
+                <td>{{est.3}}</td>
+                <td>{{est.4}}</td>
 
                 <td>
                     <button><span class="fa-solid fa-pencil"></span></button>
-                    <button><span class="fa-solid fa-trash"></span></button>
+                    <a href="/establecimiento/borrar/{{est.0}}"><span class="fa-solid fa-trash"></span></a>
                 </td>
                 </tr>
+                {%endfor%}
             </tbody>
         </table>
     </div>
