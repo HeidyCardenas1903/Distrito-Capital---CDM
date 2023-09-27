@@ -2,63 +2,70 @@
 {%block title%}Cuidadoras{%endblock%}
 {%block content%}
 <h2>Formulario de registro</h2>
-<form action="" method="post">
-    <label for="tipodoc" class="subtitulo">Tipo Documento:</label>
-    <select name="tipodoc" required class="entrada1">
-        <option value="">-------</option>
-        <option value="CC">Cédula Ciudadanía</option>
-        <option value="TI">Tarjeta de Identidad</option>
-        <option value="Pasaporte">Pasporte</option>
-        <option value="CE">Cédula Extranjería</option>
-    </select>
-    <br>
-
-    <label for="documento" class="subtitulo">Número Documento</label>
-    <input type="text" name="documento" placeholder="Númer de Documento" maxlength="10" required class="entrada">
-    <br>
-    <label for="nombres" class="subtitulo">Nombres</label>
-    <input type="text" name="nombres" placeholder="Ejemplo: Maria" maxlength="40" required class="entrada">
-    <br>
-    <label for="apellidos" class="subtitulo">Apellidos</label>
-    <input type="text" name="Apellidos" placeholder="Ejemplo: Cardenas" maxlength="40" required class="entrada">
-    <br>
-    <label for="telefono" class="subtitulo">Teléfono</label>
-    <input type="tel" name="telefono" placeholder="Ejemplo: 6011234567" minlength="7" maxlength="10" required class="entrada">
-    <br>
-    <label for="correo" class="subtitulo">Correo</label>
-    <input type="email" name="correo" placeholder="ejemplo@gmail.com" maxlength="40" required class="entrada">
-    <br>
-    <label for="ciudad" class="subtitulo">Ciudad</label>
-    <input type="text" name="ciudad" placeholder="Ejemplo: Medellin" maxlength="20" required class="entrada">
-    <br>
-    <label for="direccion" class="subtitulo">Dirección</label>
-    <input type="text" name="direccion" placeholder="Ejemplo: Cr 75 # 23a-92" maxlength="40" required class="entrada">
-    <br>
-    <label for="ocupacion" class="subtitulo">Ocupación</label>
-    <input type="text" name="ocupacion" placeholder="Ejemplo: Médico" maxlength="20" required class="entrada">
-    <br>
-    <label for="direccion" class="subtitulo">Direcciòn</label>
-    <input type="text" name="direccion" placeholder="Ejemplo: Cr 75 # 23a-92" maxlength="40" required class="entrada">
-    <br>
-
-    <label for="servicioint" class="subtitulo">¿Qué servicio le interesa?:</label>
-    <select name="servicioint" required class="entrada1">
-        <option value="">-------</option>
-        <option value="1">Estudiar</option>
-        <option value="2">Emprender</option>
-        <option value="3">Emplearse</option>
-        <option value="4">Descansar</option>
-        <option value="5">Ejercitarse</option>
-        <option value="6">Recibir Orientación</option>
-        <option value="7">Asesoría Jurídica</option>
-        <option value="8">Asesoría Psicológica</option>
-        <option value="9">Lavanderías Comunitarias</option>
-    </select>
-    <br>
-
-    <button type="submit">Registrar</button>
-
-</form>
+<div class="container mt-5">
+    <form action="" method="post" class="row g-3">
+        <div class="col-md-6">
+            <label for="tipodoc" class="form-label">Tipo Documento:</label>
+            <select class="form-select" name="tipodoc" id="tipodoc" required>
+                <option value="">-------</option>
+                <option value="CC">Cédula Ciudadanía</option>
+                <option value="TI">Tarjeta de Identidad</option>
+                <option value="Pasaporte">Pasaporte</option>
+                <option value="CE">Cédula Extranjería</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="documento" class="form-label">Número Documento:</label>
+            <input type="text" class="form-control" name="documento" placeholder="Número de Documento" maxlength="10" required>
+        </div>
+        <div class="col-md-6">
+            <label for="nombres" class="form-label">Nombres:</label>
+            <input type="text" class="form-control" name="nombres" placeholder="Ejemplo: Maria" maxlength="40" required>
+        </div>
+        <div class="col-md-6">
+            <label for="apellidos" class="form-label">Apellidos:</label>
+            <input type="text" class="form-control" name="Apellidos" placeholder="Ejemplo: Cardenas" maxlength="40" required>
+        </div>
+        <div class="col-md-6">
+            <label for="telefono" class="form-label">Teléfono:</label>
+            <input type="tel" class="form-control" name="telefono" placeholder="Ejemplo: 6011234567" minlength="7" maxlength="10" required>
+        </div>
+        <div class="col-md-6">
+            <label for="correo" class="form-label">Correo:</label>
+            <input type="email" class="form-control" name="correo" placeholder="ejemplo@gmail.com" maxlength="40" required>
+        </div>
+        <div class="col-md-6">
+            <label for="ciudad" class="form-label">Ciudad:</label>
+            <input type="text" class="form-control" name="ciudad" placeholder="Ejemplo: Medellin" maxlength="20" required>
+        </div>
+        <div class="col-md-6">
+            <label for="direccion" class="form-label">Dirección:</label>
+            <input type="text" class="form-control" name="direccion" placeholder="Ejemplo: Cr 75 # 23a-92" maxlength="40" required>
+        </div>
+        <div class="col-md-6">
+            <label for="ocupacion" class="form-label">Ocupación:</label>
+            <input type="text" class="form-control" name="ocupacion" placeholder="Ejemplo: Médico" maxlength="20" required>
+        </div>
+        <div class="col-md-6">
+            <label for="servicioint" class="form-label">¿Qué servicio le interesa?:</label>
+            <select class="form-select" name="servicioint" id="servicioint" required>
+                <option value="">-------</option>
+                <option value="1">Estudiar</option>
+                <option value="2">Emprender</option>
+                <option value="3">Emplearse</option>
+                <option value="4">Descansar</option>
+                <option value="5">Ejercitarse</option>
+                <option value="6">Recibir Orientación</option>
+                <option value="7">Asesoría Jurídica</option>
+                <option value="8">Asesoría Psicológica</option>
+                <option value="9">Lavanderías Comunitarias</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </div>
+    </form>
+</div>
 <br>
 <br>
 <h2>Mujeres registradas</h2>
