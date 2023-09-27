@@ -16,10 +16,21 @@
     <div class="tab-pane fade show active" id="serviciosR" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
         <h2 class="titulos">Formulario de Registro</h2>
         <br>
+        {%with messages=get_flashed_messages()%}
+        {%if messages%}
+        {%for message in messages%}   
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+        <div class="fa-solid fa-triangle-exclamation">
+        {{message}}
+        </div>
+        </div>   
+        {%endfor%}
+        {%endif%}
+        {%endwith%}
         <form action="" method="post" class="container mt-4">
             <div class="mb-3">
                 <label for="codservicio" class="form-label subtitulo">Código Servicio:</label>
-                <input type="text" name="codservicio" class="form-control entrada" placeholder="1132" maxlength="4" minlength="4" required>
+                <input type="text" name="codservicio" class="form-control entrada" placeholder="10" maxlength="2" required>
             </div>
             <div class="mb-3">
                 <label for="nombres" class="form-label subtitulo">Nombre del Servicio:</label>
@@ -44,16 +55,18 @@
                 </tr>
             </thead>
             <tbody>
+                {%for servicio in servicios%}
                 <tr>
-                <td>1</td>
-                <td>Estudiar</td>
-                <td>Para Interesados en aprender</td>
+                <td>{{servicio.0}}</td>
+                <td>{{servicio.1}}</td>
+                <td>{{servicio.2}}</td>
 
                 <td>
                     <button><span class="fa-solid fa-pencil"></span></button>
-                    <button><span class="fa-solid fa-trash"></span></button>
+                    <a href="/servicio/borrar/{{servicio.0}}"><span class="fa-solid fa-trash"></span></a>
                 </td>
                 </tr>
+                {%endfor%}
             </tbody>
         </table>
     </div>
