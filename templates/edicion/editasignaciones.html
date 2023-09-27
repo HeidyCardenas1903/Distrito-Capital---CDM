@@ -26,14 +26,16 @@
         {% endfor %}
         {% endif %}
         {% endwith %}
-        <form action="" method="post" class="container mt-4">
+
+        {%for i in cuidadoras%}
+        <form action="/asignacion/edit/{{i.0}}" method="post" class="container mt-4">
             <div class="mb-3">
                 <label for="documento" class="form-label subtitulo">Número Documento de la Cuidadora:</label>
-                <input type="text" name="documento" class="form-control entrada" placeholder="Número de Documento" maxlength="10" required>
+                <input type="text" name="documento" class="form-control entrada" value="{{i.0}}" maxlength="10" required>
             </div>
             <div class="mb-3">
                 <label for="codmanzana" class="form-label subtitulo">Código de Manzana propuesta:</label>
-                <input type="text" name="codmanzana" class="form-control entrada" placeholder="10256" maxlength="5" minlength="5" required>
+                <input type="text" name="codmanzana" class="form-control entrada" value="{{i.1}}" maxlength="5" minlength="5" required>
             </div>
             <div class="mb-3">
                 <label for="service" class="form-label subtitulo">Servicio por aplicar:</label>
@@ -52,52 +54,17 @@
             </div>
             <div class="mb-3">
                 <label for="dia" class="form-label subtitulo">Día:</label>
-                <input type="date" name="dia" class="form-control entrada" required>
+                <input type="date" name="dia" class="form-control entrada" required value="{{i.4}}">
             </div>
             <div class="mb-3">
                 <label for="hora" class="form-label subtitulo">Hora:</label>
-                <input type="time" name="hora" class="form-control entrada" required>
+                <input type="time" name="hora" class="form-control entrada" required value="{{i.5}}">
             </div>
-            <button type="submit" class="btn">Registrar</button>
+            
+            <button type="submit" class="btn">Editar</button>
+            <button type="button" class="cancelar">Cancelar</button>
         </form>
+        {%endfor%}
+        
     </div>
-
-    <div class="tab-pane fade" id="asignados" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-        <h2 class="titulos">Asignaciones registradas</h2>
-        <table>
-            <thead>
-                <tr>
-                    
-                    <th>Documento</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Codigo Manzana</th>
-                    <th>Servicio Deseado</th>
-                    <th>Día</th>
-                    <th>Hora</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {%for asignacion in cuidadoras%}
-                <tr>
-                <td>{{asignacion.0}}</td>
-                <td>{{asignacion.1}}</td>
-                <td>{{asignacion.2}}</td>
-                <td>{{asignacion.3}}</td>
-                <td>{{asignacion.4}}</td>
-                <td>{{asignacion.5}}</td>
-                <td>{{asignacion.6}}</td>
-
-                <td>
-                    <a href="/asignacion/edit/{{asignacion.0}}"><span class="fa-solid fa-pencil"></span></a>
-                    <a href="/asignacion/borrar/{{asignacion.0}}"><span class="fa-solid fa-trash"></span></a>
-                </td>
-                </tr>
-                {%endfor%}
-            </tbody>
-        </table>
-    </div>
-</div>
-
 {%endblock%}

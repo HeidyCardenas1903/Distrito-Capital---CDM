@@ -311,7 +311,6 @@ def asignacion():
     cur=mysql.connection.cursor()
     cur.execute('SELECT documento_mujer,nombres_mujer,apellidos_mujer,nombre_manzana,nombre_servicio,fecha,hora FROM cuidadoras,mujeres,servicios,manzanas WHERE cuidadoras.documento_mujer=mujeres.documento AND cuidadoras.cod_manzana=manzanas.cod_manzana AND cuidadoras.cod_servicio=servicios.cod_servicio')
     info=cur.fetchall()
-    print(info)
 
     if request.method == 'POST':
         documento = request.form['documento']
@@ -334,6 +333,28 @@ def asignacion():
             return redirect(url_for('asignacion'))
     return render_template('modulos/asignacion.html', cuidadoras=info)#Devolvera el template asignacion.html
 
+'''Ruta encargada de editar registros de asignaciones'''
+@app.route('/asignacion/edit/<documento_mujer>',methods=['GET','POST'])
+def update_asignaciones(documento_mujer):
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT documento_mujer,cuidadoras.cod_manzana,nombre_servicio,fecha,hora FROM cuidadoras,mujeres,servicios,manzanas WHERE cuidadoras.documento_mujer=mujeres.documento AND cuidadoras.cod_manzana=manzanas.cod_manzana AND cuidadoras.cod_servicio=servicios.cod_servicio')
+    info=cur.fetchall()
+
+    if request.method=='POST':
+        documento= request.form['documento']
+        cod1 = request.form['codmanzana']
+        cod2 = request.form['service']
+        date = request.form['dia']
+        time = request.form['hora']
+
+        cur.execute('UPDATE cuidadoras SET cod_manzana=%s,cod_servicio=%s,fecha=%s,hora=%s WHERE documento_mujer=%s',(cod1,cod2,date,time,documento))
+        mysql.connection.commit()
+        flash('Cita Re-asignada')
+        return redirect(url_for('asignacion'))
+    return render_template('edicion/editasignaciones.html', cuidadoras=info)#Devolvera el template asignacion.html
+
+
+'''Ruta encargada de elimiar registros de asignaciones'''
 @app.route('/asignacion/borrar/<string:documento_mujer>', methods=['GET','POST'])
 def borrarasignacion(documento_mujer):
     '''Funcion encargada de borrar registros de la tabla municipios'''
