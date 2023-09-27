@@ -4,8 +4,19 @@ from flask_mysqldb import MySQL
 from reportlab.pdfgen import canvas
 from modules.funciones import * 
 import io
+import xlwt 
+import pymysql
+from flask_googlemaps import GoogleMaps
+from flask_googlemaps import Map
+
+
 
 app = Flask(__name__)#Se especifica que este archivo es el que va a iniciar la webapp
+
+'''Google Maps API'''
+app.config['GOOGLEMAPS_KEY'] = "AIzaSyC-lmH6uemg3kFPtnjIO_l1YlKKDo5VYtY"
+
+GoogleMaps(app)
 
 '''Conexión a bd'''
 app.config['MYSQL_HOST']='localhost'
@@ -94,8 +105,32 @@ def borrarmunicipio(cod_municipio):
 '''Ruta de inicio'''
 @app.route ('/index')
 def inicio():
-    '''Se establece la función para la ruta de inicio/home'''
-    return render_template('modulos/index.html')#despues de que el usuario este ingresado se redirigira al index.html
+    mymap = Map(
+        identifier="view-side",
+        lat=37.4419,
+        lng=-122.1419,
+        markers=[(37.4419, -122.1419)]
+    )
+    sndmap = Map(
+        identifier="sndmap",
+        lat=37.4419,
+        lng=-122.1419,
+        markers=[
+          {
+             'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+             'lat': 37.4419,
+             'lng': -122.1419,
+             'infobox': "<b>Hello World</b>"
+          },
+          {
+             'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+             'lat': 37.4300,
+             'lng': -122.1400,
+             'infobox': "<b>Hello World from other place</b>"
+          }
+        ]
+    )
+    return render_template('modulos/index.html',mymap=mymap, sndmap=sndmap)#despues de que el usuario este ingresado se redirigira al index.html
 
 '''Ruta para los manzanas'''
 @app.route ('/manzanas',methods=['GET','POST'])
@@ -328,8 +363,13 @@ def generarpdf():
     response.mimetype = 'application/pdf'
     return response
 
+@app.route('/generar_xlx')
+def generar_xlx():
+    conn = mysql.connect()
+    cursor= conn.cursor(pymysql.cursors.DictCursor)
 
-# RUTA DE MAPA
+    cursor.execute('SELECT * FROM municipios')
+    result = cursor.fetchall()
 
 
 
