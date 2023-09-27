@@ -363,16 +363,19 @@ def generarpdf():
     response.mimetype = 'application/pdf'
     return response
 
-@app.route('/generar_xlx')
-def generar_xlx():
-    conn = mysql.connect()
-    cursor= conn.cursor(pymysql.cursors.DictCursor)
-
-    cursor.execute('SELECT * FROM municipios')
-    result = cursor.fetchall()
-
-
-
 if __name__=='__main__':
     #Se verifica que se este corriendo la aplicacion.
     app.run(debug=True)
+
+
+# @app.route('/generar_xlx')
+# def generar_xlx():
+#     conn = mysql.connect()
+#     cursor= conn.cursor(pymysql.cursors.DictCursor)
+
+#     cursor.execute('SELECT * FROM municipios')
+#     result = cursor.fetchall()
+
+#     output =io.BytesIO()
+#     workbook = xlwt.Workbook()
+#     sh = workbook.add_sheet('Reporte')
