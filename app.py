@@ -95,14 +95,13 @@ def borrarmunicipio(cod_municipio):
 '''Ruta de inicio'''
 @app.route ('/index')
 def inicio():
-    '''Se establece la función para la ruta de inicio'''
-    return render_template('modulos/index.html')
+    '''Se establece la función para la ruta de inicio/home'''
+    return render_template('modulos/index.html')#despues de que el usuario este ingresado se redirigira al index.html
 
 '''Ruta para los manzanas'''
 @app.route ('/manzanas')
 def manzana():
-    apple=manzanas()
-    return apple
+    return render_template('modulos/manzanas.html')#Devolvera el template manzana.html
 
 '''Ruta para los servicios'''
 @app.route ('/servicios')
