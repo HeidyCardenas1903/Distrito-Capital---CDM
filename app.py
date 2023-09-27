@@ -41,14 +41,13 @@ def login():
             session['Logueado']=True
 
 
-            flash('Bienvenido')
-            return redirect(url_for('index'))#si el usuario ingresa correctamente lo redireccionara al home
+            return redirect(url_for('inicio'))#si el usuario ingresa correctamente lo redireccionara al home
 
         
         else:
             flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
 
-            return render_template('moculos/login.html')
+            return render_template('modulos/login.html')
     return render_template('modulos/login.html')#Devolvera el template login.html
 
 

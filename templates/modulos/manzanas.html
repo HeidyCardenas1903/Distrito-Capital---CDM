@@ -1,80 +1,97 @@
 {%extends 'base.html'%}
 {%block title%}Manzanas{%endblock%}
 {%block content%}
-<h2 class="titulos">Formulario de Registro</h2>
-<br>
-<form action="" method="post" class="container mt-4">
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="codmanzana" class="form-label subtitulo">Código de Manzana</label>
-            <input type="text" name="codmanzana" class="form-control entrada" placeholder="10256" maxlength="5" minlength="5" required>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="nombres" class="form-label subtitulo">Nombre de la Manzana</label>
-            <input type="text" name="nombres" class="form-control entrada" placeholder="Ejemplo: Industrial" maxlength="20" required>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="codmunicipio" class="form-label subtitulo">Código Municipio al que pertenece</label>
-            <input type="text" name="documento" class="form-control entrada" placeholder="1132" maxlength="4" minlength="4" required>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="localidad" class="form-label subtitulo">Localidad:</label>
-            <input type="text" name="localidad" class="form-control entrada" placeholder="Ejemplo: Suba" maxlength="20" required>
-        </div>
-    </div>
-    <div class="mb-3">
-        <label for="direccion" class="form-label subtitulo">Dirección:</label>
-        <input type="text" name="direccion" class="form-control entrada" placeholder="Ejemplo: calle 24b#87-26" maxlength="40" required>
-    </div>
-    <div class="mb-3">
-        <label for="servicios" class="form-label subtitulo">Servicios:*</label> 
-        <select name="servicioprest" id="servicioprest" multiple required class="form-select entrada1">
-            <option value="1">Estudiar</option>
-            <option value="2">Emprender</option>
-            <option value="3">Emplear</option>
-            <option value="4">Descansar</option>
-            <option value="5">Ejercitar</option>
-            <option value="6">Recibir Orientación</option>
-            <option value="7">Asesoría Jurídica</option>
-            <option value="8">Asesoría Psicológica</option>
-            <option value="9">Lavanderías Comunitarias</option>
-        </select>
-        <p class="text-muted" style="color:  #fff !important;">* Puedes seleccionar varios servicios a la vez manteniendo presionada la tecla <kbd>Ctrl</kbd> mientras haces clic en las opciones.</p>
-    </div>
-    <button type="submit" class="btn btn-primary">Registrar</button>
-</form>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <!-- Titulos de pestañas de navegación -->
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#registrar" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><span><i class="fa-solid fa-circle-plus"></i></span>Registrar manzanas</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#establecimientos" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><span><i class="fa-solid fa-location-dot"></i></span>Manzanas</button>
+    </li>
+</ul>
 
-<h2 class="titulos">Manzanas Registradas</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Municipio</th>
-            <th>Localidad</th>
-            <th>Dirección</th>
-            <th>Servicios Prestados</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        <td>10256</td>
-        <td>Industrial</td>
-        <td>Cundinamarca</td>
-        <td>Suba</td>
-        <td>Calle 92#17-35</td>
-        <td>Descansar,Asesoría Jurídica</td>
+<!-- Cuerpo de pestañas de navegación -->
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="registrar" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <h2 class="titulos">Formulario de Manzanas</h2>
+        <br>
+        <form action="" method="post" class="container mt-4">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="codmanzana" class="form-label subtitulo">Código de Manzana</label>
+                    <input type="text" name="codmanzana" class="form-control entrada" placeholder="10256" maxlength="5" minlength="5" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="nombres" class="form-label subtitulo">Nombre de la Manzana</label>
+                    <input type="text" name="nombres" class="form-control entrada" placeholder="Ejemplo: Industrial" maxlength="20" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="codmunicipio" class="form-label subtitulo">Código Municipio al que pertenece</label>
+                    <input type="text" name="documento" class="form-control entrada" placeholder="1132" maxlength="4" minlength="4" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="localidad" class="form-label subtitulo">Localidad:</label>
+                    <input type="text" name="localidad" class="form-control entrada" placeholder="Ejemplo: Suba" maxlength="20" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label subtitulo">Dirección:</label>
+                <input type="text" name="direccion" class="form-control entrada" placeholder="Ejemplo: calle 24b#87-26" maxlength="40" required>
+            </div>
+            <div class="mb-3">
+                <label for="servicios" class="form-label subtitulo">Servicios:*</label> 
+                <select name="servicioprest" id="servicioprest" multiple required class="form-select entrada1">
+                    <option value="1">Estudiar</option>
+                    <option value="2">Emprender</option>
+                    <option value="3">Emplear</option>
+                    <option value="4">Descansar</option>
+                    <option value="5">Ejercitar</option>
+                    <option value="6">Recibir Orientación</option>
+                    <option value="7">Asesoría Jurídica</option>
+                    <option value="8">Asesoría Psicológica</option>
+                    <option value="9">Lavanderías Comunitarias</option>
+                </select>
+                <p class="text-muted" style="color:  #fff !important;">* Puedes seleccionar varios servicios a la vez manteniendo presionada la tecla <kbd>Ctrl</kbd> mientras haces clic en las opciones.</p>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="establecimientos" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <h2 class="titulos">Manzanas registradas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Municipio</th>
+                    <th>Localidad</th>
+                    <th>Dirección</th>
+                    <th>Servicios Prestados</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>10256</td>
+                <td>Industrial</td>
+                <td>Cundinamarca</td>
+                <td>Suba</td>
+                <td>Calle 92#17-35</td>
+                <td>Descansar,Asesoría Jurídica</td>
 
-        <td>
-            <button><span class="fa-solid fa-pencil"></span></button>
-            <button><span class="fa-solid fa-trash"></span></button>
-        </td>
-        </tr>
+                <td>
+                    <button><span class="fa-solid fa-pencil"></span></button>
+                    <button><span class="fa-solid fa-trash"></span></button>
+                </td>
+                </tr>
 
 
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {%endblock%}
