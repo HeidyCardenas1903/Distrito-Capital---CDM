@@ -47,7 +47,7 @@ def login():
         
         else:
             flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
-            return render_template('login/login.html')
+            return render_template('lmodulos/login.html')
     return render_template('login.html')#Devolvera el template login.html
 
 @app.route('/logout')
@@ -98,9 +98,27 @@ def establecimiento():
     return est
 
 '''Ruta para las Cuidadoras'''
-@app.route ('/mujeres')
+@app.route ('/mujeres', methods=['GET','POST'])
 def cuidadora():
     '''Se establece la función para la ruta para la seccion Cuidadoras'''
+    if request.method == 'POST':
+        tipodoc = request.form['tipodoc']
+        doc = request.form['documento']
+        name = request.form['nombres']
+        lastname = request.form['apellidos']
+        tel = request.form['telefono']
+        email = request.form['correo']
+        city = request.form['ciudad']
+        address = request.form['direccion']
+        ocupacion = request.form['ocupacion']
+        servicioint = request.form['servicioint']
+        
+
+        cur=mysql.connection.cursor()
+        cur.execute('INSERT INTO mujeres(documento,cod_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,ciudad,direccion_mujer,ocupacion) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(doc,servicioint,tipodoc,name,lastname,tel,email,city,address,ocupacion))
+        mysql.connection.commit()
+        flash('Cuidadora Agregada Satisfactoriamente')
+        return redirect(url_for('cuidadora'))
     return render_template('modulos/mujeres.html')#Devolvera el template mujeres.html
 
 
