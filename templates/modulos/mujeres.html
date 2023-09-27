@@ -1,122 +1,139 @@
 {%extends 'base.html'%}
-{%block title%}Cuidadoras{%endblock%}
+{%block title%}Mujeres cuidadoras{%endblock%}
 {%block content%}
-<h2>Formulario de registro</h2>
-{%with messages=get_flashed_messages()%}
-{%if messages%}
-{%for message in messages%}   
-<div class="alert alert-success d-flex align-items-center" role="alert">
-<div class="fa-solid fa-triangle-exclamation">
-{{message}}
-</div>
-</div>   
-{%endfor%}
-{%endif%}
-{%endwith%}
-<div class="container mt-5">
-    <form action="" method="post" class="row g-3">
-        <div class="col-md-6">
-            <label for="tipodoc" class="form-label">Tipo Documento:</label>
-            <select class="form-select" name="tipodoc" id="tipodoc" required>
-                <option value="">-------</option>
-                <option value="CC">Cédula Ciudadanía</option>
-                <option value="TI">Tarjeta de Identidad</option>
-                <option value="Pasaporte">Pasaporte</option>
-                <option value="CE">Cédula Extranjería</option>
-            </select>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <!-- Titulos de pestañas de navegación -->
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#Cuidadoras" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><span><i class="fa-solid fa-user-plus"></i></span>Registrar Cuidadora</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#cuidadorasM" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><span><i class="fa-solid fa-person-dress"></i></span>Mujeres Cuidadoras</button>
+    </li>
+</ul>
+
+<!-- Cuerpo de pestañas de navegación -->
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="Cuidadoras" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <h2 class="titulos">Formulario de mujeres cuidadoras</h2>
+        {%with messages=get_flashed_messages()%}
+        {%if messages%}
+        {%for message in messages%}   
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+        <div class="fa-solid fa-triangle-exclamation">
+        {{message}}
         </div>
-        <div class="col-md-6">
-            <label for="documento" class="form-label">Número Documento:</label>
-            <input type="number" class="form-control" name="documento" placeholder="Número de Documento" maxlength="10" required>
-        </div>
-        <div class="col-md-6">
-            <label for="nombres" class="form-label">Nombres:</label>
-            <input type="text" class="form-control" name="nombres" placeholder="Ejemplo: Maria" maxlength="40" required>
-        </div>
-        <div class="col-md-6">
-            <label for="apellidos" class="form-label">Apellidos:</label>
-            <input type="text" class="form-control" name="apellidos" placeholder="Ejemplo: Cardenas" maxlength="40" required>
-        </div>
-        <div class="col-md-6">
-            <label for="telefono" class="form-label">Teléfono:</label>
-            <input type="tel" class="form-control" name="telefono" placeholder="Ejemplo: 6011234567" minlength="7" maxlength="10" required>
-        </div>
-        <div class="col-md-6">
-            <label for="correo" class="form-label">Correo:</label>
-            <input type="email" class="form-control" name="correo" placeholder="ejemplo@gmail.com" maxlength="40" required>
-        </div>
-        <div class="col-md-6">
-            <label for="ciudad" class="form-label">Ciudad:</label>
-            <input type="text" class="form-control" name="ciudad" placeholder="Ejemplo: Medellin" maxlength="20" required>
-        </div>
-        <div class="col-md-6">
-            <label for="direccion" class="form-label">Dirección:</label>
-            <input type="text" class="form-control" name="direccion" placeholder="Ejemplo: Cr 75 # 23a-92" maxlength="40" required>
-        </div>
-        <div class="col-md-6">
-            <label for="ocupacion" class="form-label">Ocupación:</label>
-            <input type="text" class="form-control" name="ocupacion" placeholder="Ejemplo: Médico" maxlength="20" required>
-        </div>
-        <div class="col-md-6">
-            <label for="servicioint" class="form-label">¿Qué servicio le interesa?:</label>
-            <select class="form-select" name="servicioint" id="servicioint" required>
-                <option value="">-------</option>
-                <option value="1">Estudiar</option>
-                <option value="2">Emprender</option>
-                <option value="3">Emplearse</option>
-                <option value="4">Descansar</option>
-                <option value="5">Ejercitarse</option>
-                <option value="6">Recibir Orientación</option>
-                <option value="7">Asesoría Jurídica</option>
-                <option value="8">Asesoría Psicológica</option>
-                <option value="9">Lavanderías Comunitarias</option>
-            </select>
-        </div>
-        <div class="col-md-12">
-            <button type="submit" class="btn btn-primary">Registrar</button>
-        </div>
-    </form>
-</div>
-<br>
-<br>
-<h2>Mujeres registradas</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Tipo Documento</th>
-            <th>Documento</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Ciudad</th>
-            <th>Dirección</th>
-            <th>Ocupación</th>
-            <th>Servicio de Interes</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {%for mujer in mujeres%}
-        <tr>
-            <td>{{mujer.2}}</td>
-            <td>{{mujer.0}}</td>
-            <td>{{mujer.3}}</td>
-            <td>{{mujer.4}}</td>
-            <td>{{mujer.5}}</td>
-            <td>{{mujer.6}}</td>
-            <td>{{mujer.7}}</td>
-            <td>{{mujer.8}}</td>
-            <td>{{mujer.9}}</td>
-            <td>{{mujer.1}}</td> 
-            <td>
-                <button><span class="fa-solid fa-pencil"></span></button>
-                <a href="/mujer/borrar/{{mujer.0}}"><span class="fa-solid fa-trash"></span></a>
-            </td>
-        </tr>
+        </div>   
         {%endfor%}
+        {%endif%}
+        {%endwith%}
+        <div class="container mt-5">
+            <form action="" method="post" class="row g-3">
+                <div class="col-md-6">
+                    <label for="tipodoc" class="form-label">Tipo Documento:</label>
+                    <select class="form-select" name="tipodoc" id="tipodoc" required>
+                        <option value="">-------</option>
+                        <option value="CC">Cédula Ciudadanía</option>
+                        <option value="TI">Tarjeta de Identidad</option>
+                        <option value="Pasaporte">Pasaporte</option>
+                        <option value="CE">Cédula Extranjería</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="documento" class="form-label">Número Documento:</label>
+                    <input type="number" class="form-control" name="documento" placeholder="Número de Documento" maxlength="10" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="nombres" class="form-label">Nombres:</label>
+                    <input type="text" class="form-control" name="nombres" placeholder="Ejemplo: Maria" maxlength="40" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="apellidos" class="form-label">Apellidos:</label>
+                    <input type="text" class="form-control" name="apellidos" placeholder="Ejemplo: Cardenas" maxlength="40" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="telefono" class="form-label">Teléfono:</label>
+                    <input type="tel" class="form-control" name="telefono" placeholder="Ejemplo: 6011234567" minlength="7" maxlength="10" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="correo" class="form-label">Correo:</label>
+                    <input type="email" class="form-control" name="correo" placeholder="ejemplo@gmail.com" maxlength="40" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="ciudad" class="form-label">Ciudad:</label>
+                    <input type="text" class="form-control" name="ciudad" placeholder="Ejemplo: Medellin" maxlength="20" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="direccion" class="form-label">Dirección:</label>
+                    <input type="text" class="form-control" name="direccion" placeholder="Ejemplo: Cr 75 # 23a-92" maxlength="40" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="ocupacion" class="form-label">Ocupación:</label>
+                    <input type="text" class="form-control" name="ocupacion" placeholder="Ejemplo: Médico" maxlength="20" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="servicioint" class="form-label">¿Qué servicio le interesa?:</label>
+                    <select class="form-select" name="servicioint" id="servicioint" required>
+                        <option value="">-------</option>
+                        <option value="1">Estudiar</option>
+                        <option value="2">Emprender</option>
+                        <option value="3">Emplearse</option>
+                        <option value="4">Descansar</option>
+                        <option value="5">Ejercitarse</option>
+                        <option value="6">Recibir Orientación</option>
+                        <option value="7">Asesoría Jurídica</option>
+                        <option value="8">Asesoría Psicológica</option>
+                        <option value="9">Lavanderías Comunitarias</option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="cuidadorasM" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <h2 class="titulos">Mujeres cuidadoras registradas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo Documento</th>
+                    <th>Documento</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Ciudad</th>
+                    <th>Dirección</th>
+                    <th>Ocupación</th>
+                    <th>Servicio de Interes</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for mujer in mujeres%}
+                <tr>
+                    <td>{{mujer.2}}</td>
+                    <td>{{mujer.0}}</td>
+                    <td>{{mujer.3}}</td>
+                    <td>{{mujer.4}}</td>
+                    <td>{{mujer.5}}</td>
+                    <td>{{mujer.6}}</td>
+                    <td>{{mujer.7}}</td>
+                    <td>{{mujer.8}}</td>
+                    <td>{{mujer.9}}</td>
+                    <td>{{mujer.1}}</td> 
+                    <td>
+                        <button><span class="fa-solid fa-pencil"></span></button>
+                        <a href="/mujer/borrar/{{mujer.0}}"><span class="fa-solid fa-trash"></span></a>
+                    </td>
+                </tr>
+                {%endfor%}
 
 
-    </tbody>
-</table>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
 {%endblock%}
