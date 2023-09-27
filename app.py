@@ -47,7 +47,7 @@ def login():
         else:
             flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
             return render_template('modulos/login.html')
-    return render_template('login.html')#Devolvera el template login.html
+    return render_template('modulos/login.html')#Devolvera el template login.html
 
 @app.route('/logout')
 def logout():
