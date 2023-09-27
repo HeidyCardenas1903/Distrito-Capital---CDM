@@ -100,8 +100,8 @@ def establecimiento():
 '''Ruta para las Cuidadoras'''
 @app.route ('/mujeres')
 def cuidadora():
-    women=mujeres()
-    return women
+    '''Se establece la función para la ruta para la seccion Cuidadoras'''
+    return render_template('modulos/mujeres.html')#Devolvera el template mujeres.html
 
 
 '''Ruta para la asignación'''

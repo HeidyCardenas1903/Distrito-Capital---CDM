@@ -15,10 +15,6 @@ def establecimientos():
     '''Se establece la función para la ruta para la seccion establecimientos'''
     return render_template('modulos/establecimientos.html')#Devolvera el template establecimientos.html
 
-def mujeres():
-    '''Se establece la función para la ruta para la seccion Cuidadoras'''
-    return render_template('modulos/mujeres.html')#Devolvera el template mujeres.html
-
 def asignacion():
     '''Se establece la función para la ruta para la seccion asignación'''
     return render_template('modulos/asignacion.html')#Devolvera el template asignacion.html
