@@ -72,8 +72,8 @@ def municipios():
         return redirect(url_for('municipios'))
     return render_template('modulos/municipios.html')#Devolvera el template municipios.html
 
-'''Ruta de inicio'''
 
+'''Ruta de inicio'''
 @app.route ('/index')
 def inicio():
     '''Se establece la función para la ruta de inicio'''
