@@ -1,73 +1,85 @@
 {%extends 'base.html'%}
 {%block title%}Establecimientos{%endblock%}
 {%block content%}
-<h2>Formulario de Registro</h2>
-<br>
-<form action="" method="post">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <!-- Titulos de pestañas de navegación -->
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#registrar" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><span><i class="fa-solid fa-building-circle-arrow-right"></i></span>Registrar establecimiento</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#establecimientos" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><span><i class="fa-solid fa-building-circle-check"></i></span>Establecimientos</button>
+    </li>
+</ul>
 
-    <label for="codmunicipio" class="subtitulo">Código Establecimiento</label>
-    <input type="text" name="" placeholder="32" maxlength="2" minlength="2"  required class="entrada">
-    <br>
-    <label for="nombres" class="subtitulo">Nombre del Establecimiento</label>
-    <input type="text" name="nombres" placeholder="Ejemplo: Librería Pedro" maxlength="20" required class="entrada">
-    <br>
-    <label for="responsable" class="subtitulo">Responsable</label>
-    <input type="textbox" name="responsable" placeholder="Ejemplo: Julian Romero" maxlength="40" required class="entrada">
-    <br>
-    <label for="responsable" class="subtitulo">Responsable</label>
-    <input type="textbox" name="responsable" placeholder="Ejemplo: Julian Romero" maxlength="40" required class="entrada">
-    <br>
-    <label for="direccion" class="subtitulo">Dirección del Establecimiento</label>
-    <input type="textbox" name="direccion" placeholder="Ejemplo: calle 23a#56-87" maxlength="40" required class="entrada">
-    <br>
-    <label for="service" class="subtitulo">Servicio Prestado</label>
-    <select name="service" id="service" required class="entrada1">
-        <option value="">-------</option>
-        <option value="1">Estudiar</option>
-        <option value="2">Emprender</option>
-        <option value="3">Emplearse</option>
-        <option value="4">Descansar</option>
-        <option value="5">Ejercitarse</option>
-        <option value="6">Recibir Orientación</option>
-        <option value="7">Asesoría Jurídica</option>
-        <option value="8">Asesoría Psicológica</option>
-        <option value="9">Lavanderías Comunitarias</option>
-    </select>
-    <br>
+<!-- Cuerpo de pestañas de navegación -->
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="registrar" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <h2 class="titulos">Formulario de Registro</h2>
+        <br>
+        <form action="" method="post" class="container mt-4">
+            <div class="mb-3">
+                <label for="codmunicipio" class="form-label subtitulo">Código establecimiento:</label>
+                <input type="text" name="codmunicipio" class="form-control entrada" placeholder="32" maxlength="2" minlength="2" required>
+            </div>
+            <div class="mb-3">
+                <label for="nombres" class="form-label subtitulo">Nombre del establecimiento:</label>
+                <input type="text" name="nombres" class="form-control entrada" placeholder="Ejemplo: Librería Pedro" maxlength="20" required>
+            </div>
+            <div class="mb-3">
+                <label for="responsable" class="form-label subtitulo">Responsable:</label>
+                <input type="text" name="responsable" class="form-control entrada" placeholder="Ejemplo: Julian Romero" maxlength="40" required>
+            </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label subtitulo">Dirección del establecimiento:</label>
+                <input type="text" name="direccion" class="form-control entrada" placeholder="Ejemplo: calle 23a#56-87" maxlength="40" required>
+            </div>
+            <div class="mb-3">
+                <label for="service" class="form-label subtitulo">Servicio prestado:</label>
+                <select name="service" id="service" class="form-select entrada1" required>
+                    <option value="">-------</option>
+                    <option value="1">Estudiar</option>
+                    <option value="2">Emprender</option>
+                    <option value="3">Emplearse</option>
+                    <option value="4">Descansar</option>
+                    <option value="5">Ejercitarse</option>
+                    <option value="6">Recibir Orientación</option>
+                    <option value="7">Asesoría Jurídica</option>
+                    <option value="8">Asesoría Psicológica</option>
+                    <option value="9">Lavanderías Comunitarias</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="establecimientos" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <h2 class="titulos">Establecimientos registrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Responsable</th>
+                    <th>Dirección</th>
+                    <th>Servicio Prestado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>32</td>
+                <td>Librería Otoño</td>
+                <td>Juan Manaos</td>
+                <td>cll 134#12a-76</td>
+                <td>Estudiar</td>
 
-    <button type="submit">Registrar</button>
-
-</form>
-<br><br>
-
-<h2>Establecimientos Registrados</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Responsable</th>
-            <th>Dirección</th>
-            <th>Servicio Prestado</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        <td>32</td>
-        <td>Librería Otoño</td>
-        <td>Juan Manaos</td>
-        <td>cll 134#12a-76</td>
-        <td>Estudiar</td>
-
-        <td>
-            <button><span class="fa-solid fa-pencil"></span></button>
-            <button><span class="fa-solid fa-trash"></span></button>
-        </td>
-        </tr>
-
-
-    </tbody>
-</table>
+                <td>
+                    <button><span class="fa-solid fa-pencil"></span></button>
+                    <button><span class="fa-solid fa-trash"></span></button>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {%endblock%}

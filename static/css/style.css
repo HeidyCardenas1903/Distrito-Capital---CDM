@@ -142,7 +142,8 @@ p,a,button,label,input{
         background: var(--primary-color);
         color: var(--primary-color);
         margin-left: 80px;
-        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-bottom: 30px;
         font-size: 16px;
         border-radius: 10px; 
         overflow: hidden; 
@@ -186,24 +187,18 @@ p,a,button,label,input{
 
     /* Fin estilos tablas */
 
-    /* Estilos de formulario asignacion */
-    #Asignacion{
+    /* Estilos de formularios */
+    h2.titulos{
         display: flex;
         justify-content: center;
         margin-top: 30px;
         margin-bottom: 10px;
         color:var(--tertiary-color);
     }
-    #Asignadas{
-        display: flex;
-        justify-content: center;
-        margin-top: 30px;
-        margin-bottom: 20px;
-        color:var(--tertiary-color)
-    }
 
     .btn{
         display:block;
+        border: none;
         background: var(--tertiary-color);
         color: var(--primary-color);
         font-weight: 600;
@@ -218,6 +213,11 @@ p,a,button,label,input{
         color: var(--primary-color);
     }
 
+    ul#myTab{
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
 
     /* Fin de estilos de formulario asignacion */
 

@@ -2,7 +2,7 @@
 {%block title%}Asignaciones{%endblock%}
 {%block content%}
 
-<ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 30px;display: flex;justify-content: center;">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
     <!-- Titulos de pestañas de navegación -->
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#registrar" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><span><i class="fa-solid fa-user-plus"></i></span>Registrar asignación</button>
@@ -12,9 +12,9 @@
     </li>
 </ul>
     <!-- Cuerpo de pestañas de navegación -->
-  <div class="tab-content" id="myTabContent">
+<div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="registrar" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-        <h2 id="Asignacion">Formulario de Asignaciones</h2>
+        <h2 class="titulos">Formulario de Asignaciones</h2>
         <br>
         <form action="" method="post" class="container mt-4">
             <div class="mb-3">
@@ -53,7 +53,7 @@
     </div>
 
     <div class="tab-pane fade" id="asignados" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-        <h2 id="Asignadas">Asignaciones registradas</h2>
+        <h2 class="titulos">Asignaciones registradas</h2>
         <table>
             <thead>
                 <tr>
@@ -81,6 +81,6 @@
             </tbody>
         </table>
     </div>
-  </div>
+</div>
 
 {%endblock%}
