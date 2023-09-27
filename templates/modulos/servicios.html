@@ -1,47 +1,62 @@
 {%extends 'base.html'%}
 {%block title%}Servicios{%endblock%}
 {%block content%}
-<h2>Formulario de Registro</h2>
-<br>
-<form action="" method="post">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <!-- Titulos de pestañas de navegación -->
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#serviciosR" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><span><i class="fa-solid fa-plus"></i></span>Registar servicio</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#serviciosT" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><span><i class="fa-solid fa-check"></i></span>Servicios</button>
+    </li>
+</ul>
 
-    <label for="codservicio" class="subtitulo">Código Servicio</label>
-    <input type="text" name="codservicio" placeholder="1132" maxlength="4" minlength="4"  required class="entrada">
+<!-- Cuerpo de pestañas de navegación -->
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="serviciosR" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <h2 class="titulos">Formulario de Registro</h2>
+        <br>
+        <form action="" method="post" class="container mt-4">
+            <div class="mb-3">
+                <label for="codservicio" class="form-label subtitulo">Código Servicio:</label>
+                <input type="text" name="codservicio" class="form-control entrada" placeholder="1132" maxlength="4" minlength="4" required>
+            </div>
+            <div class="mb-3">
+                <label for="nombres" class="form-label subtitulo">Nombre del Servicio:</label>
+                <input type="text" name="nombres" class="form-control entrada" placeholder="Ejemplo: Lavanderia Comunitaria" maxlength="20" required>
+            </div>
+            <div class="mb-3">
+                <label for="descripcion" class="form-label subtitulo">Descripción:</label>
+                <input type="text" name="descripcion" class="form-control entrada" placeholder="Ejemplo: Permite lavar en comunidad" maxlength="100" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="serviciosT" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <h2 class="titulos">Servicios Registrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>1</td>
+                <td>Estudiar</td>
+                <td>Para Interesados en aprender</td>
 
-    <label for="nombres" class="subtitulo">Nombre del Servicio</label>
-    <input type="text" name="nombres" placeholder="Ejemplo: Lavanderia Comunitaria" maxlength="20" required class="entrada">
-
-    <label for="nombres" class="subtitulo">Descripción</label>
-    <input type="textbox" name="nombres" placeholder="Ejemplo: Permite lavar en comunidad" maxlength="100" required class="entrada">
-
-    <button type="submit">Registrar</button>
-
-</form>
-<br><br>
-<h2>Servicios Registrados</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        <td>1</td>
-        <td>Estudiar</td>
-        <td>Para Interesados en aprender</td>
-
-        <td>
-            <button><span class="fa-solid fa-pencil"></span></button>
-            <button><span class="fa-solid fa-trash"></span></button>
-        </td>
-        </tr>
-
-
-    </tbody>
-</table>
+                <td>
+                    <button><span class="fa-solid fa-pencil"></span></button>
+                    <button><span class="fa-solid fa-trash"></span></button>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {%endblock%}
