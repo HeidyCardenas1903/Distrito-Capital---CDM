@@ -70,7 +70,6 @@ def logout():
 
 '''Ruta para los municipios'''
 @app.route ('/municipios', methods=['GET','POST'])
-@login_required
 def municipios():
     '''Se establece la función para la ruta para la seccion municipios'''
     cur=mysql.connection.cursor()
@@ -106,7 +105,6 @@ def borrarmunicipio(cod_municipio):
 
 '''Ruta de inicio'''
 @app.route ('/index')
-@login_required
 def inicio():
     mymap = Map(
         identifier="view-side",
@@ -137,7 +135,6 @@ def inicio():
 
 '''Ruta para los manzanas'''
 @app.route ('/manzanas',methods=['GET','POST'])
-@login_required
 def manzana():
     '''Se establece la función para la ruta para la seccion municipios'''
     cur=mysql.connection.cursor()
@@ -171,7 +168,6 @@ def manzana():
     return render_template('modulos/manzanas.html', manzanas=info)#Devolvera el template manzana.html
 
 @app.route('/manzana/borrar/<string:cod_manzana>', methods=['GET','POST'])
-@login_required
 def borrarmanzana(cod_manzana):
     cur=mysql.connection.cursor()
     cur.execute('DELETE FROM appleservice WHERE copy_codmanzana={0}'.format(cod_manzana))
@@ -210,7 +206,6 @@ def servicios():
     return render_template('modulos/servicios.html', servicios=info)#Devolvera el template servicios.html ubicado en la carpeta templates/modulos
 
 @app.route('/servicio/borrar/<string:cod_servicio>', methods=['GET','POST'])
-@login_required
 def borrarservicio(cod_servicio):
     '''Funcion encargada de borrar registros de la tabla municipios'''
     cur=mysql.connection.cursor()
@@ -221,7 +216,6 @@ def borrarservicio(cod_servicio):
 
 '''Ruta para los establecimientos'''
 @app.route ('/establecimientos', methods=['GET','POST'])
-@login_required
 def establecimientos():
     '''Se establece la función para la ruta para la seccion establecimientos'''
     cur=mysql.connection.cursor()
@@ -271,7 +265,6 @@ def update_establecimientos(cod_establecimiento):
     return render_template('edicion/editestablecimientos.html', establecimientos=info)#Devolvera el template asignacion.html
 
 @app.route('/establecimiento/borrar/<string:cod_establecimiento>', methods=['GET','POST'])
-@login_required
 def borrarestablecimiento(cod_establecimiento):
     '''Funcion encargada de borrar registros de la tabla establecimientos'''
     cur=mysql.connection.cursor()
@@ -282,7 +275,6 @@ def borrarestablecimiento(cod_establecimiento):
 
 '''Ruta para las Cuidadoras'''
 @app.route ('/mujeres', methods=['GET','POST'])
-@login_required
 def cuidadora():
     '''Se establece la función para la ruta para la seccion Cuidadoras'''
     cur=mysql.connection.cursor()
@@ -325,7 +317,6 @@ def cuidadora():
     return render_template('modulos/mujeres.html', mujeres=info)#Devolvera el template mujeres.html
 
 @app.route('/mujer/borrar/<string:documento>', methods=['GET','POST'])
-@login_required
 def borrarmujer(documento):
     cur=mysql.connection.cursor()
     cur.execute('DELETE FROM mujeres WHERE documento={0}'.format(documento))
