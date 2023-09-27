@@ -219,6 +219,9 @@ p,a,button,label,input{
         justify-content: center;
     }
 
+    p.text-muted{
+        color:var(--primary-color);
+    }
     /* Fin de estilos de formulario asignacion */
 
 

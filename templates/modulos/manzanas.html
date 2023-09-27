@@ -1,44 +1,52 @@
 {%extends 'base.html'%}
 {%block title%}Manzanas{%endblock%}
 {%block content%}
-<h2>Formulario de Registro</h2>
+<h2 class="titulos">Formulario de Registro</h2>
 <br>
-<form action="" method="post">
-
-    <label for="codmanzana" class="subtitulo">Código de Manzana</label>
-    <input type="text" name="codmanzana" placeholder="10256" maxlength="5" minlength="5" required class="entrada">
-    <br>
-    <label for="nombres" class="subtitulo">Nombre de la Manzana</label>
-    <input type="text" name="nombres" placeholder="Ejemplo: Industrial" maxlength="20" required class="entrada">
-    <br>
-    <label for="codmunicipio" class="subtitulo">Código Municipio al que pertenece</label>
-    <input type="text" name="documento" placeholder="1132" maxlength="4" minlength="4"  required class="entrada">
-    <br>
-    <label for="localidad" class="subtitulo">Localidad:</label>
-    <input type="text" name="localidad" placeholder="Ejemplo: Suba" maxlength="20" required class="entrada">
-    <br>
-    <label for="direccion" class="subtitulo">Dirección:</label>
-    <input type="text" name="direccion" placeholder="Ejemplo: calle 24b#87-26" maxlength="40" required class="entrada">
-    <br><br>
-    <label for="servicios" class="subtitulo">Servicios:*</label> 
-    <select name="servicioprest" id="servicioprest" multiple required class="entrada1">
-        <option value="1">Estudiar</option>
-        <option value="2">Emprender</option>
-        <option value="3">Emplear</option>
-        <option value="4">Descansar</option>
-        <option value="5">Ejercitar</option>
-        <option value="6">Recibir Orientación</option>
-        <option value="7">Asesoría Jurídica</option>
-        <option value="8">Asesoría Psicológica</option>
-        <option value="9">Lavanderías Comunitarias</option>
-    </select>
-    <p>*Para escoger varios servicios mantenga presionado ctrl mientras selecciona las opciones</p>
-
-    <button type="submit">Registrar</button>
-
+<form action="" method="post" class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="codmanzana" class="form-label subtitulo">Código de Manzana</label>
+            <input type="text" name="codmanzana" class="form-control entrada" placeholder="10256" maxlength="5" minlength="5" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="nombres" class="form-label subtitulo">Nombre de la Manzana</label>
+            <input type="text" name="nombres" class="form-control entrada" placeholder="Ejemplo: Industrial" maxlength="20" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="codmunicipio" class="form-label subtitulo">Código Municipio al que pertenece</label>
+            <input type="text" name="documento" class="form-control entrada" placeholder="1132" maxlength="4" minlength="4" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="localidad" class="form-label subtitulo">Localidad:</label>
+            <input type="text" name="localidad" class="form-control entrada" placeholder="Ejemplo: Suba" maxlength="20" required>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="direccion" class="form-label subtitulo">Dirección:</label>
+        <input type="text" name="direccion" class="form-control entrada" placeholder="Ejemplo: calle 24b#87-26" maxlength="40" required>
+    </div>
+    <div class="mb-3">
+        <label for="servicios" class="form-label subtitulo">Servicios:*</label> 
+        <select name="servicioprest" id="servicioprest" multiple required class="form-select entrada1">
+            <option value="1">Estudiar</option>
+            <option value="2">Emprender</option>
+            <option value="3">Emplear</option>
+            <option value="4">Descansar</option>
+            <option value="5">Ejercitar</option>
+            <option value="6">Recibir Orientación</option>
+            <option value="7">Asesoría Jurídica</option>
+            <option value="8">Asesoría Psicológica</option>
+            <option value="9">Lavanderías Comunitarias</option>
+        </select>
+        <p class="text-muted" style="color:  #fff !important;">* Puedes seleccionar varios servicios a la vez manteniendo presionada la tecla <kbd>Ctrl</kbd> mientras haces clic en las opciones.</p>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar</button>
 </form>
-<br><br>
-<h2>Manzanas Registradas</h2>
+
+<h2 class="titulos">Manzanas Registradas</h2>
 <table>
     <thead>
         <tr>
