@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect,url_for,flash,session, make_response
-from flask_login import login_required, LoginManager, UserMixin
+from flask_login import login_required
 from flask_mysqldb import MySQL
 from reportlab.pdfgen import canvas
 from modules.funciones import * 
@@ -12,7 +12,7 @@ from flask_googlemaps import Map
 
 
 app = Flask(__name__)#Se especifica que este archivo es el que va a iniciar la webapp
-login_manager = LoginManager(app)
+
 
 '''Google Maps API'''
 app.config['GOOGLEMAPS_KEY'] = "AIzaSyC-lmH6uemg3kFPtnjIO_l1YlKKDo5VYtY"
@@ -27,7 +27,7 @@ app.config['MYSQL_DB']='manzanascuidado'
 mysql=MySQL(app)
 
 '''Settings'''
-app.secret_key='manzanita'
+app.secret_key='mysecretkey'
 
 
 '''Ruta para el index'''
