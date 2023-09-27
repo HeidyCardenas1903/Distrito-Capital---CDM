@@ -113,11 +113,26 @@ def cuidadora():
         ocupacion = request.form['ocupacion']
         servicioint = request.form['servicioint']
         
-
+     
         cur=mysql.connection.cursor()
-        cur.execute('INSERT INTO mujeres(documento,cod_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,ciudad,direccion_mujer,ocupacion) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(doc,servicioint,tipodoc,name,lastname,tel,email,city,address,ocupacion))
-        mysql.connection.commit()
-        flash('Cuidadora Agregada Satisfactoriamente')
+        cur.execute('SELECT * FROM mujeres WHERE documento=%s',[doc,])
+        data=cur.fetchone()
+
+        if data:
+            flash('Cuidadora ya Registrada')
+            return redirect(url_for('cuidadora')) 
+
+        else:
+            cur.execute('SELECT * FROM mujeres WHERE correo=%s',[email,])
+            data=cur.fetchone()
+
+            if data:
+                flash('Email ya Registrado')
+                return redirect(url_for('cuidadora')) 
+            else:
+                cur.execute('INSERT INTO mujeres(documento,cod_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,ciudad,direccion_mujer,ocupacion) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(doc,servicioint,tipodoc,name,lastname,tel,email,city,address,ocupacion))
+                mysql.connection.commit()
+                flash('Cuidadora Agregada Satisfactoriamente')
         return redirect(url_for('cuidadora'))
     return render_template('modulos/mujeres.html')#Devolvera el template mujeres.html
 
