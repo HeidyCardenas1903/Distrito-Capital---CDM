@@ -142,16 +142,48 @@ def borrarmanzana(cod_manzana):
     return redirect(url_for('manzana'))
 
 '''Ruta para los servicios'''
-@app.route ('/servicios')
-def servicio():
-    service=servicios()
-    return service
+@app.route ('/servicios', methods=['GET','POST'])
+def servicios():
+    '''Se establece la función para la ruta para la seccion servicios'''
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM servicios')
+    info=cur.fetchall()
+
+    if request.method == 'POST':
+        cod = request.form['codservicio']
+        name = request.form['nombres']
+        description = request.form['descripcion']
+
+        cur.execute('SELECT * FROM servicios WHERE cod_servicio=%s',[cod,])#Se verifica que el servicio no haya sido previamente ingresado
+        data=cur.fetchone()
+
+        if data:
+            flash('Servicio ya Registrado')
+            return redirect(url_for('servicios'))#Si el servicio se encuentra ya resgistrao se habilita el mensaje de aviso y se redirije al formulario
+
+        else:
+            cur.execute('INSERT INTO servicios(cod_servicio,nombre_servicio,descripcion) VALUES(%s,%s,%s)',(cod,name,description))
+            mysql.connection.commit()
+            flash('Servicio Agregado')
+            return redirect(url_for('servicios'))
+
+    return render_template('modulos/servicios.html', servicios=info)#Devolvera el template servicios.html ubicado en la carpeta templates/modulos
+
+@app.route('/servicio/borrar/<string:cod_servicio>', methods=['GET','POST'])
+def borrarservicio(cod_servicio):
+    '''Funcion encargada de borrar registros de la tabla municipios'''
+    cur=mysql.connection.cursor()
+    cur.execute('DELETE FROM servicios WHERE cod_servicio={0}'.format(cod_servicio))
+    mysql.connection.commit()
+    flash('Registro Eliminado')
+    return redirect(url_for('servicios'))
 
 '''Ruta para los establecimientos'''
 @app.route ('/establecimientos')
-def establecimiento():
-    est=establecimientos()
-    return est
+def establecimientos():
+    '''Se establece la función para la ruta para la seccion establecimientos'''
+    return render_template('modulos/establecimientos.html')#Devolvera el template establecimientos.html
+
 
 '''Ruta para las Cuidadoras'''
 @app.route ('/mujeres', methods=['GET','POST'])
@@ -203,8 +235,6 @@ def borrarmujer(documento):
     mysql.connection.commit()
     flash('Registro Eliminado')
     return redirect(url_for('cuidadora'))
-
-
 
 
 '''Ruta para la asignación'''
