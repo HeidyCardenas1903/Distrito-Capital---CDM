@@ -243,6 +243,26 @@ def establecimientos():
 
     return render_template('modulos/establecimientos.html',establecimiento=info)#Devolvera el template establecimientos.html
 
+'''Ruta encargada de editar registros de establecimientos'''
+@app.route('/establecimientos/edit/<cod_establecimiento>',methods=['GET','POST'])
+def update_establecimientos(cod_establecimiento):
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT cod_establecimiento,nombre_establecimiento,responsable,direccion_establecimiento,nombre_servicio FROM establecimiento,servicios WHERE establecimiento.cod_servicio=servicios.cod_servicio')
+    info=cur.fetchall()
+
+    if request.method=='POST':
+        cod = request.form['codestablecimiento']
+        name = request.form['nombres']
+        responsable = request.form['responsable']
+        direccion = request.form['direccion']
+        service= request.form['service']
+
+        cur.execute('UPDATE establecimiento SET cod_servicio=%s,nombre_establecimiento=%s,responsable=%s,direccion_establecimiento=%s WHERE cod_establecimiento=%s',(service,name,responsable,direccion,cod))
+        mysql.connection.commit()
+        flash('Establecimiento Actualizado')
+        return redirect(url_for('establecimientos'))
+    return render_template('edicion/editestablecimientos.html', establecimientos=info)#Devolvera el template asignacion.html
+
 @app.route('/establecimiento/borrar/<string:cod_establecimiento>', methods=['GET','POST'])
 def borrarestablecimiento(cod_establecimiento):
     '''Funcion encargada de borrar registros de la tabla establecimientos'''

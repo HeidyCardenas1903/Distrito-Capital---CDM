@@ -1,0 +1,68 @@
+{%extends 'base.html'%}
+{%block title%}Asignaciones{%endblock%}
+{%block content%}
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <!-- Titulos de pestañas de navegación -->
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#registrar" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><i class="fa-regular fa-calendar-plus"></i></span> Registrar asignación</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#asignados" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><span><i class="fa-solid fa-list"></i></span>Asignadas</button>
+    </li>
+</ul>
+    <!-- Cuerpo de pestañas de navegación -->
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="registrar" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <h2 class="titulos">Formulario de Asignaciones</h2>
+        <br>
+        {% with messages=get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}   
+        <div class="alert alert-warning" role="alert">
+            <i class="fas fa-exclamation-triangle"></i>
+            {{ message }}
+        </div>   
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {%for i in establecimientos%}
+        <form action="" method="post" class="container mt-4">
+            <div class="mb-3">
+                <label for="codestablecimiento" class="form-label subtitulo">Código establecimiento:</label>
+                <input type="text" name="codestablecimiento" class="form-control entrada" value="{{i.0}}" maxlength="2" minlength="2" required>
+            </div>
+            <div class="mb-3">
+                <label for="nombres" class="form-label subtitulo">Nombre del establecimiento:</label>
+                <input type="text" name="nombres" class="form-control entrada" value="{{i.1}}" maxlength="20" required>
+            </div>
+            <div class="mb-3">
+                <label for="responsable" class="form-label subtitulo">Responsable:</label>
+                <input type="text" name="responsable" class="form-control entrada" value="{{i.2}}" maxlength="40" required>
+            </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label subtitulo">Dirección del establecimiento:</label>
+                <input type="text" name="direccion" class="form-control entrada" value="{{i.3}}" maxlength="40" required>
+            </div>
+            <div class="mb-3">
+                <label for="service" class="form-label subtitulo">Servicio prestado:</label>
+                <select name="service" id="service" class="form-select entrada1" required>
+                    <option value="">-------</option>
+                    <option value="1">Estudiar</option>
+                    <option value="2">Emprender</option>
+                    <option value="3">Emplearse</option>
+                    <option value="4">Descansar</option>
+                    <option value="5">Ejercitarse</option>
+                    <option value="6">Recibir Orientación</option>
+                    <option value="7">Asesoría Jurídica</option>
+                    <option value="8">Asesoría Psicológica</option>
+                    <option value="9">Lavanderías Comunitarias</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+        {%endfor%}
+        
+    </div>
+{%endblock%}
