@@ -16,7 +16,6 @@
     <div class="tab-pane fade show active" id="registrar" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
         <h2 class="titulos">Formulario de Manzanas</h2>
         <br>
-        <h2>¡Bienvenido de nuevo!</h2>
         {% with messages=get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}   
@@ -90,16 +89,16 @@
                 <td>{{manzana.0}}</td>
                 <td>{{manzana.2}}</td>
                 <td>{{manzana.1}}</td>
-                <td>{{}}</td>
-                <td>Calle 92#17-35</td>
-                <td>Descansar,Asesoría Jurídica</td>
+                <td>{{manzana.3}}</td>
+                <td>{{manzana.4}}</td>
+                <td>{{manzana.5}}</td>
 
                 <td>
                     <button><span class="fa-solid fa-pencil"></span></button>
-                    <button><span class="fa-solid fa-trash"></span></button>
+                    <a href="/manzana/borrar/{{manzana.0}}"><span class="fa-solid fa-trash"></span></a>
                 </td>
                 </tr>
-
+                {%endfor%}
 
             </tbody>
         </table>

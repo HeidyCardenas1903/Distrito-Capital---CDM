@@ -102,8 +102,9 @@ def inicio():
 def manzana():
     '''Se establece la función para la ruta para la seccion municipios'''
     cur=mysql.connection.cursor()
-    cur.execute('SELECT * FROM manzanas')
+    cur.execute('SELECT cod_manzana,nombre_municipio,nombre_manzana,localidad,direccion_manzana,nombre_servicio FROM manzanas,municipios,servicios,appleservice WHERE manzanas.cod_municipio=municipios.cod_municipio AND manzanas.cod_manzana=appleservice.copy_codmanzana AND servicios.cod_servicio=appleservice.copy_codservice')
     info=cur.fetchall()
+    print(info)
 
     if request.method == 'POST':
         cod = request.form['codmanzana']
@@ -124,11 +125,21 @@ def manzana():
 
         else:
             cur.execute('INSERT INTO manzanas(cod_manzana,cod_municipio,nombre_manzana,localidad,direccion_manzana) VALUES(%s,%s,%s,%s,%s)',(cod,cod2,name,localidad,direccion))
-            cur.execute('INSERT INTO manzanas_servicios(cod_manzana,cod_servicio) VALUES(%s,%s)',(cod,codserv))
+            cur.execute('INSERT INTO appleservice(copy_codmanzana,copy_codservice) VALUES(%s,%s)',(cod,codserv))
             mysql.connection.commit()
             flash('Manzana Agregada')
             return redirect(url_for('manzana'))
     return render_template('modulos/manzanas.html', manzanas=info)#Devolvera el template manzana.html
+
+@app.route('/manzana/borrar/<string:cod_manzana>', methods=['GET','POST'])
+def borrarmanzana(cod_manzana):
+    cur=mysql.connection.cursor()
+    cur.execute('DELETE FROM appleservice WHERE copy_codmanzana={0}'.format(cod_manzana))
+    mysql.connection.commit()
+    cur.execute('DELETE FROM manzanas WHERE cod_manzana={0}'.format(cod_manzana))
+    mysql.connection.commit()
+    flash('Registro Eliminado')
+    return redirect(url_for('manzana'))
 
 '''Ruta para los servicios'''
 @app.route ('/servicios')
