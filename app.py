@@ -27,8 +27,12 @@ app.secret_key='mysecretkey'
 @app.route('/')
 def index():
     '''Se establece la función para la ruta del index'''
-    return render_template('modulos/login.html')#Devolvera el template index.html
+    return render_template('login.html')#Devolvera el template index.html
 
+@app.route('/inicioMujer')
+def inicioMujer():
+    '''Se establece la función para la ruta del index'''
+    return render_template('Mujer/indexMujer.html')#Devolvera el template index.html
 
 '''Ruta para el login'''
 @app.route('/login', methods=['GET','POST'])
@@ -51,8 +55,8 @@ def login():
         
         else:
             flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
-            return render_template('modulos/login.html')
-    return render_template('modulos/login.html')#Devolvera el template login.html
+            return render_template('login.html')
+    return render_template('login.html')#Devolvera el template login.html
 
 @app.route('/logout')
 def logout():
@@ -85,7 +89,7 @@ def municipios():
             mysql.connection.commit()
             flash('Municipio Agregado')
             return redirect(url_for('municipios'))
-    return render_template('modulos/municipios.html', municipios=info)#Devolvera el template municipios.html
+    return render_template('admin/municipios.html', municipios=info)#Devolvera el template municipios.html
 
 @app.route('/municipio/edit/<cod_municipio>', methods=['POST', 'GET'])
 def get_municipios(cod_municipio):
@@ -121,7 +125,7 @@ def borrarmunicipio(cod_municipio):
 '''Ruta de inicio'''
 @app.route ('/index')
 def inicio():
-    return render_template('modulos/index.html')#despues de que el usuario este ingresado se redirigira al index.html
+    return render_template('Admin/index.html')#despues de que el usuario este ingresado se redirigira al index.html
 
 '''Ruta para los manzanas'''
 @app.route ('/manzanas',methods=['GET','POST'])
@@ -154,7 +158,7 @@ def manzana():
             mysql.connection.commit()
             flash('Manzana Agregada')
             return redirect(url_for('manzana'))
-    return render_template('modulos/manzanas.html', manzanas=info)#Devolvera el template manzana.html
+    return render_template('Admin/manzanas.html', manzanas=info)#Devolvera el template manzana.html
 
 @app.route('/manzanas/edit/<cod_manzanas>', methods=['POST', 'GET'])
 def get_manzanas(cod_manzanas):
@@ -220,7 +224,7 @@ def servicios():
             flash('Servicio Agregado')
             return redirect(url_for('servicios'))
 
-    return render_template('modulos/servicios.html', servicios=info)#Devolvera el template servicios.html ubicado en la carpeta templates/modulos
+    return render_template('Admin/servicios.html', servicios=info)#Devolvera el template servicios.html ubicado en la carpeta templates/modulos
 
 @app.route('/servicio/edit/<cod_servicio>', methods=['POST', 'GET'])
 def get_servicio(cod_servicio):
@@ -283,7 +287,7 @@ def establecimientos():
             flash('Establecimiento Agregado')
             return redirect(url_for('establecimientos'))
 
-    return render_template('modulos/establecimientos.html',establecimiento=info)#Devolvera el template establecimientos.html
+    return render_template('Admin/establecimientos.html',establecimiento=info)#Devolvera el template establecimientos.html
 
 @app.route('/establecimientos/edit/<cod_establecimiento>', methods=['POST', 'GET'])
 def get_establecimiento(cod_establecimiento):
@@ -359,7 +363,7 @@ def cuidadora():
                 flash('Cuidadora Agregada Satisfactoriamente')
         return redirect(url_for('cuidadora'))#SI el registro se completa satisfactoriamente se habilita el mensaje y se redirige al formulario
     
-    return render_template('modulos/mujeres.html', mujeres=info)#Devolvera el template mujeres.html
+    return render_template('Admin/mujeres.html', mujeres=info)#Devolvera el template mujeres.html
 
 @app.route('/mujeres/edit/<documento>', methods=['POST', 'GET'])
 def get_mujeres(documento):
@@ -427,7 +431,7 @@ def asignacion():
             mysql.connection.commit()
             flash('Cita Asignada')
             return redirect(url_for('asignacion'))
-    return render_template('modulos/asignacion.html', cuidadoras=info)#Devolvera el template asignacion.html
+    return render_template('Admin/asignacion.html', cuidadoras=info)#Devolvera el template asignacion.html
 
 @app.route('/asignacion/edit/<documento_mujer>', methods=['POST', 'GET'])
 def get_asignacion(documento_mujer):
@@ -573,10 +577,7 @@ def generarpdfE():
     response.mimetype = 'application/pdf'
     return response
 
-def status_401(error):
-    return render_template('errores/401.html'),401
-def status_404(error):
-    return render_template('errores/404.html'),404
+
 
 if __name__=='__main__':
     #Se verifica que se este corriendo la aplicacion.

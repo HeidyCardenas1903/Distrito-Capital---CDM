@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"><!-- Link de bootstrap -->
+
+    <link rel="stylesheet" href="{{url_for ('static', filename='css/style.css')}}"> <!-- Link de hoja de estilos .css -->
+
+    <link rel="icon" href="{{url_for('static', filename='img/icono.png')}}" sizes="48x48"><!-- Link icono pestaña de navegador -->
+
+    <title>Inicio</title> <!-- Titulo pagina -->
+</head>
+<body>
+    <header>
+        <!-- Barra de navegación -->
+        <nav>
+            <div class="barra-superior">
+                <button id="menu" onclick="panelLateral()"><span><i class="fa-solid fa-bars"></i></span></button> <!--Boton de menú-->
+                <img src="{{url_for('static', filename='img/logo.png')}}" alt="logo"> <!--Logo-->
+                <a id="cerrar sesion" href="/logout">Cerrar sesión</a> <!-- Boton cerrar sesión -->
+            </div>
+        </nav>
+
+        <div class="panel-lateral">
+
+            <button class="close" onclick="panelLateral()"><span><i class="fa-solid fa-xmark"></i></span></button>
+            <h3>Menú principal</h3>
+            <ul>
+                <a class="item"href="/inicioMujer"><span><i class="fa-solid fa-house"></i></span> Inicio</a>
+                <a class="item"href="/manzanas"><span><i class="fa-solid fa-map"></i></span> Manzanas</a>
+                <a class="item"href="/asignacion"><span><i class="fa-solid fa-check"></i></span> Asignación</a>
+            </ul>
+        </div>
+    </header>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> <!-- Link de js bootstrap-->
+    
+<script src="https://kit.fontawesome.com/909a90592e.js" crossorigin="anonymous"></script> <!-- Links iconos-->
+
+<script src="{{url_for('static', filename='js/main.js')}}"></script> <!-- Script de js propio -->
+</html>
