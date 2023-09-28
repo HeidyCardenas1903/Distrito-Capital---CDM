@@ -1,5 +1,5 @@
 /* Fuentes */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 /* Variables */
 :root{
@@ -12,17 +12,17 @@
 }
 
 h1,h2,h3,h4,h5,h6{
-    font-family: 'Crimson Text', serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
 }
 
 p,a,button,label,input{
-    font-family: 'Crimson Text', serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Estilos */
 body {
-    background: var(--secondary-color);
+    background: url(../img/bgLogin.png);
     color: var(--secondary-color);
 }
 
@@ -35,7 +35,7 @@ h2{
     display: flex;
     width: 500px;
     margin: 120px auto;
-    background: #fff;
+    background: #ffffffb2;
     justify-content: center;
     padding: 5px;
     border-radius: 8px;

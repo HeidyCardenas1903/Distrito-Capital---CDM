@@ -4,20 +4,13 @@ from flask_mysqldb import MySQL
 from reportlab.pdfgen import canvas
 from modules.funciones import * 
 import io
-import xlwt 
 import pymysql
-from flask_googlemaps import GoogleMaps
-from flask_googlemaps import Map
+
 
 
 
 app = Flask(__name__)#Se especifica que este archivo es el que va a iniciar la webapp
 
-
-'''Google Maps API'''
-app.config['GOOGLEMAPS_KEY'] = "AIzaSyC-lmH6uemg3kFPtnjIO_l1YlKKDo5VYtY"
-
-GoogleMaps(app)
 
 '''Conexión a bd'''
 app.config['MYSQL_HOST']='localhost'
@@ -35,9 +28,6 @@ app.secret_key='mysecretkey'
 def index():
     '''Se establece la función para la ruta del index'''
     return render_template('modulos/login.html')#Devolvera el template index.html
-
-
-'''Ruta mapa'''
 
 
 '''Ruta para el login'''
@@ -502,7 +492,6 @@ def status_401(error):
     return render_template('errores/401.html'),401
 def status_404(error):
     return render_template('errores/404.html'),404
-
 
 if __name__=='__main__':
     #Se verifica que se este corriendo la aplicacion.
