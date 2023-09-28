@@ -37,6 +37,9 @@ def index():
     return render_template('modulos/login.html')#Devolvera el template index.html
 
 
+'''Ruta mapa'''
+
+
 '''Ruta para el login'''
 @app.route('/login', methods=['GET','POST'])
 def login():

@@ -7,7 +7,10 @@
       <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#registrar" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><span><i class="fa-solid fa-circle-plus"></i></span>Registrar manzanas</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#establecimientos" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><span><i class="fa-solid fa-location-dot"></i></span>Manzanas</button>
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#manzanas" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><span><i class="fa-solid fa-location-dot"></i></span>Manzanas</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#mapa" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><span><i class="fa-solid fa-map"></i></span>Mapa</button>
     </li>
 </ul>
 
@@ -64,12 +67,11 @@
                     <option value="8">Asesoría Psicológica</option>
                     <option value="9">Lavanderías Comunitarias</option>
                 </select>
-                <p class="text-muted" style="color:  #fff !important;">* Puedes seleccionar varios servicios a la vez manteniendo presionada la tecla <kbd>Ctrl</kbd> mientras haces clic en las opciones.</p>
             </div>
             <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
     </div>
-    <div class="tab-pane fade" id="establecimientos" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+    <div class="tab-pane fade" id="manzanas" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
         <h2 class="titulos">Manzanas registradas</h2>
         <a class="PDF" href="/generar_pdfM">Descargar PDF</a>
         <table>
@@ -103,6 +105,9 @@
 
             </tbody>
         </table>
+    </div>
+    <div class="tab-pane fade" id="mapa" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+
     </div>
 </div>
 
