@@ -362,7 +362,7 @@ def cuidadora():
     return render_template('modulos/mujeres.html', mujeres=info)#Devolvera el template mujeres.html
 
 @app.route('/mujeres/edit/<documento>', methods=['POST', 'GET'])
-def get_servicio(documento):
+def get_mujeres(documento):
     cur=mysql.connection.cursor()
     cur.execute('SELECT documento,cod_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,ciudad,direccion_mujer,ocupacion FROM mujeres,servicios WHERE mujeres.cod_servicio=servicios.cod_servicio')
     info=cur.fetchall()
@@ -371,7 +371,7 @@ def get_servicio(documento):
 
 '''Ruta encargada de editar registros de establecimientos'''
 @app.route('/mujeres/update/<documento>',methods=['GET','POST'])
-def update_servicios(documento):
+def update_mujeres(documento):
 
     if request.method=='POST':
         tipodoc = request.form['tipodoc']
