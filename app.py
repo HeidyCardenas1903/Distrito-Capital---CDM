@@ -77,15 +77,44 @@ def logout():
 
 
 '''Restablecer contraseña'''
-@app.route('/restablecer')
+@app.route('/restablecer', methods=('GET','POST'))
 def restablecer():
 
     if request.method == 'POST':
-        mail = request.form['emial']
-        contraseña = request.form['contraseña']
+        email = request.form['email']
+        documento=request.form['documento']
 
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM mujeres where documento=%s AND mujeres.correo=%s',(documento,email))
+        account = cur.fetchone()
 
+        if account:
+            return redirect(url_for('cambiocontra'))
+        else:
+            flash('Email no registrado')
+            return redirect(url_for('login'))
     return render_template('restablecer.html')
+
+@app.route('/cambiocontra',methods=('GET','POST'))
+def cambiocontra():
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM mujeres')
+    info=cur.fetchall()
+    cur.close()
+    return render_template('cambiocontra.html',mujeres=info[0])
+
+@app.route('/updatecontra/<documento>',methods=('GET','POST'))
+def updatecontra(documento):
+    if request.method=='POST':
+        contra = request.form['contra']
+
+        cur = mysql.connection.cursor()
+        cur.execute('UPDATE mujeres SET contraseña=%s WHERE documento=%s',(contra,documento))
+        mysql.connection.commit()
+        flash('Contraseña Actualizada')
+        return redirect(url_for('login'))
+
+
 
 '''Ruta para los municipios'''
 @app.route ('/municipios', methods=['GET','POST'])
@@ -436,9 +465,9 @@ def borrarmujer(documento):
     flash('Registro Eliminado')
     return redirect(url_for('cuidadora'))
 '''Registro de mujeres pov usuarias'''
-@app.route('/registromujer')
+@app.route('/registromujer',methods=('GET','POST'))
 def registromujer():
-    
+
     return render_template('registromujer.html')
 
 
