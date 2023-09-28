@@ -12,7 +12,7 @@
 }
 
 body {
-    background: var(--secondary-color);
+    background: url(../img/bg-web.png);
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -31,13 +31,12 @@ p,a,button,label,input{
     /* Barra superior */
     .barra-superior{
         display: flex;
-        background: transparent;
-        height: 60px;
+        background: var(--secondary-color);
+        height: 80px;
         justify-content: space-around;
         width: 100%;
-        margin-top: 20px;
-        padding: 10px;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        box-shadow: 2px 2px 10px rgb(0, 0, 0);
     }
 
     .barra-superior #menu {
@@ -253,8 +252,4 @@ p,a,button,label,input{
     /* Fin de estilos de formularios */
 
 /* Fin de estilos de tablas y formularios */      
-        
-/* Estilos inicio | home */
-
-/* Fin de estilos inicio | home */
 
