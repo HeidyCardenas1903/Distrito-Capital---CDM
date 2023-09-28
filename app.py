@@ -94,6 +94,28 @@ def municipios():
             return redirect(url_for('municipios'))
     return render_template('modulos/municipios.html', municipios=info)#Devolvera el template municipios.html
 
+@app.route('/municipio/edit/<cod_municipio>', methods=['POST', 'GET'])
+def get_municipios(cod_municipio):
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM municipios')
+    info=cur.fetchall()
+    cur.close()
+    return render_template('edicion/editmunicipios.html',municipios=info[0])
+
+'''Ruta encargada de editar registros de establecimientos'''
+@app.route('/municipio/update/<cod_municipio>',methods=['GET','POST'])
+def update_municipios(cod_municipio):
+
+    if request.method=='POST':
+        cod = request.form['codmunicipio']
+        name = request.form['nombres']
+
+        cur = mysql.connection.cursor()
+        cur.execute('UPDATE municipios SET nombre_municipio=%s WHERE cod_municipio=%s',(name,cod))
+        mysql.connection.commit()
+        flash('Municipio Actualizado')
+        return redirect(url_for('municipios'))
+
 @app.route('/municipio/borrar/<string:cod_municipio>', methods=['GET','POST'])
 def borrarmunicipio(cod_municipio):
     '''Funcion encargada de borrar registros de la tabla municipios'''
