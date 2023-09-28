@@ -467,7 +467,39 @@ def borrarmujer(documento):
 '''Registro de mujeres pov usuarias'''
 @app.route('/registromujer',methods=('GET','POST'))
 def registromujer():
+    if request.method == 'POST':
+        tipodoc = request.form['tipodoc']
+        doc = request.form['documento']
+        name = request.form['nombres']
+        lastname = request.form['apellidos']
+        tel = request.form['telefono']
+        email = request.form['correo']
+        password=request.form['contraseña']
+        city = request.form['ciudad']
+        address = request.form['direccion']
+        ocupacion = request.form['ocupacion']
+        servicioint = request.form['servicioint']
+        
+        cur=mysql.connection.cursor()
+        cur.execute('SELECT * FROM mujeres WHERE documento=%s',[doc,])#Se verifica que la mujer no haya sido previamente ingresada
+        data=cur.fetchone()
 
+        if data:
+            flash('Cuidadora ya Registrada')
+            return redirect(url_for('cuidadora'))#Si la mujer se encuentra ya resgistrada se habilita el mensaje de aviso y se redirije al formulario
+
+        else:
+            cur.execute('SELECT * FROM mujeres WHERE correo=%s',[email,])#Se verifica que el email no haya sido registrado anteriormente
+            data=cur.fetchone()
+
+            if data:
+                flash('Email ya Registrado')
+                return redirect(url_for('cuidadora'))#Si el email se encuentra ya resgistrado se habilita el mensaje de aviso y se redirije al formulario
+            else:
+                cur.execute('INSERT INTO mujeres(documento,cod_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,contraseña,ciudad,direccion_mujer,ocupacion) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(doc,servicioint,tipodoc,name,lastname,tel,email,password,city,address,ocupacion))
+                mysql.connection.commit()
+                flash('Registro Competado')
+        return redirect(url_for('inicioMujer'))
     return render_template('registromujer.html')
 
 
