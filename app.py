@@ -483,7 +483,37 @@ def borrarasignacion(documento_mujer):
     return redirect(url_for('asignacion'))
 
 
+'''Rutas de asignaciones que se les mostrará a las mujeres en asignacionMujer.html'''
+@app.route ('/vista', methods=['GET','POST'])
+def asignacionmujer():
+    '''Se establece la función para la ruta para la seccion asignación'''
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT documento_mujer,nombres_mujer,apellidos_mujer,nombre_manzana,nombre_servicio,fecha,hora FROM cuidadoras,mujeres,servicios,manzanas WHERE cuidadoras.documento_mujer=mujeres.documento AND cuidadoras.cod_manzana=manzanas.cod_manzana AND cuidadoras.cod_servicio=servicios.cod_servicio')
+    info=cur.fetchall()
 
+    if request.method == 'POST':
+        documento = request.form['documento']
+        cod1 = request.form['codmanzana']
+        cod2 = request.form['service']
+        date = request.form['dia']
+        time = request.form['hora']
+
+        cur.execute('SELECT * FROM cuidadoras WHERE documento_mujer=%s',[documento,])#Se verifica que el establecimiento no haya sido previamente ingresado
+        data=cur.fetchone()
+
+        if data:
+            flash('Ya cuenta con una cita asignada')
+            return redirect(url_for('asignacionmujer'))#Si el servicio se encuentra ya resgistrada se habilita el mensaje de aviso y se redirije al formulario
+    return render_template('Mujer/asignacionMujer.html', cuidadoras=info)
+'''Boton eliminacion en vista asignacionMujer'''
+@app.route('/asignacionMujer/borrar/<string:documento_mujer>', methods=['GET','POST'])
+def borrarasignacionmujer(documento_mujer):
+    '''Funcion encargada de borrar registros de la tabla municipios'''
+    cur=mysql.connection.cursor()
+    cur.execute('DELETE FROM cuidadoras WHERE documento_mujer={0}'.format(documento_mujer))
+    mysql.connection.commit()
+    flash('Registro Eliminado')
+    return redirect(url_for('asignacionmujer'))
 
 '''Ruta para los reportes'''
 @app.route ('/reportes')
