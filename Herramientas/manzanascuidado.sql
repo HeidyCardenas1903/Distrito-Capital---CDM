@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-09-2023 a las 21:12:46
+-- Tiempo de generación: 28-09-2023 a las 17:21:56
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -37,7 +37,7 @@ CREATE TABLE `appleservice` (
 --
 
 INSERT INTO `appleservice` (`copy_codmanzana`, `copy_codservice`) VALUES
-(10789, 6);
+(10789, 1);
 
 -- --------------------------------------------------------
 
@@ -67,6 +67,13 @@ CREATE TABLE `establecimiento` (
   `direccion_establecimiento` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `establecimiento`
+--
+
+INSERT INTO `establecimiento` (`cod_establecimiento`, `cod_servicio`, `nombre_establecimiento`, `responsable`, `direccion_establecimiento`) VALUES
+(32, 5, 'Maria Paquita', 'julian romero', 'calle 54#83-98');
+
 -- --------------------------------------------------------
 
 --
@@ -86,7 +93,7 @@ CREATE TABLE `manzanas` (
 --
 
 INSERT INTO `manzanas` (`cod_manzana`, `cod_municipio`, `nombre_manzana`, `localidad`, `direccion_manzana`) VALUES
-(10789, 5476, 'Morada', 'modelia', 'car 65#12-67');
+(10789, 5476, 'Morada', 'Resistencia', 'car 65#12-67');
 
 -- --------------------------------------------------------
 
@@ -102,6 +109,7 @@ CREATE TABLE `mujeres` (
   `apellidos_mujer` varchar(40) NOT NULL,
   `telefono` varchar(10) NOT NULL,
   `correo` varchar(40) NOT NULL,
+  `contraseña` varchar(10) NOT NULL,
   `ciudad` varchar(20) NOT NULL,
   `direccion_mujer` varchar(40) NOT NULL,
   `ocupacion` varchar(20) NOT NULL
@@ -111,8 +119,9 @@ CREATE TABLE `mujeres` (
 -- Volcado de datos para la tabla `mujeres`
 --
 
-INSERT INTO `mujeres` (`documento`, `cod_servicio`, `tipoDocumento`, `nombres_mujer`, `apellidos_mujer`, `telefono`, `correo`, `ciudad`, `direccion_mujer`, `ocupacion`) VALUES
-(1019132790, 5, 'TI', 'Vivian', 'hincapie', '3194091311', 'carohinca1997@gmail.com', 'Bogotá', 'calle 168a # 73 a-96', 'Desarrolladora');
+INSERT INTO `mujeres` (`documento`, `cod_servicio`, `tipoDocumento`, `nombres_mujer`, `apellidos_mujer`, `telefono`, `correo`, `contraseña`, `ciudad`, `direccion_mujer`, `ocupacion`) VALUES
+(1019132790, 2, 'CC', 'Vivian', 'hincapie', '3194091311', 'carohinca1997@gmail.com', 'caro12345', 'Bogotá', 'calle 168a # 73 a-96', 'Desarrolladora'),
+(1020816856, 5, 'TI', 'juana', 'jimenez', '3158344617', 'juana@gmail.com', '123456juan', 'medellin', 'calle siempre viva', 'medico');
 
 -- --------------------------------------------------------
 
@@ -130,7 +139,7 @@ CREATE TABLE `municipios` (
 --
 
 INSERT INTO `municipios` (`cod_municipio`, `nombre_municipio`) VALUES
-(3344, 'Cundiinamarca'),
+(3344, 'Antioquia'),
 (5476, 'Nariño');
 
 -- --------------------------------------------------------

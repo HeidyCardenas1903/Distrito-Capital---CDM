@@ -51,8 +51,6 @@ def login():
 
         if account:
             session['Logueado']=True
-
-
             return redirect(url_for('inicioMujer'))#si el usuario ingresa correctamente lo redireccionara al index de las mujeres
         else:
             cur = mysql.connection.cursor()
@@ -61,7 +59,6 @@ def login():
 
             if admin:
                 session['Logueado']=True
-                flash('Bienvenido usuario administrador')
                 return redirect(url_for('inicio'))#si el usuario ingresa correctamente lo redireccionara al home
             else:
                 flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
