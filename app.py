@@ -121,32 +121,7 @@ def borrarmunicipio(cod_municipio):
 '''Ruta de inicio'''
 @app.route ('/index')
 def inicio():
-    mymap = Map(
-        identifier="view-side",
-        lat=37.4419,
-        lng=-122.1419,
-        markers=[(37.4419, -122.1419)]
-    )
-    sndmap = Map(
-        identifier="sndmap",
-        lat=37.4419,
-        lng=-122.1419,
-        markers=[
-          {
-             'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-             'lat': 37.4419,
-             'lng': -122.1419,
-             'infobox': "<b>Hello World</b>"
-          },
-          {
-             'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-             'lat': 37.4300,
-             'lng': -122.1400,
-             'infobox': "<b>Hello World from other place</b>"
-          }
-        ]
-    )
-    return render_template('modulos/index.html',mymap=mymap, sndmap=sndmap)#despues de que el usuario este ingresado se redirigira al index.html
+    return render_template('modulos/index.html')#despues de que el usuario este ingresado se redirigira al index.html
 
 '''Ruta para los manzanas'''
 @app.route ('/manzanas',methods=['GET','POST'])
@@ -385,6 +360,36 @@ def cuidadora():
         return redirect(url_for('cuidadora'))#SI el registro se completa satisfactoriamente se habilita el mensaje y se redirige al formulario
     
     return render_template('modulos/mujeres.html', mujeres=info)#Devolvera el template mujeres.html
+
+@app.route('/mujeres/edit/<documento>', methods=['POST', 'GET'])
+def get_servicio(documento):
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT documento,cod_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,ciudad,direccion_mujer,ocupacion FROM mujeres,servicios WHERE mujeres.cod_servicio=servicios.cod_servicio')
+    info=cur.fetchall()
+    cur.close()
+    return render_template('edicion/editmujeres.html',mujeres=info[0])
+
+'''Ruta encargada de editar registros de establecimientos'''
+@app.route('/mujeres/update/<documento>',methods=['GET','POST'])
+def update_servicios(documento):
+
+    if request.method=='POST':
+        tipodoc = request.form['tipodoc']
+        doc = request.form['documento']
+        name = request.form['nombres']
+        lastname = request.form['apellidos']
+        tel = request.form['telefono']
+        email = request.form['correo']
+        city = request.form['ciudad']
+        address = request.form['direccion']
+        ocupacion = request.form['ocupacion']
+        servicioint = request.form['servicioint']
+
+        cur = mysql.connection.cursor()
+        cur.execute('UPDATE mujeres SET documento=%s,cod_servicio=%s,tipoDocumento=%s,nombres_mujer=%s,apellidos_mujer=%s,telefono=%s,correo=%s,ciudad=%s,direccion_mujer=%s,ocupacion=%s, WHERE documento=%s',(tipodoc,doc,name,lastname,tel,email,city,address,ocupacion,servicioint,doc))
+        mysql.connection.commit()
+        flash('Mujeres Actualizado')
+        return redirect(url_for('servicios'))
 
 @app.route('/mujer/borrar/<string:documento>', methods=['GET','POST'])
 def borrarmujer(documento):
