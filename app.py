@@ -574,7 +574,13 @@ def asignacionmujer():
         data=cur.fetchone()
 
         if data:
+
             flash('Ya cuenta con una cita asignada')
+
+        else:
+            cur.execute('INSERT INTO cuidadoras(documento_mujer,cod_manzana,cod_servicio,fecha,hora) VALUES(%s,%s,%s,%s,%s)',(documento,cod1,cod2,date,time))
+            mysql.connection.commit()
+            flash('Cita Asignada')
             return redirect(url_for('asignacionmujer'))#Si el servicio se encuentra ya resgistrada se habilita el mensaje de aviso y se redirije al formulario
     return render_template('Mujer/asignacionMujer.html', cuidadoras=info)
 '''Boton eliminacion en vista asignacionMujer'''
