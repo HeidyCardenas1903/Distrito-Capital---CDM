@@ -200,6 +200,15 @@ def borrarmanzana(cod_manzana):
 
 
 
+'''Rutas de Manzanas que se les mostrara a las mujeres en manzanaMujer.html'''
+@app.route ('/manzanasMujer',methods=['GET','POST'])
+def manzanamujer():
+    '''Se establece la función para la ruta para la seccion municipios'''
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT cod_manzana,nombre_municipio,nombre_manzana,localidad,direccion_manzana,nombre_servicio FROM manzanas,municipios,servicios,appleservice WHERE manzanas.cod_municipio=municipios.cod_municipio AND manzanas.cod_manzana=appleservice.copy_codmanzana AND servicios.cod_servicio=appleservice.copy_codservice')
+    info=cur.fetchall()
+    return render_template('Mujer/manzanaMujer.html', manzanas=info)#Devolvera el template manzana.html
+
 
 '''Ruta para los servicios'''
 @app.route ('/servicios', methods=['GET','POST'])
