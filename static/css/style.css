@@ -223,6 +223,18 @@ p,a,button,label,input{
         color:var(--tertiary-color);
     }
 
+    .btn{
+        display:block;
+        border: none;
+        background: var(--tertiary-color);
+        color: var(--primary-color);
+        font-weight: 600;
+        margin: auto;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        padding: 10px 20px;
+    }
+
     .btn-primary{
         display:block;
         border: none;
