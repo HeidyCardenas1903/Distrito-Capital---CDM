@@ -373,7 +373,7 @@ def cuidadora():
 @app.route('/mujeres/edit/<documento>', methods=['POST', 'GET'])
 def get_mujeres(documento):
     cur=mysql.connection.cursor()
-    cur.execute('SELECT documento,cod_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,ciudad,direccion_mujer,ocupacion FROM mujeres,servicios WHERE mujeres.cod_servicio=servicios.cod_servicio')
+    cur.execute('SELECT documento,mujeres.cod_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,ciudad,direccion_mujer,ocupacion FROM mujeres,servicios WHERE mujeres.cod_servicio=servicios.cod_servicio')
     info=cur.fetchall()
     cur.close()
     return render_template('edicion/editmujeres.html',mujeres=info[0])
@@ -395,12 +395,13 @@ def update_mujeres(documento):
         servicioint = request.form['servicioint']
 
         cur = mysql.connection.cursor()
-        cur.execute('UPDATE mujeres SET documento=%s,cod_servicio=%s,tipoDocumento=%s,nombres_mujer=%s,apellidos_mujer=%s,telefono=%s,correo=%s,ciudad=%s,direccion_mujer=%s,ocupacion=%s, WHERE documento=%s',(tipodoc,doc,name,lastname,tel,email,city,address,ocupacion,servicioint,doc))
+        cur.execute('UPDATE mujeres SET cod_servicio=%s,tipoDocumento=%s,nombres_mujer=%s,apellidos_mujer=%s,telefono=%s,correo=%s,ciudad=%s,direccion_mujer=%s,ocupacion=%s WHERE documento=%s',(servicioint,tipodoc,name,lastname,tel,email,city,address,ocupacion,doc))
         mysql.connection.commit()
-        flash('Mujeres Actualizado')
-        return redirect(url_for('servicios'))
-    
-'''Ruta encargada de elimiar registros de cuidadoras'''
+
+        
+        flash('Mujer Actualizada')
+        return redirect(url_for('cuidadora'))
+
 @app.route('/mujer/borrar/<string:documento>', methods=['GET','POST'])
 def borrarmujer(documento):
     cur=mysql.connection.cursor()
