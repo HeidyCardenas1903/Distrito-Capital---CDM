@@ -46,20 +46,27 @@ def login():
         password=request.form['contrasenia']
 
         cur = mysql.connection.cursor()
-        cur.execute('SELECT * FROM usuarios where usuarios.email=%s AND usuarios.contraseña=%s',(email,password))
+        cur.execute('SELECT * FROM mujeres where mujeres.correo=%s AND mujeres.contraseña=%s',(email,password))
         account = cur.fetchone()
 
         if account:
             session['Logueado']=True
 
 
-            return redirect(url_for('inicio'))#si el usuario ingresa correctamente lo redireccionara al home
-
-        
+            return redirect(url_for('inicioMujer'))#si el usuario ingresa correctamente lo redireccionara al index de las mujeres
         else:
-            flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
-            return render_template('login.html')
-    return render_template('login.html')#Devolvera el template login.html
+            cur = mysql.connection.cursor()
+            cur.execute('SELECT * FROM usuarios where usuarios.email=%s AND usuarios.contraseña=%s',(email,password))
+            admin = cur.fetchone()#si el usuario ingresa correctamente lo redireccionara al index del admin
+
+            if admin:
+                session['Logueado']=True
+                flash('Bienvenido usuario administrador')
+                return redirect(url_for('inicio'))#si el usuario ingresa correctamente lo redireccionara al home
+            else:
+                flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
+                return render_template('login.html')
+    return render_template('login.html')
 '''Ruta para el Logout'''
 @app.route('/logout')
 def logout():
@@ -352,6 +359,7 @@ def cuidadora():
         lastname = request.form['apellidos']
         tel = request.form['telefono']
         email = request.form['correo']
+        password=request.form['contraseña']
         city = request.form['ciudad']
         address = request.form['direccion']
         ocupacion = request.form['ocupacion']
@@ -373,7 +381,7 @@ def cuidadora():
                 flash('Email ya Registrado')
                 return redirect(url_for('cuidadora'))#Si el email se encuentra ya resgistrado se habilita el mensaje de aviso y se redirije al formulario
             else:
-                cur.execute('INSERT INTO mujeres(documento,cod_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,ciudad,direccion_mujer,ocupacion) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(doc,servicioint,tipodoc,name,lastname,tel,email,city,address,ocupacion))
+                cur.execute('INSERT INTO mujeres(documento,cod_servicio,tipoDocumento,nombres_mujer,apellidos_mujer,telefono,correo,contraseña,ciudad,direccion_mujer,ocupacion) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(doc,servicioint,tipodoc,name,lastname,tel,email,password,city,address,ocupacion))
                 mysql.connection.commit()
                 flash('Cuidadora Agregada Satisfactoriamente')
         return redirect(url_for('cuidadora'))#SI el registro se completa satisfactoriamente se habilita el mensaje y se redirige al formulario
