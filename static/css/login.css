@@ -5,7 +5,7 @@
 :root{
     --primary-color: #fff;
     --secondary-color: #000;
-    --tertiary-color: #DD2C2C;
+    --tertiary-color: #004caf;
     --fontS-titulo: 30px;
     --fontS-subtitulos: 22px;
     --fontS-parra: 16px; 
@@ -35,7 +35,7 @@ h2{
     display: flex;
     width: 500px;
     margin: 120px auto;
-    background: #ffffffb2;
+    background: #ffffffc2;
     justify-content: center;
     padding: 5px;
     border-radius: 8px;
@@ -82,7 +82,7 @@ button:hover {
 }
 
 .forgot-password {
-    color: #8f8f8f;
+    color: #707070;
     margin: 10px 0 10px 0;
 }
 
