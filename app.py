@@ -82,37 +82,31 @@ def restablecer():
 
     if request.method == 'POST':
         email = request.form['email']
-        documento=request.form['documento']
 
         cur = mysql.connection.cursor()
-        cur.execute('SELECT * FROM mujeres where documento=%s AND mujeres.correo=%s',(documento,email))
+        cur.execute('SELECT * FROM mujeres where mujeres.correo=%s',(email,))
         account = cur.fetchone()
 
         if account:
-            return redirect(url_for('cambiocontra'))
+            return redirect(url_for('updatecontra'))
         else:
             flash('Email no registrado')
             return redirect(url_for('login'))
     return render_template('restablecer.html')
 
-@app.route('/cambiocontra',methods=('GET','POST'))
-def cambiocontra():
-    cur=mysql.connection.cursor()
-    cur.execute('SELECT * FROM mujeres')
-    info=cur.fetchall()
-    cur.close()
-    return render_template('cambiocontra.html',mujeres=info[0])
 
-@app.route('/updatecontra/<documento>',methods=('GET','POST'))
-def updatecontra(documento):
+@app.route('/updatecontra',methods=('GET','POST'))
+def updatecontra():
     if request.method=='POST':
-        contra = request.form['contra']
+        contra = request.form['contrasenia']
+        doc=request.form['documento']
 
         cur = mysql.connection.cursor()
-        cur.execute('UPDATE mujeres SET contraseña=%s WHERE documento=%s',(contra,documento))
+        cur.execute('UPDATE mujeres SET contraseña=%s WHERE documento=%s',(contra,doc))
         mysql.connection.commit()
         flash('Contraseña Actualizada')
         return redirect(url_for('login'))
+    return render_template('cambiarcontra.html')
 
 
 
