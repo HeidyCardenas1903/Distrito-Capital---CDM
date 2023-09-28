@@ -251,6 +251,11 @@ p,a,button,label,input{
         padding: 10px 20px;
     }
 
+    .btn-secondary:hover{
+        background: #3b3b3b;
+        color: var(--primary-color);
+    }
+
     ul#myTab{
         margin-top: 30px;
         display: flex;
