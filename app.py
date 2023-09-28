@@ -4,7 +4,6 @@ from flask_mysqldb import MySQL
 from reportlab.pdfgen import canvas
 from modules.funciones import * 
 import io
-import pymysql
 
 
 app = Flask(__name__)#Se especifica que este archivo es el que va a iniciar la webapp
@@ -61,7 +60,7 @@ def login():
             flash('Datos incorrectos')#Si no, le saldra un mensaje de validacion y lo redirigirá al login de nuevo 
             return render_template('login.html')
     return render_template('login.html')#Devolvera el template login.html
-
+'''Ruta para el Logout'''
 @app.route('/logout')
 def logout():
     # Elimina la sesión del usuario
@@ -97,7 +96,7 @@ def municipios():
             flash('Municipio Agregado')
             return redirect(url_for('municipios'))
     return render_template('admin/municipios.html', municipios=info)#Devolvera el template municipios.html
-
+'''Ruta encargada de capturar la primary key de los registros de municipios'''
 @app.route('/municipio/edit/<cod_municipio>', methods=['POST', 'GET'])
 def get_municipios(cod_municipio):
     cur=mysql.connection.cursor()
@@ -105,7 +104,6 @@ def get_municipios(cod_municipio):
     info=cur.fetchall()
     cur.close()
     return render_template('edicion/editmunicipios.html',municipios=info[0])
-
 '''Ruta encargada de editar registros de municipios'''
 @app.route('/municipio/update/<cod_municipio>',methods=['GET','POST'])
 def update_municipios(cod_municipio):
@@ -119,6 +117,7 @@ def update_municipios(cod_municipio):
         mysql.connection.commit()
         flash('Municipio Actualizado')
         return redirect(url_for('municipios'))
+'''Ruta encargada de borrar registros de municipios'''
 @app.route('/municipio/borrar/<string:cod_municipio>', methods=['GET','POST'])
 def borrarmunicipio(cod_municipio):
     '''Funcion encargada de borrar registros de la tabla municipios'''
@@ -170,7 +169,6 @@ def get_manzanas(cod_manzanas):
     info=cur.fetchall()
     print(info[0])
     return render_template('edicion/editmanzanas.html',manzanas=info[0])
-
 '''Ruta encargada de editar registros de manzanas'''
 @app.route('/manzanas/update/<cod_manzana>',methods=['GET','POST'])
 def update_manzanas(cod_manzana):
@@ -230,6 +228,7 @@ def servicios():
             return redirect(url_for('servicios'))
 
     return render_template('Admin/servicios.html', servicios=info)#Devolvera el template servicios.html ubicado en la carpeta templates/modulos
+'''Ruta encargada de capturar la primary key de los resgistros de servicios'''
 @app.route('/servicio/edit/<cod_servicio>', methods=['POST', 'GET'])
 def get_servicio(cod_servicio):
     cur = mysql.connection.cursor()
@@ -237,8 +236,7 @@ def get_servicio(cod_servicio):
     data = cur.fetchall()
     cur.close()
     return render_template('edicion/editservicios.html',servicios=data[0])
-
-'''Ruta encargada de editar registros de establecimientos'''
+'''Ruta encargada de editar registros de servicios'''
 @app.route('/servicio/update/<cod_servicio>',methods=['GET','POST'])
 def update_servicios(cod_servicio):
 
@@ -252,6 +250,7 @@ def update_servicios(cod_servicio):
         mysql.connection.commit()
         flash('Servicio Actualizado')
         return redirect(url_for('servicios'))
+'''Ruta encargada de borrar registros de servicios'''
 @app.route('/servicio/borrar/<string:cod_servicio>', methods=['GET','POST'])
 def borrarservicio(cod_servicio):
     '''Funcion encargada de borrar registros de la tabla municipios'''
@@ -293,13 +292,13 @@ def establecimientos():
             return redirect(url_for('establecimientos'))
 
     return render_template('Admin/establecimientos.html',establecimiento=info)#Devolvera el template establecimientos.html
+'''Ruta encargada de capturar la primary key de los resgistros de establecimientos'''
 @app.route('/establecimientos/edit/<cod_establecimiento>', methods=['POST', 'GET'])
 def get_establecimiento(cod_establecimiento):
     cur=mysql.connection.cursor()
     cur.execute('SELECT cod_establecimiento,nombre_establecimiento,responsable,direccion_establecimiento,nombre_servicio FROM establecimiento,servicios WHERE establecimiento.cod_servicio=servicios.cod_servicio')
     info=cur.fetchall()
     return render_template('edicion/editestablecimientos.html',establecimientos=info[0])
-
 '''Ruta encargada de editar registros de establecimientos'''
 @app.route('/establecimientos/update/<cod_establecimiento>',methods=['GET','POST'])
 def update_establecimientos(cod_establecimiento):
@@ -316,6 +315,7 @@ def update_establecimientos(cod_establecimiento):
         mysql.connection.commit()
         flash('Establecimiento Actualizado')
         return redirect(url_for('establecimientos'))
+'''Ruta encargada de borrar resgistros de servicios'''
 @app.route('/establecimiento/borrar/<string:cod_establecimiento>', methods=['GET','POST'])
 def borrarestablecimiento(cod_establecimiento):
     '''Funcion encargada de borrar registros de la tabla establecimientos'''
@@ -328,7 +328,7 @@ def borrarestablecimiento(cod_establecimiento):
 
 
 
-'''Ruta para las Cuidadoras'''
+'''Ruta para las Mujeres'''
 @app.route ('/mujeres', methods=['GET','POST'])
 def cuidadora():
     '''Se establece la función para la ruta para la seccion Cuidadoras'''
@@ -370,6 +370,7 @@ def cuidadora():
         return redirect(url_for('cuidadora'))#SI el registro se completa satisfactoriamente se habilita el mensaje y se redirige al formulario
     
     return render_template('Admin/mujeres.html', mujeres=info)#Devolvera el template mujeres.html
+'''Ruta encargada de capturar la primary key de los resgistros de mujeres'''
 @app.route('/mujeres/edit/<documento>', methods=['POST', 'GET'])
 def get_mujeres(documento):
     cur=mysql.connection.cursor()
@@ -377,8 +378,7 @@ def get_mujeres(documento):
     info=cur.fetchall()
     cur.close()
     return render_template('edicion/editmujeres.html',mujeres=info[0])
-
-'''Ruta encargada de editar registros de cuidadoras'''
+'''Ruta encargada de editar registros de mujeres'''
 @app.route('/mujeres/update/<documento>',methods=['GET','POST'])
 def update_mujeres(documento):
 
@@ -401,7 +401,7 @@ def update_mujeres(documento):
         
         flash('Mujer Actualizada')
         return redirect(url_for('cuidadora'))
-
+'''Ruta encargada de eliminar los resgistros de mujeres'''
 @app.route('/mujer/borrar/<string:documento>', methods=['GET','POST'])
 def borrarmujer(documento):
     cur=mysql.connection.cursor()
@@ -409,6 +409,7 @@ def borrarmujer(documento):
     mysql.connection.commit()
     flash('Registro Eliminado')
     return redirect(url_for('cuidadora'))
+
 
 
 
@@ -440,13 +441,13 @@ def asignacion():
             flash('Cita Asignada')
             return redirect(url_for('asignacion'))
     return render_template('Admin/asignacion.html', cuidadoras=info)#Devolvera el template asignacion.html
+'''Ruta encargada de capturar la primary key de los resgistros de asignaciones'''
 @app.route('/asignacion/edit/<documento_mujer>', methods=['POST', 'GET'])
 def get_asignacion(documento_mujer):
     cur=mysql.connection.cursor()
     cur.execute('SELECT documento_mujer,cuidadoras.cod_manzana,nombre_servicio,fecha,hora FROM cuidadoras,mujeres,servicios,manzanas WHERE cuidadoras.documento_mujer=mujeres.documento AND cuidadoras.cod_manzana=manzanas.cod_manzana AND cuidadoras.cod_servicio=servicios.cod_servicio')
     info=cur.fetchall()
     return render_template('edicion/editasignaciones.html',cuidadoras=info[0])
-
 '''Ruta encargada de editar registros de asignaciones'''
 @app.route('/asignacion/update/<documento_mujer>',methods=['GET','POST'])
 def update_asignaciones(documento_mujer):
@@ -462,8 +463,7 @@ def update_asignaciones(documento_mujer):
         mysql.connection.commit()
         flash('Cita Re-asignada')
         return redirect(url_for('asignacion'))
-
-'''Ruta encargada de elimiar registros de asignaciones'''
+'''Ruta encargada de eliminar registros de asignaciones'''
 @app.route('/asignacion/borrar/<string:documento_mujer>', methods=['GET','POST'])
 def borrarasignacion(documento_mujer):
     '''Funcion encargada de borrar registros de la tabla municipios'''
@@ -481,8 +481,8 @@ def borrarasignacion(documento_mujer):
 def reporte():
     report=reportes()
     return report
-
 def pdf_report(data):
+    '''crear el reporte con el boton en el html'''
     # Crear el PDF usando reportlab
     buffer = io.BytesIO()
     p = canvas.Canvas(buffer)
@@ -505,8 +505,10 @@ def pdf_report(data):
     buffer.close()
     return pdf
 
-'''Rutas de PDF'''
 
+
+'''Rutas de los modulos en (botones) PDF'''
+'''Genera el pdf en el modulo municipios'''
 @app.route('/generar_pdf', methods=['GET','POST']) #Genera el pdf de municipios
 def generarpdf():
     cur=mysql.connection.cursor()
@@ -519,7 +521,7 @@ def generarpdf():
     response.headers['Content-Disposition'] = 'attachment; filename=Reporte Municipios.pdf'
     response.mimetype = 'application/pdf'
     return response
-
+'''Genera el pdf en el modulo asignaciones'''
 @app.route('/generar_pdfC', methods=['GET','POST']) #Genera el PDF de las Asignaciones
 def generarpdfC():
     cur=mysql.connection.cursor()
@@ -532,7 +534,7 @@ def generarpdfC():
     response.headers['Content-Disposition'] = 'attachment; filename=Reporte Asignaciones.pdf'
     response.mimetype = 'application/pdf'
     return response
-
+'''Genera el pdf en el modulo manzanas'''
 @app.route('/generar_pdfM', methods=['GET','POST']) #Genera el PDF de las Manzanas
 def generarpdfM():
     cur=mysql.connection.cursor()
@@ -545,8 +547,7 @@ def generarpdfM():
     response.headers['Content-Disposition'] = 'attachment; filename=Reporte Manzanas.pdf'
     response.mimetype = 'application/pdf'
     return response
-
-
+'''Genera el pdf en el modulo servicios'''
 @app.route('/generar_pdfS', methods=['GET','POST']) #Genera el PDF de las servicios
 def generarpdfS():
     cur=mysql.connection.cursor()
@@ -559,7 +560,7 @@ def generarpdfS():
     response.headers['Content-Disposition'] = 'attachment; filename=Reporte Servicios.pdf'
     response.mimetype = 'application/pdf'
     return response
-
+'''Genera el pdf en el modulo Mujeres'''
 @app.route('/generar_pdfW', methods=['GET','POST']) #Genera el PDF de las Mujeres
 def generarpdfW():
     cur=mysql.connection.cursor()
@@ -572,7 +573,7 @@ def generarpdfW():
     response.headers['Content-Disposition'] = 'attachment; filename=Reporte Mujeres.pdf'
     response.mimetype = 'application/pdf'
     return response
-
+'''Genera el pdf en el modulo Establecimientos'''
 @app.route('/generar_pdfE', methods=['GET','POST']) #Genera el PDF de las Establecimientos
 def generarpdfE():
     cur=mysql.connection.cursor()
