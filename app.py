@@ -76,7 +76,16 @@ def logout():
     return redirect(url_for('login'))  # Redirige a la página de inicio de sesión
 
 
+'''Restablecer contraseña'''
+@app.route('/restablecer')
+def restablecer():
 
+    if request.method == 'POST':
+        mail = request.form['emial']
+        contraseña = request.form['contraseña']
+
+
+    return render_template('restablecer.html')
 
 '''Ruta para los municipios'''
 @app.route ('/municipios', methods=['GET','POST'])
@@ -344,7 +353,7 @@ def borrarestablecimiento(cod_establecimiento):
 
 
 
-'''Ruta para las Mujeres'''
+'''Ruta para el registro de las Mujeres pov admin'''
 @app.route ('/mujeres', methods=['GET','POST'])
 def cuidadora():
     '''Se establece la función para la ruta para la seccion Cuidadoras'''
@@ -426,8 +435,11 @@ def borrarmujer(documento):
     mysql.connection.commit()
     flash('Registro Eliminado')
     return redirect(url_for('cuidadora'))
-
-
+'''Registro de mujeres pov usuarias'''
+@app.route('/registromujer')
+def registromujer():
+    
+    return render_template('registromujer.html')
 
 
 '''Ruta para la asignación'''
