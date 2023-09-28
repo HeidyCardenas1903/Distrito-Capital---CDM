@@ -204,6 +204,30 @@ def servicios():
 
     return render_template('modulos/servicios.html', servicios=info)#Devolvera el template servicios.html ubicado en la carpeta templates/modulos
 
+@app.route('/servicio/edit/<cod_servicio>', methods=['POST', 'GET'])
+def get_servicio(cod_servicio):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM servicios WHERE cod_servicio = %s', (cod_servicio))
+    data = cur.fetchall()
+    cur.close()
+    return render_template('edicion/editservicios.html',servicios=data[0])
+
+'''Ruta encargada de editar registros de establecimientos'''
+@app.route('/servicio/update/<cod_servicio>',methods=['GET','POST'])
+def update_servicios(cod_servicio):
+
+    if request.method=='POST':
+        cod = request.form['codservicio']
+        name = request.form['nombres']
+        description = request.form['descripcion']
+
+        cur = mysql.connection.cursor()
+        cur.execute('UPDATE servicios SET nombre_servicio=%s,descripcion=%s WHERE cod_servicio=%s',(name,description,cod))
+        mysql.connection.commit()
+        flash('Servicio Actualizado')
+        return redirect(url_for('servicios'))
+
+
 @app.route('/servicio/borrar/<string:cod_servicio>', methods=['GET','POST'])
 def borrarservicio(cod_servicio):
     '''Funcion encargada de borrar registros de la tabla municipios'''
@@ -243,13 +267,17 @@ def establecimientos():
 
     return render_template('modulos/establecimientos.html',establecimiento=info)#Devolvera el template establecimientos.html
 
-'''Ruta encargada de editar registros de establecimientos'''
-@app.route('/establecimientos/edit/<cod_establecimiento>',methods=['GET','POST'])
-def update_establecimientos(cod_establecimiento):
+@app.route('/establecimientos/edit/<cod_establecimiento>', methods=['POST', 'GET'])
+def get_establecimiento(cod_establecimiento):
     cur=mysql.connection.cursor()
     cur.execute('SELECT cod_establecimiento,nombre_establecimiento,responsable,direccion_establecimiento,nombre_servicio FROM establecimiento,servicios WHERE establecimiento.cod_servicio=servicios.cod_servicio')
     info=cur.fetchall()
+    return render_template('edicion/editestablecimientos.html',establecimientos=info[0])
 
+'''Ruta encargada de editar registros de establecimientos'''
+@app.route('/establecimientos/update/<cod_establecimiento>',methods=['GET','POST'])
+def update_establecimientos(cod_establecimiento):
+    
     if request.method=='POST':
         cod = request.form['codestablecimiento']
         name = request.form['nombres']
@@ -257,11 +285,11 @@ def update_establecimientos(cod_establecimiento):
         direccion = request.form['direccion']
         service= request.form['service']
 
+        cur=mysql.connection.cursor()
         cur.execute('UPDATE establecimiento SET cod_servicio=%s,nombre_establecimiento=%s,responsable=%s,direccion_establecimiento=%s WHERE cod_establecimiento=%s',(service,name,responsable,direccion,cod))
         mysql.connection.commit()
         flash('Establecimiento Actualizado')
         return redirect(url_for('establecimientos'))
-    return render_template('edicion/editestablecimientos.html', establecimientos=info)#Devolvera el template asignacion.html
 
 @app.route('/establecimiento/borrar/<string:cod_establecimiento>', methods=['GET','POST'])
 def borrarestablecimiento(cod_establecimiento):
@@ -353,13 +381,16 @@ def asignacion():
             return redirect(url_for('asignacion'))
     return render_template('modulos/asignacion.html', cuidadoras=info)#Devolvera el template asignacion.html
 
-'''Ruta encargada de editar registros de asignaciones'''
-@app.route('/asignacion/edit/<documento_mujer>',methods=['GET','POST'])
-def update_asignaciones(documento_mujer):
+@app.route('/asignacion/edit/<documento_mujer>', methods=['POST', 'GET'])
+def get_asignacion(documento_mujer):
     cur=mysql.connection.cursor()
     cur.execute('SELECT documento_mujer,cuidadoras.cod_manzana,nombre_servicio,fecha,hora FROM cuidadoras,mujeres,servicios,manzanas WHERE cuidadoras.documento_mujer=mujeres.documento AND cuidadoras.cod_manzana=manzanas.cod_manzana AND cuidadoras.cod_servicio=servicios.cod_servicio')
     info=cur.fetchall()
+    return render_template('edicion/editasignaciones.html',cuidadoras=info[0])
 
+'''Ruta encargada de editar registros de asignaciones'''
+@app.route('/asignacion/update/<documento_mujer>',methods=['GET','POST'])
+def update_asignaciones(documento_mujer):
     if request.method=='POST':
         documento= request.form['documento']
         cod1 = request.form['codmanzana']
@@ -367,11 +398,11 @@ def update_asignaciones(documento_mujer):
         date = request.form['dia']
         time = request.form['hora']
 
+        cur=mysql.connection.cursor()
         cur.execute('UPDATE cuidadoras SET cod_manzana=%s,cod_servicio=%s,fecha=%s,hora=%s WHERE documento_mujer=%s',(cod1,cod2,date,time,documento))
         mysql.connection.commit()
         flash('Cita Re-asignada')
         return redirect(url_for('asignacion'))
-    return render_template('edicion/editasignaciones.html', cuidadoras=info)#Devolvera el template asignacion.html
 
 
 '''Ruta encargada de elimiar registros de asignaciones'''

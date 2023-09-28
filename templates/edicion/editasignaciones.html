@@ -27,15 +27,14 @@
         {% endif %}
         {% endwith %}
 
-        {%for i in cuidadoras%}
-        <form action="/asignacion/edit/{{i.0}}" method="post" class="container mt-4">
+        <form action="/asignacion/update/{{cuidadoras.0}}" method="post" class="container mt-4">
             <div class="mb-3">
                 <label for="documento" class="form-label subtitulo">Número Documento de la Cuidadora:</label>
-                <input type="text" name="documento" class="form-control entrada" value="{{i.0}}" maxlength="10" required>
+                <input type="text" name="documento" class="form-control entrada" value="{{cuidadoras.0}}" maxlength="10" required>
             </div>
             <div class="mb-3">
                 <label for="codmanzana" class="form-label subtitulo">Código de Manzana propuesta:</label>
-                <input type="text" name="codmanzana" class="form-control entrada" value="{{i.1}}" maxlength="5" minlength="5" required>
+                <input type="text" name="codmanzana" class="form-control entrada" value="{{cuidadoras.1}}" maxlength="5" minlength="5" required>
             </div>
             <div class="mb-3">
                 <label for="service" class="form-label subtitulo">Servicio por aplicar:</label>
@@ -54,17 +53,16 @@
             </div>
             <div class="mb-3">
                 <label for="dia" class="form-label subtitulo">Día:</label>
-                <input type="date" name="dia" class="form-control entrada" required value="{{i.4}}">
+                <input type="date" name="dia" class="form-control entrada" required value="{{cuidadoras.4}}">
             </div>
             <div class="mb-3">
                 <label for="hora" class="form-label subtitulo">Hora:</label>
-                <input type="time" name="hora" class="form-control entrada" required value="{{i.5}}">
+                <input type="time" name="hora" class="form-control entrada" required value="{{cuidadoras.5}}">
             </div>
             
             <button type="submit" class="btn">Editar</button>
-            <button type="button" class="btn btn-secondary">Cancelar</button>
         </form>
-        {%endfor%}
+
         
     </div>
 {%endblock%}

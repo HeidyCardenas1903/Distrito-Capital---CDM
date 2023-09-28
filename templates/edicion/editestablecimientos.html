@@ -27,23 +27,22 @@
         {% endif %}
         {% endwith %}
 
-        {%for i in establecimientos%}
-        <form action="" method="post" class="container mt-4">
+        <form action="/establecimientos/update/{{establecimientos.0}}" method="post" class="container mt-4">
             <div class="mb-3">
                 <label for="codestablecimiento" class="form-label subtitulo">Código establecimiento:</label>
-                <input type="text" name="codestablecimiento" class="form-control entrada" value="{{i.0}}" maxlength="2" minlength="2" required>
+                <input type="text" name="codestablecimiento" class="form-control entrada" value="{{establecimientos.0}}" maxlength="2" minlength="2" required>
             </div>
             <div class="mb-3">
                 <label for="nombres" class="form-label subtitulo">Nombre del establecimiento:</label>
-                <input type="text" name="nombres" class="form-control entrada" value="{{i.1}}" maxlength="20" required>
+                <input type="text" name="nombres" class="form-control entrada" value="{{establecimientos.1}}" maxlength="20" required>
             </div>
             <div class="mb-3">
                 <label for="responsable" class="form-label subtitulo">Responsable:</label>
-                <input type="text" name="responsable" class="form-control entrada" value="{{i.2}}" maxlength="40" required>
+                <input type="text" name="responsable" class="form-control entrada" value="{{establecimientos.2}}" maxlength="40" required>
             </div>
             <div class="mb-3">
                 <label for="direccion" class="form-label subtitulo">Dirección del establecimiento:</label>
-                <input type="text" name="direccion" class="form-control entrada" value="{{i.3}}" maxlength="40" required>
+                <input type="text" name="direccion" class="form-control entrada" value="{{establecimientos.3}}" maxlength="40" required>
             </div>
             <div class="mb-3">
                 <label for="service" class="form-label subtitulo">Servicio prestado:</label>
@@ -60,9 +59,8 @@
                     <option value="9">Lavanderías Comunitarias</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="submit" class="btn btn-primary">Editar</button>
         </form>
-        {%endfor%}
         
     </div>
 {%endblock%}
