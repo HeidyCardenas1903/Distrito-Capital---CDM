@@ -27,50 +27,21 @@
         {%endfor%}
         {%endif%}
         {%endwith%}
-        <form action="" method="post" class="container mt-4">
+
+        <form action="/servicio/update/{{servicios.0}}" method="POST" class="container mt-4">
             <div class="mb-3">
                 <label for="codservicio" class="form-label subtitulo">Código Servicio:</label>
-                <input type="text" name="codservicio" class="form-control entrada" placeholder="10" maxlength="2" required>
+                <input type="text" name="codservicio" class="form-control entrada" value="{{servicios.0}}" maxlength="2" required>
             </div>
             <div class="mb-3">
                 <label for="nombres" class="form-label subtitulo">Nombre del Servicio:</label>
-                <input type="text" name="nombres" class="form-control entrada" placeholder="Ejemplo: Lavanderia Comunitaria" maxlength="20" required>
+                <input type="text" name="nombres" class="form-control entrada" value='{{servicios.1}}' maxlength="20" required>
             </div>
             <div class="mb-3">
                 <label for="descripcion" class="form-label subtitulo">Descripción:</label>
-                <input type="text" name="descripcion" class="form-control entrada" placeholder="Ejemplo: Permite lavar en comunidad" maxlength="100" required>
+                <input type="text" name="descripcion" class="form-control entrada" value="{{servicios.2}}" maxlength="100" required>
             </div>
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="submit" class="btn btn-primary">Editar</button>
         </form>
     </div>
-    <div class="tab-pane fade" id="serviciosT" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-        <h2 class="titulos">Servicios Registrados</h2>
-        <a class="PDF" href="/generar_pdfS">Descargar PDF</a>
-        <table>
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {%for servicio in servicios%}
-                <tr>
-                <td>{{servicio.0}}</td>
-                <td>{{servicio.1}}</td>
-                <td>{{servicio.2}}</td>
-
-                <td>
-                    <a class="delete" href="/servicio/edit/{{servicio.0}}" id="edit"><span class="fa-solid fa-pencil"></span></a>
-                    <a class="delete" href="/servicio/borrar/{{servicio.0}}" id="delete"><span class="fa-solid fa-trash"></span></a>
-                </td>
-                </tr>
-                {%endfor%}
-            </tbody>
-        </table>
-    </div>
-</div>
-
-{%endblock%}
+    {%endblock%}
