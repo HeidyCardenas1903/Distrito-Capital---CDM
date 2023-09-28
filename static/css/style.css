@@ -132,6 +132,21 @@ p,a,button,label,input{
     }
     /* Fin estilos barra lateral (menú) */
 
+    /* Estilos Hero */
+    .col-md-6 {
+        display: flex;
+        align-items: center;
+    }
+    .img-fluid {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+    .img-fluid:hover {
+        transform: scale(1.1);
+    }
+
 /* Fin de estilos Index | Inicio */
 
 /* Estilos de tablas y formularios */
@@ -188,6 +203,14 @@ p,a,button,label,input{
     a.delete{
         color: #000;
         font-size: 20px;
+    }
+
+    a.PDF{
+        display: flex;
+        font-weight: 700;
+        text-decoration: revert;
+        justify-content: flex-end;
+        margin-right: 3cm;
     }
 
     /* Fin estilos tablas */

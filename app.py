@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect,url_for,flash,session, make_response
-from flask_login import login_required, login_manager
+from flask_login import login_required
 from flask_mysqldb import MySQL
 from reportlab.pdfgen import canvas
 from modules.funciones import * 
@@ -12,6 +12,7 @@ from flask_googlemaps import Map
 
 
 app = Flask(__name__)#Se especifica que este archivo es el que va a iniciar la webapp
+
 
 '''Google Maps API'''
 app.config['GOOGLEMAPS_KEY'] = "AIzaSyC-lmH6uemg3kFPtnjIO_l1YlKKDo5VYtY"
@@ -524,6 +525,11 @@ def generarpdfE():
     response.headers['Content-Disposition'] = 'attachment; filename=Establecimientos.pdf'
     response.mimetype = 'application/pdf'
     return response
+
+def status_401(error):
+    return render_template('errores/401.html'),401
+def status_404(error):
+    return render_template('errores/404.html'),404
 
 
 if __name__=='__main__':
