@@ -26,30 +26,30 @@
         {% endfor %}
         {% endif %}
         {% endwith %}
-        <form action="" method="post" class="container mt-4">
+        <form action="/manzanas/update/{{manzanas.0}}" method="post" class="container mt-4">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="codmanzana" class="form-label subtitulo">Código de Manzana</label>
-                    <input type="text" name="codmanzana" class="form-control entrada" placeholder="10256" maxlength="5" minlength="5" required>
+                    <input type="text" name="codmanzana" class="form-control entrada" value="{{manzanas.0}}" maxlength="5" minlength="5" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="nombres" class="form-label subtitulo">Nombre de la Manzana</label>
-                    <input type="text" name="nombres" class="form-control entrada" placeholder="Ejemplo: Industrial" maxlength="20" required>
+                    <input type="text" name="nombres" class="form-control entrada" value="{{manzanas.2}}"  maxlength="20" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="codmunicipio" class="form-label subtitulo">Código Municipio al que pertenece</label>
-                    <input type="text" name="codmunicipio" class="form-control entrada" placeholder="1132" maxlength="4" minlength="4" required>
+                    <input type="text" name="codmunicipio" class="form-control entrada" value="{{manzanas.1}}"  maxlength="4" minlength="4" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="localidad" class="form-label subtitulo">Localidad:</label>
-                    <input type="text" name="localidad" class="form-control entrada" placeholder="Ejemplo: Suba" maxlength="20" required>
+                    <input type="text" name="localidad" class="form-control entrada" value="{{manzanas.3}}"  maxlength="20" required>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="direccion" class="form-label subtitulo">Dirección:</label>
-                <input type="text" name="direccion" class="form-control entrada" placeholder="Ejemplo: calle 24b#87-26" maxlength="40" required>
+                <input type="text" name="direccion" class="form-control entrada" value="{{manzanas.4}}"  maxlength="40" required>
             </div>
             <div class="mb-3">
                 <label for="servicios" class="form-label subtitulo">Servicios:*</label> 
@@ -69,41 +69,4 @@
             <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
     </div>
-    <div class="tab-pane fade" id="establecimientos" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-        <h2 class="titulos">Manzanas registradas</h2>
-        <a class="PDF" href="/generar_pdfM">Descargar PDF</a>
-        <table>
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Municipio</th>
-                    <th>Localidad</th>
-                    <th>Dirección</th>
-                    <th>Servicios Prestados</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {%for manzana in manzanas%}
-                <tr>
-                <td>{{manzana.0}}</td>
-                <td>{{manzana.2}}</td>
-                <td>{{manzana.1}}</td>
-                <td>{{manzana.3}}</td>
-                <td>{{manzana.4}}</td>
-                <td>{{manzana.5}}</td>
-
-                <td>
-                    <a class="delete" href="/manzanas/edit/{{manzana.0}}"><span class="fa-solid fa-pencil"></span></a>
-                    <a class="delete" href="/manzana/borrar/{{manzana.0}}"><span class="fa-solid fa-trash"></span></a>
-                </td>
-                </tr>
-                {%endfor%}
-
-            </tbody>
-        </table>
-    </div>
-</div>
-
 {%endblock%}

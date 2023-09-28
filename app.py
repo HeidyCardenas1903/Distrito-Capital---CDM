@@ -140,7 +140,6 @@ def manzana():
     cur=mysql.connection.cursor()
     cur.execute('SELECT cod_manzana,nombre_municipio,nombre_manzana,localidad,direccion_manzana,nombre_servicio FROM manzanas,municipios,servicios,appleservice WHERE manzanas.cod_municipio=municipios.cod_municipio AND manzanas.cod_manzana=appleservice.copy_codmanzana AND servicios.cod_servicio=appleservice.copy_codservice')
     info=cur.fetchall()
-    print(info)
 
     if request.method == 'POST':
         cod = request.form['codmanzana']
@@ -166,6 +165,34 @@ def manzana():
             flash('Manzana Agregada')
             return redirect(url_for('manzana'))
     return render_template('modulos/manzanas.html', manzanas=info)#Devolvera el template manzana.html
+
+@app.route('/manzanas/edit/<cod_manzanas>', methods=['POST', 'GET'])
+def get_manzanas(cod_manzanas):
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT cod_manzana,manzanas.cod_municipio,nombre_manzana,localidad,direccion_manzana,nombre_servicio FROM manzanas,municipios,servicios,appleservice WHERE manzanas.cod_municipio=municipios.cod_municipio AND manzanas.cod_manzana=appleservice.copy_codmanzana AND servicios.cod_servicio=appleservice.copy_codservice')
+    info=cur.fetchall()
+    print(info[0])
+    return render_template('edicion/editmanzanas.html',manzanas=info[0])
+
+'''Ruta encargada de editar registros de establecimientos'''
+@app.route('/manzanas/update/<cod_manzana>',methods=['GET','POST'])
+def update_manzanas(cod_manzana):
+    
+    if request.method=='POST':
+        cod = request.form['codmanzana']
+        name = request.form['nombres']
+        cod2 = request.form['codmunicipio']
+        localidad = request.form['localidad']
+        direccion = request.form['direccion']
+        codserv=request.form['servicioprest']
+
+        cur=mysql.connection.cursor()
+        cur.execute('UPDATE manzanas SET cod_manzana=%s,cod_municipio=%s,nombre_manzana=%s,localidad=%s,direccion_manzana=%s WHERE cod_manzana=%s',(cod,cod2,name,localidad,direccion,cod))
+        cur.execute('UPDATE appleservice SET copy_codmanzana=%s,copy_codservice=%s WHERE copy_codmanzana=%s',(cod,codserv,cod))
+
+        mysql.connection.commit()
+        flash('Manzana Actualizada')
+        return redirect(url_for('manzana'))
 
 @app.route('/manzana/borrar/<string:cod_manzana>', methods=['GET','POST'])
 def borrarmanzana(cod_manzana):
