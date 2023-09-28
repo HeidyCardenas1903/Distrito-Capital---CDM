@@ -37,6 +37,16 @@
     </header>
     <main>
         <div class="container">
+            {% with messages=get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}   
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    {{ message }}
+                </div>   
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
             <div class="row">
                 <div class="col-md-6">
                     <div id="hero">
